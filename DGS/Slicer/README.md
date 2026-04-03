@@ -1,5 +1,5 @@
 # Slicer
-----
+
 Slicer是基于两阶段切片技术实现的缺陷用例提取工具。由 Python 语言开发，图中灰色方框表示的外部可执行程序由 C++ 语言开发。其中，基于依赖图的代码切片基于开源库DG提供的 llvm-slicer 工具修改，增加了结果映射过程，使其输出保留代码位置信息文件。
 ![Slicer工作流程](./用例提取子系统工作流程.png)
 
@@ -26,10 +26,23 @@ Slicer是基于两阶段切片技术实现的缺陷用例提取工具。由 Pyth
 	
 公共头文件包含常见的include，复制源于[common.h](./astslicer/scripts/common.h)，不保证符合所有项目的需求，需要人工调试。
 
-### 用例格式、内容说明
+### 用例结构说明
 - 用例的名字是缺陷报告名+缺陷id
 - 缺陷用例 = 缺陷用例代码（头文件+C文件） + 缺陷信息文件defect_info.json + 编译命令
-![](./用例结构.png)
+```
+├── project_name
+│   ├── common.h
+│   ├── case_name1
+│   │   ├──compile_commands.json
+│   │   ├──defect_info.json
+│   │   ├──header_func.h
+│   │   ├──header_type.h
+│   │   ├──XXX.h
+│   │   ├──XXX.c
+│   ├── case_name2
+...
+```
+
 <!-- ![缺陷信息文件](./缺陷信息文件.png) -->
 
 ### 文件介绍
