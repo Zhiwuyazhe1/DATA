@@ -1,7 +1,7 @@
 # DefectClassfier
 
 实现缺陷分类的工具，由通用特征分析工具Sseq和运行脚本scripts两部分组成。
-![工具流程](./缺陷标签生成子系统工作流程_qwen.png)
+![DC流程](./缺陷标签生成子系统工作流程_qwen.png)
 
 ## Sseq 
 通过AST分析缺陷的场景特征，详见`./Sseq/README.md`。在执行下述脚本前需要编译Sseq。
