@@ -1,0 +1,5 @@
+TaintSummary := "{" SideEffects "}"
+Key := <-1> | <0> | <1> | <2> | … | <9>
+Keys := Key | Key "||" Keys
+SideEffects := TaintSideEffect*
+TaintSideEffect := "setSink" "(" Key ")" | "transitive" "(" Key "," Keys ")" | "sanitize" "(" Key ")" | "swapTaint" "(" Key "," Key ")" 

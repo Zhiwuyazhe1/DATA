@@ -1,0 +1,404 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "taint",
+  "rules": {
+    "source_file": {
+      "type": "SYMBOL",
+      "name": "taint_summary"
+    },
+    "taint_summary": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "side_effects"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "side_effects": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "taint_side_effect"
+      }
+    },
+    "taint_side_effect": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PREC",
+          "value": "operation",
+          "content": {
+            "type": "FIELD",
+            "name": "operation",
+            "content": {
+              "type": "SYMBOL",
+              "name": "set_sink"
+            }
+          }
+        },
+        {
+          "type": "PREC",
+          "value": "operation",
+          "content": {
+            "type": "FIELD",
+            "name": "operation",
+            "content": {
+              "type": "SYMBOL",
+              "name": "transitive"
+            }
+          }
+        },
+        {
+          "type": "PREC",
+          "value": "operation",
+          "content": {
+            "type": "FIELD",
+            "name": "operation",
+            "content": {
+              "type": "SYMBOL",
+              "name": "sanitize"
+            }
+          }
+        },
+        {
+          "type": "PREC",
+          "value": "operation",
+          "content": {
+            "type": "FIELD",
+            "name": "operation",
+            "content": {
+              "type": "SYMBOL",
+              "name": "swap_taint"
+            }
+          }
+        }
+      ]
+    },
+    "key": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "open_angle",
+          "content": {
+            "type": "STRING",
+            "value": "<"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "number",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "-1"
+              },
+              {
+                "type": "STRING",
+                "value": "0"
+              },
+              {
+                "type": "STRING",
+                "value": "1"
+              },
+              {
+                "type": "STRING",
+                "value": "2"
+              },
+              {
+                "type": "STRING",
+                "value": "3"
+              },
+              {
+                "type": "STRING",
+                "value": "4"
+              },
+              {
+                "type": "STRING",
+                "value": "5"
+              },
+              {
+                "type": "STRING",
+                "value": "6"
+              },
+              {
+                "type": "STRING",
+                "value": "7"
+              },
+              {
+                "type": "STRING",
+                "value": "8"
+              },
+              {
+                "type": "STRING",
+                "value": "9"
+              }
+            ]
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "close_angle",
+          "content": {
+            "type": "STRING",
+            "value": ">"
+          }
+        }
+      ]
+    },
+    "keys": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "key"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "or",
+                "content": {
+                  "type": "STRING",
+                  "value": "||"
+                }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "key"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "set_sink": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "operation_name",
+          "content": {
+            "type": "STRING",
+            "value": "setSink"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "open_paren",
+          "content": {
+            "type": "STRING",
+            "value": "("
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "key",
+          "content": {
+            "type": "SYMBOL",
+            "name": "key"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "close_paren",
+          "content": {
+            "type": "STRING",
+            "value": ")"
+          }
+        }
+      ]
+    },
+    "transitive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "operation_name",
+          "content": {
+            "type": "STRING",
+            "value": "transitive"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "open_paren",
+          "content": {
+            "type": "STRING",
+            "value": "("
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "left",
+          "content": {
+            "type": "SYMBOL",
+            "name": "key"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "comma",
+          "content": {
+            "type": "STRING",
+            "value": ","
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "right",
+          "content": {
+            "type": "SYMBOL",
+            "name": "keys"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "close_paren",
+          "content": {
+            "type": "STRING",
+            "value": ")"
+          }
+        }
+      ]
+    },
+    "sanitize": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "operation_name",
+          "content": {
+            "type": "STRING",
+            "value": "sanitize"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "open_paren",
+          "content": {
+            "type": "STRING",
+            "value": "("
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "key",
+          "content": {
+            "type": "SYMBOL",
+            "name": "key"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "close_paren",
+          "content": {
+            "type": "STRING",
+            "value": ")"
+          }
+        }
+      ]
+    },
+    "swap_taint": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "operation_name",
+          "content": {
+            "type": "STRING",
+            "value": "swapTaint"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "open_paren",
+          "content": {
+            "type": "STRING",
+            "value": "("
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "left",
+          "content": {
+            "type": "SYMBOL",
+            "name": "key"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "comma",
+          "content": {
+            "type": "STRING",
+            "value": ","
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "right",
+          "content": {
+            "type": "SYMBOL",
+            "name": "key"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "close_paren",
+          "content": {
+            "type": "STRING",
+            "value": ")"
+          }
+        }
+      ]
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [
+    [
+      {
+        "type": "STRING",
+        "value": "error"
+      },
+      {
+        "type": "STRING",
+        "value": "token"
+      },
+      {
+        "type": "STRING",
+        "value": "operation"
+      }
+    ]
+  ],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}

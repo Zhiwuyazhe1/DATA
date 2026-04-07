@@ -1,0 +1,31 @@
+{
+  "ground_truth_file" : "examples/list_v6.csv",
+  "rag_database_file" : "examples/test_example_v4.csv",
+  "test_data_file" : "examples/list_v6.csv",
+  "taint_grammar_file" : "configs/taint_grammar.txt",
+  "taint_knowledge_file" : "configs/taint_knowledge.txt",
+  "memory_grammar_file" : "configs/memory_grammar.txt",
+  "memory_knowledge_file" : "configs/memory_knowledge.txt",
+  "similar_example_num" : 5,
+  "fixed_rag_file" : "",
+  "llm_config" : {
+    "api_key": "",
+    "base_url": "https://svip.xty.app/v1",
+    "model": "deepseek-v3.2-exp-thinking",
+    "base_prompt": "你是一位精通C++编程语言、静态分析和领域特定语言（DSL）设计的软件架构专家，擅长将c++库函数源码或文档转换为DSL结构的摘要。请根据我提供的DSL结构定义，严格遵循以下要求生成C++库函数摘要。"
+  },
+  "post_checkers": {
+    "grammar_checker" : {
+      "enable" : true,
+      "retry_times" : 3
+    },
+    "add_param_checker":{
+      "enable" : true,
+      "count" : 2
+    },
+    "swap_checker" : {
+      "enable" : true,
+      "retry_times" : 1
+    }
+  }
+}

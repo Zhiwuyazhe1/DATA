@@ -1,0 +1,1162 @@
+﻿namespace,class,func,docstring,taint_summary_gt,taint_summary_pd,taint_same,taint_tp,taint_fp,taint_fn,memory_summary_gt,memory_summary_pd,memory_same,memory_tp,memory_fp,memory_fn
+"std::list<T,Allocator>::list",list,list() : list(Allocator()) {},C++11 起的默认构造函数。构造拥有默认构造的分配器的空 list。 参数 alloc - 用于此容器所有内存分配的分配器,{},{},1,0,0,0,"{
+    <0>.size = 0
+}","{
+    <0>.size = 0
+}",1,1,0,0
+"std::list<T,Allocator>::list",list,explicit list( const Allocator& alloc = Allocator() );,C++11 前的默认构造函数。构造拥有给定分配器 alloc 的空 list。 参数 alloc - 用于此容器所有内存分配的分配器,{},"{}
+",1,0,0,0,"{
+    <0>.size = 0
+}","{
+    <0>.size = 0
+}",1,1,0,0
+"std::list<T,Allocator>::list",list,explicit list( const Allocator& alloc );,C++11 前的默认构造函数。构造拥有给定分配器 alloc 的空 list。 参数 alloc - 用于此容器所有内存分配的分配器,{},{},1,0,0,0,"{
+    <0>.size = 0
+}","{
+    <0>.size = 0
+}
+",1,1,0,0
+"std::list<T,Allocator>::list",list,"explicit list( size_type count, const Allocator& alloc = Allocator() );",构造拥有 count 个默认插入的 T 对象的 list。不进行复制。 如果 T 不可默认插入 (DefaultInsertable) 到 std::list<T> 中，那么行为未定义。 参数 alloc - 用于此容器所有内存分配的分配器 count - 容器的大小,"{
+    setSink(<1>)
+}","{
+  setSink(<1>)
+}",1,1,0,0,"{
+    <0>.size = <1>
+}","{
+    <0>.size = <1>
+}",1,1,0,0
+"std::list<T,Allocator>::list",list,"explicit list( size_type count, const T& value = T(),const Allocator& alloc = Allocator() );",构造拥有 count 个值 value 的元素的 list。 如果 T 不可复制插入 (CopyInsertable) 到 std::list<T> 中，那么行为未定义。 参数 alloc - 用于此容器所有内存分配的分配器 count - 容器的大小 value - 以之初始化容器元素的值,"{
+    setSink(<1>)
+    transitive(<0>, <2>)
+}","{
+  setSink(<1>)
+  transitive(<0>, <2>)
+}",1,2,0,0,"{
+    <0>.size = <1>
+    <0>.field = <2>
+}","{
+    <0>.size = <1>
+    <0>.field = <2>
+}",1,2,0,0
+"std::list<T,Allocator>::list",list,"list( size_type count, const T& value,
+      const Allocator& alloc = Allocator() );",构造拥有 count 个值 value 的元素的 list。 如果 T 不可复制插入 (CopyInsertable) 到 std::list<T> 中，那么行为未定义。 参数 alloc - 用于此容器所有内存分配的分配器 count - 容器的大小 value - 以之初始化容器元素的值,"{
+    setSink(<1>)
+    transitive(<0>, <2>)
+}","{
+  setSink(<1>)
+  transitive(<0>, <2>)
+}",1,2,0,0,"{
+    <0>.size = <1>
+    <0>.field = <2>
+}","{
+    <0>.size = <1>
+    <0>.field = <2>
+}",1,2,0,0
+"std::list<T,Allocator>::list",list,"template< class InputIt >
+list( InputIt first, InputIt last, const Allocator& alloc = Allocator() );","以范围 [first, last) 的内容构造 list。[first, last) 中的每个迭代器都只会解引用一次。 如果 InputIt 不满足老式输入迭代器 (LegacyInputIterator) ，那么就会改为以实参 static_cast<size_type>(first)、last 和 alloc 调用重载 (4)。 (C++11 前) 此重载只有在 InputIt 满足老式输入迭代器 (LegacyInputIterator) 时才会参与重载决议。 如果 T 从 *first 不可就位构造 (EmplaceConstructible) 到 std::list<T> 中，那么行为未定义。 参数 alloc - 用于此容器所有内存分配的分配器 count - 容器的大小 value - 以之初始化容器元素的值 first, last - 要复制源元素范围的迭代器对","{
+    transitive(<0>, <1> || <2>)
+}","{
+  transitive(<0>, <1> || <2>)
+}",1,1,0,0,"{
+    <0>.field = <1>.field
+}","{
+    <0>.field = <1>.field
+}",1,1,0,0
+"std::list<T,Allocator>::list",list,list( const list& other );,"以 other 的内容构造 list。 7) 复制构造函数。 如同通过调用 std::allocator_traits<Allocator>:: select_on_container_copy_construction (other.get_allocator()) 获得分配器。 参数 alloc - 用于此容器所有内存分配的分配器 count - 容器的大小 value - 以之初始化容器元素的值 first, last - 要复制源元素范围的迭代器对 other - 用作初始化容器元素来源的另一容器","{
+    transitive(<0>, <1>)
+}","{
+  transitive(<0>, <1>)
+}",1,1,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <1>.size
+}","{
+    <0>.size = <1>.size
+    <0>.field = <1>.field
+}",1,2,0,0
+"std::list<T,Allocator>::list",list,list( list&& other );,"以 other 的内容构造 list。 移动构造函数。如同通过从 other.get_allocator() 移动构造获得分配器。 参数 alloc - 用于此容器所有内存分配的分配器 count - 容器的大小 value - 以之初始化容器元素的值 first, last - 要复制源元素范围的迭代器对 other - 用作初始化容器元素来源的另一容器","{
+    transitive(<0>, <1>)
+}","{
+  transitive(<0>, <1>)
+}",1,1,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <1>.size
+    <1>.size = 0
+}","{
+    <0>.size = <1>.size
+    <0>.field = <1>.field
+}",0,2,0,1
+"std::list<T,Allocator>::list",list,"list( const list& other, const Allocator& alloc );","以 other 的内容构造 list。 与构造函数相同，但是会将 alloc 用作分配器。 如果 T 不可复制插入 (CopyInsertable) 到 std::list<T> 中，那么行为未定义。 参数 alloc - 用于此容器所有内存分配的分配器 count - 容器的大小 value - 以之初始化容器元素的值 first, last - 要复制源元素范围的迭代器对 other - 用作初始化容器元素来源的另一容器","{
+    transitive(<0>, <1>)
+}","{
+  transitive(<0>, <1>)
+}
+",1,1,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <1>.size
+}","{
+    <0>.size = <1>.size
+    <0>.field = <1>.field
+}",1,2,0,0
+"std::list<T,Allocator>::list",list,"list( list&& other, const Allocator& alloc );","以 other 的内容构造 list。 与移动函数相同，但是会将 alloc 用作分配器。 如果 T 不可移动插入 (MoveInsertable) 到 std::list<T> 中，那么行为未定义。 参数 alloc - 用于此容器所有内存分配的分配器 count - 容器的大小 value - 以之初始化容器元素的值 first, last - 要复制源元素范围的迭代器对 other - 用作初始化容器元素来源的另一容器","{
+    transitive(<0>, <1>)
+}","{
+  transitive(<0>, <1>)
+}",1,1,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <1>.size
+    <1>.size = 0
+}","{
+    <0>.size = <1>.size
+    <0>.field = <1>.field
+}",0,2,0,1
+"std::list<T,Allocator>::list",list,"list( std::initializer_list<T> init, const Allocator& alloc = Allocator() );","等价于 list(il.begin(), il.end(), alloc)。 参数 init - 用作初始化元素来源的初始化器列表","{
+    transitive(<0>, <1>)
+}","{
+  transitive(<0>, <1>)
+}
+",1,1,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <1>.size
+}","{
+    <0>.size = <1>.size
+    <0>.field = <1>.field
+}",1,2,0,0
+"std::list<T,Allocator>::~list",list,~list();,析构函数。 销毁 list。调用各元素的析构函数，然后解分配所用的存储。注意，若元素是指针，则不销毁所指向的对象。,"{
+    sanitize(<0>)
+}","{
+  sanitize(<0>)
+}",1,1,0,0,"{
+    <0> = NULL
+}","{
+    <0> = NULL
+}",1,1,0,0
+"std::list<T,Allocator>::operator=",list,list& operator=( const list& other );,复制赋值运算符。以 other 内容的副本替换内容。 若 std::allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value 为 true，则用 other 的分配器的副本替换 *this 的分配器。若 *this 的分配器在赋值后将与其旧值比较不相等，则用旧分配器解分配内存，然后在复制元素前用新分配器分配内存。否则，在可行时可能复用 *this 所拥有的内存。任何情况下，原属于 *this 的元素要么被销毁，要么被逐元素复制赋值所替换。 参数 other - 用作数据源的另一容器 返回值 *this,"{
+    transitive(<0>, <1>)
+    transitive(<-1>, <0>)
+}","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}",1,2,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <1>.size
+    <-1> = <0>
+}","{
+    <0>.size = <1>.size
+    <0>.field = <1>.field
+    <-1> = <0>
+}",1,3,0,0
+"std::list<T,Allocator>::operator=",list,list& operator=( list&& other );,移动赋值运算符。用移动语义以 other 的内容替换内容（即从 other 移动 other 中的数据到此容器中）。之后 other 处于合法但未指定的状态。 若 std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value 为 true，则用 other 的分配器的副本替换 *this 的分配器。若它为 false 且 *this 与 other 的分配器比较不相等，则 *this 不能接管 other 所拥有的内存的所有权且必须单独地移动赋值每个元素，并用其自身的分配器按需分配额外内存。任何情况下，原属于 *this 的元素要么被销毁，要么被逐元素移动赋值所替换。 参数 other - 用作数据源的另一容器 返回值 *this,"{
+    transitive(<0>, <1>)
+    transitive(<-1>, <0>)
+}","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}",1,2,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <1>.size
+    <1>.size = 0
+    <-1> = <0>
+}","{
+    <0>.size = <1>.size
+    <0>.field = <1>.field
+    <-1> = <0>
+}",0,3,0,1
+"std::list<T,Allocator>::operator=",list,list& operator=( list&& other ) noexcept,移动赋值运算符。用移动语义以 other 的内容替换内容（即从 other 移动 other 中的数据到此容器中）。之后 other 处于合法但未指定的状态。 若 std::allocator_traits<allocator_type>::propagate_on_container_move_assignment::value 为 true，则用 other 的分配器的副本替换 *this 的分配器。若它为 false 且 *this 与 other 的分配器比较不相等，则 *this 不能接管 other 所拥有的内存的所有权且必须单独地移动赋值每个元素，并用其自身的分配器按需分配额外内存。任何情况下，原属于 *this 的元素要么被销毁，要么被逐元素移动赋值所替换。 参数 other - 用作数据源的另一容器 返回值 *this,"{
+    transitive(<0>, <1>)
+    transitive(<-1>, <0>)
+}","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}",1,2,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <1>.size
+    <1>.size = 0
+    <-1> = <0>
+}","{
+    <0>.size = <1>.size
+    <0>.field = <1>.field
+    <-1> = <0>
+}",0,3,0,1
+"std::list<T,Allocator>::operator=",list,list& operator=( std::initializer_list<value_type> ilist );,以 initializer_list ilist 所标识者替换内容。 参数 other - 用作数据源的另一容器 ilist - 用作数据源的 initializer_list 返回值 *this,"{
+    transitive(<0>, <1>)
+    transitive(<-1>, <0>)
+}","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}",1,2,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <1>.size
+    <-1> = <0>
+}","{
+    <0>.size = <1>.size
+    <0>.field = <1>.field
+    <-1> = <0>
+}",1,3,0,0
+"std::list<T,Allocator>::assign",list,"void assign( size_type count, const T& value );",替换容器的内容。 1) 以 count 份 value 的副本替换内容。 参数 count - 容器的新大小 value - 用以初始化容器元素的值,"{
+    setSink(<1>)
+    transitive(<0>, <2>)
+}","{
+  setSink(<1>)
+  transitive(<0>, <2>)
+}",1,2,0,0,"{
+    <0>.field = <2>
+    <0>.size = <1>
+}","{
+    <0>.size = <1>
+    <0>.field = <2>
+}",1,2,0,0
+"std::list<T,Allocator>::assign",list,"template< class InputIt >
+void assign( InputIt first, InputIt last );","以范围 [first, last) 中元素的副本替换内容。 其中有任何一个实参是指向 *this 中的迭代器时行为未定义。 如果 InputIt 是整数类型，那么此重载与 (1) 拥有相同效果。 此重载只有在 InputIt 满足老式输入迭代器 (LegacyInputIterator) 时才会参与重载决议。 参数 first, last - 要复制的源元素范围的迭代器对","{
+    transitive(<0>, <1> || <2>)
+}","{
+  transitive(<0>, <1> || <2>)
+}",1,1,0,0,"{
+    <0>.field = <1>.field
+}","{
+    <0>.field = <1>.field
+}",1,1,0,0
+"std::list<T,Allocator>::assign",list,void assign( std::initializer_list<T> ilist );,以 ilist 的元素替换内容。 指代容器元素的所有迭代器、指针和引用均会失效。 参数 ilist - 复制值来源的 std::initializer_list,"{
+    transitive(<0>, <1>)
+}","{
+  transitive(<0>, <1>)
+}",1,1,0,0,"{
+    <0>.size = <1>.size
+    <0>.field = <1>.field
+}","{
+    <0>.size = <1>.size
+    <0>.field = <1>.field
+}
+",1,2,0,0
+"std::list<T,Allocator>::get_allocator",list,allocator_type get_allocator() const;,返回与容器关联的分配器。 参数 （无） 返回值 关联的分配器。,{},"{}
+",1,0,0,0,{},{},1,0,0,0
+"std::list<T,Allocator>::front",list,reference front();,返回到容器首元素的引用。 在空容器上对 front 的调用是未定义的。 参数 （无） 返回值 到首元素的引用,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = <0>.field
+}","{
+    <-1> = <0>.field
+}",1,1,0,0
+"std::list<T,Allocator>::front",list,const_reference front() const;,返回到容器首元素的引用。 在空容器上对 front 的调用是未定义的。 参数 （无） 返回值 到首元素的引用,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = <0>.field
+}","{
+    <-1> = <0>.field
+}",1,1,0,0
+"std::list<T,Allocator>::back",list,reference back();,返回到容器中最后一个元素的引用。 在空容器上调用 back 导致未定义行为。 参数 （无） 返回值 到最后元素的引用。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}
+",1,1,0,0,"{
+    <-1> = <0>.field
+}","{
+    <-1> = <0>.field
+}",1,1,0,0
+"std::list<T,Allocator>::back",list,const_reference back() const;,返回到容器中最后一个元素的引用。 在空容器上调用 back 导致未定义行为。 参数 （无） 返回值 到最后元素的引用。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = <0>.field
+}","{
+    <-1> = <0>.field
+}",1,1,0,0
+"std::list<T,Allocator>::begin",list,iterator begin();,返回指向 list 首元素的迭代器。 如果 list 为空，那么返回的迭代器等于 end()。 参数 （无） 返回值 指向首元素的迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}",1,1,0,0
+"std::list<T,Allocator>::begin",list,const_iterator begin() const;,返回指向 list 首元素的迭代器。 如果 list 为空，那么返回的迭代器等于 end()。 参数 （无） 返回值 指向首元素的迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}",1,1,0,0
+"std::list<T,Allocator>::cbegin",list,const_iterator cbegin() const noexcept;,返回指向 list 首元素的迭代器。 如果 list 为空，那么返回的迭代器等于 end()。 参数 （无） 返回值 指向首元素的迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}",1,1,0,0
+"std::list<T,Allocator>::end",list,iterator end();,返回指向 list 末元素后一元素的迭代器。 此元素表现为占位符；试图访问它导致未定义行为。 参数 （无） 返回值 指向后随最后元素的迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}
+",1,1,0,0
+"std::list<T,Allocator>::end",list,const_iterator end() const;,返回指向 list 末元素后一元素的迭代器。 此元素表现为占位符；试图访问它导致未定义行为。 参数 （无） 返回值 指向后随最后元素的迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}",1,1,0,0
+"std::list<T,Allocator>::cend",list,const_iterator cend() const noexcept;,返回指向 list 末元素后一元素的迭代器。 此元素表现为占位符；试图访问它导致未定义行为。 参数 （无） 返回值 指向后随最后元素的迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}
+",1,1,0,0
+"std::list<T,Allocator>::rbegin",list,reverse_iterator rbegin();,返回指向逆向的 list 的首元素的逆向迭代器。它对应非逆向 list 的末元素。如果 list 为空，那么返回的迭代器等于 rend()。 参数 （无） 返回值 指向首元素的逆向迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}",1,1,0,0
+"std::list<T,Allocator>::rbegin",list,const_reverse_iterator rbegin() const;,返回指向逆向的 list 的首元素的逆向迭代器。它对应非逆向 list 的末元素。如果 list 为空，那么返回的迭代器等于 rend()。 参数 （无） 返回值 指向首元素的逆向迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}",1,1,0,0
+"std::list<T,Allocator>::crbegin",list,const_reverse_iterator crbegin() const noexcept;,返回指向逆向的 list 的首元素的逆向迭代器。它对应非逆向 list 的末元素。如果 list 为空，那么返回的迭代器等于 rend()。 参数 （无） 返回值 指向首元素的逆向迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}
+",1,1,0,0
+"std::list<T,Allocator>::rend",list,reverse_iterator rend();,返回指向逆向的 list 末元素后一元素的逆向迭代器。它对应非逆向 list 首元素的前一元素。此元素表现为占位符，试图访问它导致未定义行为。 参数 （无） 返回值 指向末元素后一元素的逆向迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}",1,1,0,0
+"std::list<T,Allocator>::rend",list,const_reverse_iterator rend() const;,返回指向逆向的 list 末元素后一元素的逆向迭代器。它对应非逆向 list 首元素的前一元素。此元素表现为占位符，试图访问它导致未定义行为。 参数 （无） 返回值 指向末元素后一元素的逆向迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}
+",1,1,0,0
+"std::list<T,Allocator>::crend",list,const_reverse_iterator crend() const noexcept;,返回指向逆向的 list 末元素后一元素的逆向迭代器。它对应非逆向 list 首元素的前一元素。此元素表现为占位符，试图访问它导致未定义行为。 参数 （无） 返回值 指向末元素后一元素的逆向迭代器。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}
+",1,1,0,0
+"std::list<T,Allocator>::empty",list,bool empty() const;,检查容器是否无元素，即是否 begin() == end()。 参数 （无） 返回值 若容器为空则为 true，否则为 false。,"{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = 0 || 1
+}","{
+    <-1> = 0 || 1
+}",1,1,0,0
+"std::list<T,Allocator>::size",list,size_type size() const;,"返回容器中的元素数，即 std::distance(begin(), end())。 参数 （无） 返回值 容器中的元素数量。","{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = <0>.size
+}","{
+    <-1> = <0>.size
+}",1,1,0,0
+"std::list<T,Allocator>::size",list,size_type size() const noexcept;,"返回容器中的元素数，即 std::distance(begin(), end())。 参数 （无） 返回值 容器中的元素数量。","{
+    transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    <-1> = <0>.size
+}","{
+    <-1> = <0>.size
+}
+",1,1,0,0
+"std::list<T,Allocator>::max_size",list,size_type max_size() const;,"返回容器根据系统或库实现限制而可保有的元素最大数量，即对于最大容器的 std::distance(begin(), end())。 参数 （无） 返回值 元素数量的最大值。",{},{},1,0,0,0,"{
+    <-1> = [0, MAX]
+}","{
+    <-1> = [0, MAX]
+}",1,1,0,0
+"std::list<T,Allocator>::clear",list,void clear();,从容器擦除所有元素。此调用后 size() 返回零。 使任何指代所含元素的引用、指针和迭代器失效。 任何尾后迭代器保持有效。 复杂度,"{
+    sanitize(<0>)
+}","{
+  sanitize(<0>)
+}",1,1,0,0,"{
+    <0>.size = 0
+    <0>.field = NULL
+}","{
+    <0>.size = 0
+    <0>.field = NULL
+}
+",1,2,0,0
+"std::list<T,Allocator>::insert",list,"iterator insert( const_iterator pos, const T& value );","插入元素到容器中的指定位置。 在 pos 前插入 value 的副本。 参数 pos - 将内容插入到它前面的迭代器。pos 可以是 end() 迭代器 value - 要插入的元素值 返回值 1,2) 指向被插入 value 的迭代器。","{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}",1,2,0,0,"{
+    overflow(<1>, [<0>.begin, <0>.end - 1])
+    <0>.field = <2>
+    <0>.size = <0>.size + 1
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.size = <0>.size + 1
+    <0>.field = <2>
+    <-1> = [<0>.begin, <0>.end]
+}",0,3,1,1
+"std::list<T,Allocator>::insert",list,"iterator insert( const_iterator pos, T&& value );","插入元素到容器中的指定位置。 在 pos 前插入 value，可能使用移动语义。 参数 pos - 将内容插入到它前面的迭代器。pos 可以是 end() 迭代器 value - 要插入的元素值 返回值 1,2) 指向被插入 value 的迭代器。","{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}",1,2,0,0,"{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.field = <2>
+    <0>.size = <0>.size + 1
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.field = <2>
+    <0>.size = <0>.size + 1
+    <-1> = [<0>.begin, <0>.end]
+}",1,4,0,0
+"std::list<T,Allocator>::insert",list,"iterator insert( const_iterator pos,
+                 size_type count, const T& value );",插入元素到容器中的指定位置。 在 pos 前插入 value 的 count 个副本。 参数 pos - 将内容插入到它前面的迭代器。pos 可以是 end() 迭代器 value - 要插入的元素值 count - 要插入的元素数量 返回值 指向首个被插入元素的迭代器，或者在 count == 0 时返回 pos。,"{
+  setSink(<2>)
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  setSink(<2>)
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}
+",1,3,0,0,"{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.field = <3>
+    <0>.size = <0>.size + <2>
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.field = <3>
+    <0>.size = <0>.size + <2>
+    <-1> = [<0>.begin, <0>.end]
+}
+",1,4,0,0
+"std::list<T,Allocator>::insert",list,"template< class InputIt >
+iterator insert( const_iterator pos, InputIt first, InputIt last );","插入元素到容器中的指定位置。 在 pos 前插入来自范围 [first, last) 的元素。 如果 InputIt 是整数类型，那么此重载与重载 (3) 的效果相同。 (C++11 前) 此重载只有在InputIt 足以为输入迭代器时才会参与重载决议，以避免与重载 (3) 有歧义。 参数 first, last - 要插入的（不能是指向调用 insert 所用的容器中的迭代器）元素范围的迭代器对 返回值 指向首个被插入元素的迭代器，或者在 first == last 时返回 pos","{
+  transitive(<0>, <0> || <2> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  transitive(<0>, <0> || <2> || <3>)
+  transitive(<-1>, <0>)
+}",1,2,0,0,"{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.field = <2>.field
+    <0>.size = [<0>.size, MAX]
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.field = <2>.field
+    <0>.size = [<0>.size, MAX]
+    <-1> = [<0>.begin, <0>.end]
+}
+",1,4,0,0
+"std::list<T,Allocator>::insert",list,"iterator insert( const_iterator pos, std::initializer_list<T> ilist );","插入元素到容器中的指定位置。 在 pos 前插入来自初始化器列表 ilist 的元素。 参数 参数 pos - 将内容插入到它前面的迭代器。pos 可以是 end() 迭代器 value - 要插入的元素值 count - 要插入的元素数量 first, last - 要插入的（不能是指向调用 insert 所用的容器中的迭代器）元素范围的迭代器对 ilist - 要插入的值来源的 std::initializer_list 返回值 指向首个被插入元素的迭代器，或者在 ilist 为空时返回 pos。","{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}",1,2,0,0,"{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.field = <2>.field
+    <0>.size = <0>.size + <2>.size
+<-1> = [<0>.begin, <0>.end]
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.size = <0>.size + <2>.size
+    <0>.field = <2>.field
+    <-1> = [<0>.begin, <0>.end]
+}
+",1,4,0,0
+"std::list<T,Allocator>::emplace",list,"template< class... Args >
+iterator emplace( const_iterator pos, Args&&... args );",在紧接 pos 之前的位置向容器插入新元素。 通过 std::allocator_traits::construct 构造元素，用布置 new 在容器提供的位置原位构造元素。 将实参 args... 作为 std::forward<Args>(args)... 转发给构造函数。 args... 可以直接或间接地指代容器中的值。 没有引用和迭代器会失效。 参数 pos - 将构造新元素到其前的迭代器 args - 转发给元素构造函数的参数 类型要求 -T 必须满足可就位构造 (EmplaceConstructible) 。 返回值 指向被安置的元素的迭代器。,"{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}
+",1,2,0,0,"{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.field = <2>
+    <0>.size = <0>.size + 1
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    <0>.size = <0>.size + 1
+    <0>.field = <2>
+    <-1> = [<0>.begin, <0>.end]
+}
+",0,3,0,1
+"std::list<T,Allocator>::erase",list,iterator erase( iterator pos );,"从容器擦除指定的元素。 移除位于 pos 的元素。 参数 pos - 指向要移除的元素的迭代器 first, last - 要移除的元素范围的迭代器对 返回值 最后移除元素之后的迭代器。 如果 pos 指代末元素，那么返回 end() 迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    overflow(<1>, [<0>.begin, <0>.end - 1])
+    <0>.size = <0>.size - 1
+    <0>.field = NULL
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    overflow(<1>, [<0>.begin, <0>.end - 1])
+    <0>.size = <0>.size - 1
+    <0>.field = NULL
+    <-1> = [<0>.begin, <0>.end]
+}",1,4,0,0
+"std::list<T,Allocator>::erase",list,iterator erase( const_iterator pos );,"从容器擦除指定的元素。 移除位于 pos 的元素。 参数 pos - 指向要移除的元素的迭代器 first, last - 要移除的元素范围的迭代器对 返回值 最后移除元素之后的迭代器。 如果 pos 指代末元素，那么返回 end() 迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+    overflow(<1>, [<0>.begin, <0>.end - 1])
+    <0>.size = <0>.size - 1
+    <0>.field = NULL
+    <-1> = [<0>.begin, <0>.end]
+}","{
+    overflow(<1>, [<0>.begin, <0>.end - 1])
+    <0>.size = <0>.size - 1
+    <0>.field = NULL
+    <-1> = [<0>.begin, <0>.end]
+}",1,4,0,0
+"std::list<T,Allocator>::erase",list,"iterator erase( iterator first, iterator last );","从容器擦除指定的元素。 移除范围 [first, last) 中的元素。 参数 pos - 指向要移除的元素的迭代器 first, last - 要移除的元素范围的迭代器对 返回值 如果在移除前 last == end()，那么返回更新的 end() 迭代器。 如果范围 [first, last) 为空，那么返回 last。","{
+  transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+  overflow(<1>, [<0>.begin, <0>.end])
+  overflow(<2>, [<0>.begin, <0>.end])
+  <0>.size = [0, <0>.size]
+  <0>.field = NULL
+  <-1> = [<0>.begin, <0>.end]
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    overflow(<2>, [<0>.begin, <0>.end])
+    <0>.size = [0, <0>.size]
+    <0>.field = NULL
+    <-1> = [<0>.begin, <0>.end]
+}",1,5,0,0
+"std::list<T,Allocator>::erase",list,"iterator erase( const_iterator first, const_iterator last );","从容器擦除指定的元素。 移除范围 [first, last) 中的元素。 参数 pos - 指向要移除的元素的迭代器 first, last - 要移除的元素范围的迭代器对 返回值 如果在移除前 last == end()，那么返回更新的 end() 迭代器。 如果范围 [first, last) 为空，那么返回 last。","{
+  transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+  overflow(<1>, [<0>.begin, <0>.end])
+  overflow(<2>, [<0>.begin, <0>.end])
+  <0>.size = [0, <0>.size]
+  <0>.field = NULL
+  <-1> = [<0>.begin, <0>.end]
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    overflow(<2>, [<0>.begin, <0>.end])
+    <0>.size = [0, <0>.size]
+    <0>.field = NULL
+    <-1> = [<0>.begin, <0>.end]
+}",1,5,0,0
+"std::list<T,Allocator>::push_back",list,void push_back( const T& value );,追加给定元素 value 到容器尾。 初始化新元素为 value 的副本。 没有引用和迭代器会失效。 参数 value - 要追加的元素值 类型要求 - 为使用重载 (1)， T 必须满足可复制插入 (CopyInsertable) 。 - 为使用重载 (2)， T 必须满足可移动插入 (MoveInsertable) 。 返回值 （无）,"{
+    transitive(<0>, <0> || <1>)
+}","{
+  transitive(<0>, <0> || <1>)
+}",1,1,0,0,"{
+    <0>.field = <1>
+    <0>.size = <0>.size + 1
+}","{
+    <0>.size = <0>.size + 1
+    <0>.field = <1>
+}",1,2,0,0
+"std::list<T,Allocator>::push_back",list,void push_back( T&& value );,追加给定元素 value 到容器尾。 2) 移动 value 进新元素。 没有引用和迭代器会失效。 参数 value - 要追加的元素值 类型要求 - 为使用重载 (1)， T 必须满足可复制插入 (CopyInsertable) 。 - 为使用重载 (2)， T 必须满足可移动插入 (MoveInsertable) 。 返回值 （无）,"{
+    transitive(<0>, <0> || <1>)
+}","{
+  transitive(<0>, <0> || <1>)
+}",1,1,0,0,"{
+    <0>.field = <1>
+    <0>.size = <0>.size + 1
+}","{
+    <0>.size = <0>.size + 1
+    <0>.field = <1>
+}",1,2,0,0
+"std::list<T,Allocator>::emplace_back",list,"template< class... Args >
+void emplace_back( Args&&... args );",添加新元素到容器尾。元素通过 std::allocator_traits::construct 构造，通常用布置 new 于容器所提供的位置原位构造元素。实参 args... 以 std::forward<Args>(args)... 转发到构造函数。 没有引用和迭代器会失效。 参数 args - 转发到元素构造函数的实参 类型要求 -T（容器的元素类型） 必须满足可就位构造 (EmplaceConstructible) 。 返回值 （无）,"{
+    transitive(<0>, <0> || <1>)
+}","{
+  transitive(<0>, <0> || <1>)
+}",1,1,0,0,"{
+    <0>.field = <1>
+    <0>.size = <0>.size + 1
+}","{
+    <0>.size = <0>.size + 1
+    <0>.field = <1>
+}
+",1,2,0,0
+"std::list<T,Allocator>::emplace_back",list,"template< class... Args >
+reference emplace_back( Args&&... args );",添加新元素到容器尾。元素通过 std::allocator_traits::construct 构造，通常用布置 new 于容器所提供的位置原位构造元素。实参 args... 以 std::forward<Args>(args)... 转发到构造函数。 没有引用和迭代器会失效。 参数 args - 转发到元素构造函数的实参 类型要求 -T（容器的元素类型） 必须满足可就位构造 (EmplaceConstructible) 。 返回值 到被插入元素的引用。,"{
+    transitive(<0>, <0> || <1>)
+    transitive(<-1>, <0>)
+}","{
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}
+",1,2,0,0,"{
+    <0>.field = <1>
+    <0>.size = <0>.size + 1      <-1> = <0>.field
+}","{
+    <0>.size = <0>.size + 1
+    <0>.field = <1>
+    <-1> = <0>.field
+}",1,3,0,0
+"std::list<T,Allocator>::pop_back",list,void pop_back();,移除容器的末元素。 在空容器上调用 pop_back 导致未定义行为。 指向被擦除元素的迭代器和引用会失效。 参数 （无） 返回值 （无）,"{
+}","{
+}",1,0,0,0,"{
+    <0>.field = NULL
+    <0>.size = <0>.size - 1
+}","{
+    <0>.size = <0>.size - 1
+}",0,1,0,1
+"std::list<T,Allocator>::push_front",list,void push_front( const T& value );,前附给定元素 value 到容器起始。 没有引用和迭代器会失效。 参数 value - 要前附的元素值 返回值 （无）,"{
+    transitive(<0>, <0> || <1>)
+}","{
+  transitive(<0>, <0> || <1>)
+}",1,1,0,0,"{
+    <0>.field = <1>
+    <0>.size = <0>.size + 1
+}","{
+    <0>.size = <0>.size + 1
+    <0>.field = <1>
+}
+",1,2,0,0
+"std::list<T,Allocator>::push_front",list,void push_front( T&& value );,前附给定元素 value 到容器起始。 没有引用和迭代器会失效。 参数 value - 要前附的元素值 返回值 （无）,"{
+    transitive(<0>, <0> || <1>)
+}","{
+  transitive(<0>, <0> || <1>)
+}",1,1,0,0,"{
+    <0>.field = <1>
+    <0>.size = <0>.size + 1
+}","{
+    <0>.size = <0>.size + 1
+    <0>.field = <1>
+}
+",1,2,0,0
+"std::list<T,Allocator>::pop_front",list,void pop_front();,移除容器首元素。若容器中无元素，则行为未定义。 指向被擦除元素的迭代器和引用会失效。 参数 （无） 返回值 （无） 复杂度 常数。 异常 不抛出。,"{
+}","{
+}
+",1,0,0,0,"{
+    <0>.field = NULL
+    <0>.size = <0>.size - 1
+}","{
+    <0>.size = <0>.size - 1
+}",0,1,0,1
+"std::list<T,Allocator>::resize",list,void resize( size_type count );,重设容器大小以容纳 count 个元素，在 count == size() 时不做任何事。 如果当前大小大于 count，那么减小容器到它的前 count 个元素。 如果当前大小小于 count，那么： 追加额外的默认插入的元素。 参数 count - 容器的大小 value - 用以初始化新元素的值,"{
+    setSink(<1>)
+}","{
+  setSink(<1>)
+}",1,1,0,0,"{
+    <0>.size = <1>
+}","{
+    <0>.size = <1>
+}
+",1,1,0,0
+"std::list<T,Allocator>::resize",list,"void resize( size_type count, const value_type& value );",重设容器大小以容纳 count 个元素，在 count == size() 时不做任何事。 如果当前大小大于 count，那么减小容器到它的前 count 个元素。 如果当前大小小于 count，那么： 追加额外的 value 的副本。 参数 count - 容器的大小 value - 用以初始化新元素的值,"{
+    setSink(<1>)
+    transitive(<0>, <0> || <2>)
+}","{
+  setSink(<1>)
+  transitive(<0>, <0> || <2>)
+}
+",1,2,0,0,"{
+    <0>.size = <1>
+    <0>.field = <2>
+}","{
+    <0>.size = <1>
+    <0>.field = <2>
+}
+",1,2,0,0
+"std::list<T,Allocator>::swap",list,void swap( list& other );,将内容与 other 的交换。不在单独的元素上调用任何移动、复制或交换操作。 所有迭代器和引用保持有效。在操作后，未指明保有此容器中 end() 值的迭代器指代此容器还是另一容器。 参数 other - 要与之交换内容的容器,"{
+    swapTaint(<0>, <1>)
+}","{
+  swapTaint(<0>, <1>)
+}",1,1,0,0,"{
+    swap(<0>, <1>)
+}","{
+    swap(<0>, <1>)
+}",1,1,0,0
+"std::list<T,Allocator>::swap",list,void swap( list& other ) noexcept,将内容与 other 的交换。不在单独的元素上调用任何移动、复制或交换操作。 所有迭代器和引用保持有效。在操作后，未指明保有此容器中 end() 值的迭代器指代此容器还是另一容器。 参数 other - 要与之交换内容的容器,"{
+  swapTaint(<0>, <1>)
+}","{
+  swapTaint(<0>, <1>)
+}
+",1,1,0,0,"{
+    swap(<0>, <1>)
+}","{
+    swap(<0>, <1>)
+}",1,1,0,0
+"std::list<T,Allocator>::merge",list,void merge( list& other );,"如果 other 与 *this 指代同一对象，那么什么也不做。 否则，将 other 合并到 *this。两个链表都应有序。不复制元素，并且在操作后容器 other 会变为空。此操作是稳定的：对于两个链表中的等价元素，来自 *this 的元素始终在来自 other 的元素之前，并且不更改 *this 和 other 的等价元素顺序。 迭代器和引用不会失效。指向或指代从 other 移走的元素的指针、引用和迭代器将不再涉及 other，而是会指代 *this 中的相同元素。 用 std::less<T>()(C++14 前)std::less<>()(C++14 起) 比较元素。 参数 other - 要交换的另一容器 comp - 比较函数对象（即满足比较 (Compare) 概念的对象），在第一参数小于（即先 ﻿序于）第二参数时返回 ​true。 比较函数的签名应等价于如下： bool cmp(const Type1 &a, const Type2 &b); 返回值 （无）","{
+    transitive(<0>, <0> || <1>)
+    sanitize(<1>)
+}","{
+  transitive(<0>, <0> || <1>)
+  sanitize(<1>)
+}",1,2,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <0>.size + <1>.size
+    <1>.size = 0
+    <1>.field = NULL
+}","{
+    <0>.size = <0>.size + <1>.size
+    <1>.size = 0
+    <1>.field = NULL
+}",0,3,0,1
+"std::list<T,Allocator>::merge",list,void merge( list&& other );,"如果 other 与 *this 指代同一对象，那么什么也不做。 否则，将 other 合并到 *this。两个链表都应有序。不复制元素，并且在操作后容器 other 会变为空。此操作是稳定的：对于两个链表中的等价元素，来自 *this 的元素始终在来自 other 的元素之前，并且不更改 *this 和 other 的等价元素顺序。 迭代器和引用不会失效。指向或指代从 other 移走的元素的指针、引用和迭代器将不再涉及 other，而是会指代 *this 中的相同元素。 用 std::less<T>()(C++14 前)std::less<>()(C++14 起) 比较元素。 参数 other - 要交换的另一容器 comp - 比较函数对象（即满足比较 (Compare) 概念的对象），在第一参数小于（即先 ﻿序于）第二参数时返回 ​true。 比较函数的签名应等价于如下： bool cmp(const Type1 &a, const Type2 &b); 返回值 （无）","{
+    transitive(<0>, <0> || <1>)
+    sanitize(<1>)
+}","{
+  transitive(<0>, <0> || <1>)
+  sanitize(<1>)
+}",1,2,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <0>.size + <1>.size
+    <1>.size = 0
+    <1>.field = NULL
+}","{
+    <0>.size = <0>.size + <1>.size
+    <1>.size = 0
+    <1>.field = NULL
+}",0,3,0,1
+"std::list<T,Allocator>::merge",list,"template< class Compare >
+void merge( list& other, Compare comp );","如果 other 与 *this 指代同一对象，那么什么也不做。 否则，将 other 合并到 *this。两个链表都应有序。不复制元素，并且在操作后容器 other 会变为空。此操作是稳定的：对于两个链表中的等价元素，来自 *this 的元素始终在来自 other 的元素之前，并且不更改 *this 和 other 的等价元素顺序。 迭代器和引用不会失效。指向或指代从 other 移走的元素的指针、引用和迭代器将不再涉及 other，而是会指代 *this 中的相同元素。 用 comp 比较元素。 参数 other - 要交换的另一容器 comp - 比较函数对象（即满足比较 (Compare) 概念的对象），在第一参数小于（即先 ﻿序于）第二参数时返回 ​true。 比较函数的签名应等价于如下： bool cmp(const Type1 &a, const Type2 &b); 返回值 （无）","{
+    transitive(<0>, <0> || <1>)
+    sanitize(<1>)
+}","{
+  transitive(<0>, <0> || <1>)
+  sanitize(<1>)
+}",1,2,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <0>.size + <1>.size
+    <1>.size = 0
+    <1>.field = NULL
+}","{
+    <0>.size = <0>.size + <1>.size
+    <1>.size = 0
+    <1>.field = NULL
+}
+",0,3,0,1
+"std::list<T,Allocator>::merge",list,"template< class Compare >
+void merge( list&& other, Compare comp );","如果 other 与 *this 指代同一对象，那么什么也不做。 否则，将 other 合并到 *this。两个链表都应有序。不复制元素，并且在操作后容器 other 会变为空。此操作是稳定的：对于两个链表中的等价元素，来自 *this 的元素始终在来自 other 的元素之前，并且不更改 *this 和 other 的等价元素顺序。 迭代器和引用不会失效。指向或指代从 other 移走的元素的指针、引用和迭代器将不再涉及 other，而是会指代 *this 中的相同元素。 用 comp 比较元素。 参数 other - 要交换的另一容器 comp - 比较函数对象（即满足比较 (Compare) 概念的对象），在第一参数小于（即先 ﻿序于）第二参数时返回 ​true。 比较函数的签名应等价于如下： bool cmp(const Type1 &a, const Type2 &b); 返回值 （无）","{
+    transitive(<0>, <0> || <1>)
+    sanitize(<1>)
+}","{
+  transitive(<0>, <0> || <1>)
+  sanitize(<1>)
+}
+",1,2,0,0,"{
+    <0>.field = <1>.field
+    <0>.size = <0>.size + <1>.size
+    <1>.size = 0
+    <1>.field = NULL
+}","{
+    <0>.size = <0>.size + <1>.size
+    <1>.size = 0
+    <1>.field = NULL
+    <0>.field = <1>.field || <0>.field
+}",0,3,1,1
+"std::list<T,Allocator>::splice",list,"void splice( const_iterator pos, list& other );",从一个 list 转移元素给另一个。 不复制或移动元素，仅对链表结点的内部指针进行重指向。没有迭代器或引用会失效，指向被移动元素的迭代器保持有效，但现在指代到 *this 中，而不是到 other 中。 从 other 转移所有元素到 *this 中。元素被插入到 pos 指向的元素之前。操作后容器 other 变为空。 参数 pos - 将插入内容到它之前的元素 other - 要从它转移内容的另一容器 返回值 （无）,"{
+    transitive(<0>, <0> || <2>)
+    sanitize(<2>)
+}","{
+  transitive(<0>, <0> || <2>)
+  sanitize(<2>)
+}",1,2,0,0,"{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.field = <1>.field
+    <0>.size = <0>.size + <2>.size
+    <2>.size = 0
+    <2>.field = NULL
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.size = <0>.size + <2>.size
+    <0>.field = <2>.field
+    <2>.size = 0
+    <2>.field = NULL
+}
+",0,4,1,1
+"std::list<T,Allocator>::splice",list,"void splice( const_iterator pos, list&& other );",从一个 list 转移元素给另一个。 不复制或移动元素，仅对链表结点的内部指针进行重指向。没有迭代器或引用会失效，指向被移动元素的迭代器保持有效，但现在指代到 *this 中，而不是到 other 中。 从 other 转移所有元素到 *this 中。元素被插入到 pos 指向的元素之前。操作后容器 other 变为空。 参数 pos - 将插入内容到它之前的元素 other - 要从它转移内容的另一容器 返回值 （无）,"{
+    transitive(<0>,  <0> || <2>)
+    sanitize(<2>)
+}","{
+  transitive(<0>, <0> || <2>)
+  sanitize(<2>)
+}",1,2,0,0,"{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.field = <1>.field
+    <0>.size = <0>.size + <2>.size
+    <2>.size = 0
+    <2>.field = NULL
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    <0>.size = <0>.size + <2>.size
+    <0>.field = <2>.field
+    <2>.size = 0
+    <2>.field = NULL
+}
+",0,4,1,1
+"std::list<T,Allocator>::splice",list,"void splice( const_iterator pos, list& other, const_iterator it );",从一个 list 转移元素给另一个。 不复制或移动元素，仅对链表结点的内部指针进行重指向。没有迭代器或引用会失效，指向被移动元素的迭代器保持有效，但现在指代到 *this 中，而不是到 other 中。 从 other 转移 it 指向的元素到 *this。元素被插入到 pos 指向的元素之前。 参数 pos - 将插入内容到它之前的元素 other - 要从它转移内容的另一容器 it - 要从 other 转移到 *this 的元素 返回值 （无）,"{
+    transitive(<0>, <0> ||  <3>)
+    sanitize(<2>)
+}","{
+  transitive(<0>, <0> || <2>)
+}",0,0,1,2,"{
+    overflow(<1>, [<0>.begin, <0>.end])
+    overflow(<3>, [<2>.begin, <2>.end - 1])
+    <0>.field = <3>.field
+    <0>.size = <0>.size + 1
+    <2>.size = <2>.size - 1
+    <2>.field = NULL
+}","{
+    <0>.size = <0>.size + 1
+    <2>.size = <2>.size - 1
+    <0>.field = <3>.field
+}",0,3,0,3
+"std::list<T,Allocator>::splice",list,"void splice( const_iterator pos, list&& other, const_iterator it );",从一个 list 转移元素给另一个。 不复制或移动元素，仅对链表结点的内部指针进行重指向。没有迭代器或引用会失效，指向被移动元素的迭代器保持有效，但现在指代到 *this 中，而不是到 other 中。 从 other 转移 it 指向的元素到 *this。元素被插入到 pos 指向的元素之前。 参数 pos - 将插入内容到它之前的元素 other - 要从它转移内容的另一容器 it - 要从 other 转移到 *this 的元素 返回值 （无）,"{
+    transitive(<0>, <0> ||  <3>)
+    sanitize(<2>)
+}","{
+  transitive(<0>, <0> || <2>)
+}
+",0,0,1,2,"{
+    overflow(<1>, [<0>.begin, <0>.end])
+    overflow(<3>, [<2>.begin, <2>.end - 1])
+    <0>.field = <3>.field
+    <0>.size = <0>.size + 1
+    <2>.size = <2>.size - 1
+    <2>.field = NULL
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    overflow(<3>, [<2>.begin, <2>.end])
+    <0>.size = <0>.size + 1
+    <2>.size = <2>.size - 1
+    <0>.field = <3>.field
+    <3>.field = NULL
+}
+",0,4,2,2
+"std::list<T,Allocator>::splice",list,"void splice( const_iterator pos, list& other,
+             const_iterator first, const_iterator last);","从一个 list 转移元素给另一个。 不复制或移动元素，仅对链表结点的内部指针进行重指向。没有迭代器或引用会失效，指向被移动元素的迭代器保持有效，但现在指代到 *this 中，而不是到 other 中。 从 other 转移范围 [first, last) 中的元素到 *this。元素被插入到 pos 指向的元素之前。 参数 pos - 将插入内容到它之前的元素 other - 要从它转移内容的另一容器 it - 要从 other 转移到 *this 的元素 first, last - 要从 other 转移到 *this 的元素范围的迭代器对 返回值 （无）","{
+    transitive(<0>, <0> || <3> || <4>)
+}","{
+  transitive(<0>, <0> || <2>)
+}
+",0,0,1,1,"{
+   overflow(<1>, [<0>.begin, <0>.end])
+   overflow(<3>, [<2>.begin, <2>.end])
+   overflow(<4>, [<2>.begin, <2>.end])
+   <0>.field = <3>.field
+   <0>.size = [<0>.size, <0>.size + <2>.size]
+   <2>.size = [0, <2>.size]
+   <2>.field = NULL
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    overflow(<3>, [<2>.begin, <2>.end])
+    overflow(<4>, [<2>.begin, <2>.end])
+    <0>.field = <3>.field
+    <2>.field = NULL
+    <0>.size = [<0>.size, MAX]
+    <2>.size = [0, <2>.size]
+}
+",0,6,1,1
+"std::list<T,Allocator>::splice",list,"void splice( const_iterator pos, list&& other,
+             const_iterator first, const_iterator last );","从一个 list 转移元素给另一个。 不复制或移动元素，仅对链表结点的内部指针进行重指向。没有迭代器或引用会失效，指向被移动元素的迭代器保持有效，但现在指代到 *this 中，而不是到 other 中。 从 other 转移范围 [first, last) 中的元素到 *this。元素被插入到 pos 指向的元素之前。 参数 pos - 将插入内容到它之前的元素 other - 要从它转移内容的另一容器 it - 要从 other 转移到 *this 的元素 first, last - 要从 other 转移到 *this 的元素范围的迭代器对 返回值 （无）","{
+    transitive(<0>,  <3> || <4>)
+}","{
+  transitive(<0>, <0> || <2>)
+}
+",0,0,1,1,"{
+   overflow(<1>, [<0>.begin, <0>.end])
+   overflow(<3>, [<2>.begin, <2>.end])
+   overflow(<4>, [<2>.begin, <2>.end])
+   <0>.field = <3>.field
+   <0>.size = [<0>.size, <0>.size + <2>.size]
+   <2>.size = [0, <2>.size]
+   <2>.field = NULL
+}","{
+    overflow(<1>, [<0>.begin, <0>.end])
+    overflow(<3>, [<2>.begin, <2>.end])
+    overflow(<4>, [<2>.begin, <2>.end])
+    <0>.field = <3>.field
+    <0>.size = [<0>.size, MAX]
+    <2>.size = [0, <2>.size]
+    <2>.field = NULL
+}",0,6,1,1
+"std::list<T,Allocator>::remove",list,void remove( const T& value );,移除所有满足特定标准的元素。只有指向被移除元素的迭代器和引用会失效。 移除所有等于 value 的元素（用 operator== 判断）。 参数 value - 要移除的元素的值 返回值 （无）,"{
+}","{
+  
+}",1,0,0,0,"{
+   <0>.field = <0>.field || NULL
+   <0>.size = [0, <0>.size]
+}","{
+    <0>.size = [0, <0>.size]
+    <0>.field = <0>.field || NULL
+}
+",1,2,0,0
+"std::list<T,Allocator>::remove",list,size_type remove( const T& value );,移除所有满足特定标准的元素。只有指向被移除元素的迭代器和引用会失效。 移除所有等于 value 的元素（用 operator== 判断）。 参数 value - 要移除的元素的值 返回值 移除的元素数,"{
+  transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+   <0>.field = <0>.field || NULL
+   <0>.size = [0, <0>.size]
+   <-1> = [0, <0>.size]
+}","{
+    <0>.size = [0, <0>.size]
+    <0>.field = NULL
+    <-1> = [0, <0>.size]
+}
+",0,2,1,1
+"std::list<T,Allocator>::remove_if",list,"template< class UnaryPredicate >
+void remove_if( UnaryPredicate p );",移除所有满足特定标准的元素。只有指向被移除元素的迭代器和引用会失效。 移除所有谓词 p 对它返回 true 的元素。 参数 p - 若应该移除该元素则返回 ​true 的一元谓词。 对每个（可为 const 的） T 类型参数 v ，表达式 p(v) 必须可转换到 bool，无关乎值类别，而且必须不修改 v 。从而不允许 T& 类型参数，亦不允许 T ，除非对 T 而言移动等价于复制(C++11 起)。​返回值 无,"{
+}","{
+}",1,0,0,0,"{
+   <0>.field = <0>.field || NULL
+   <0>.size = [0, <0>.size]
+}","{
+    <0>.size = [0, <0>.size]
+    <0>.field = NULL
+}",0,1,1,1
+"std::list<T,Allocator>::remove_if",list,"template< class UnaryPredicate >
+size_type remove_if( UnaryPredicate p );",移除所有满足特定标准的元素。只有指向被移除元素的迭代器和引用会失效。 移除所有谓词 p 对它返回 true 的元素。 参数 p - 若应该移除该元素则返回 ​true 的一元谓词。 对每个（可为 const 的） T 类型参数 v ，表达式 p(v) 必须可转换到 bool，无关乎值类别，而且必须不修改 v 。从而不允许 T& 类型参数，亦不允许 T ，除非对 T 而言移动等价于复制(C++11 起)。​返回值 移除的元素数,"{
+  transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+   <0>.field = <0>.field || NULL
+   <0>.size = [0, <0>.size]
+   <-1> = [0, <0>.size]
+}","{
+    <-1> = [0, <0>.size]
+    <0>.size = [0, <0>.size]
+    <0>.field = NULL
+}",0,2,1,1
+"std::list<T,Allocator>::reverse",list,void reverse();,逆转容器中的元素顺序。迭代器和引用不会失效。 参数 （无） 返回值 （无）,{},"{
+}",1,0,0,0,{},"{
+    
+}
+",1,0,0,0
+"std::list<T,Allocator>::unique",list,void unique();,从容器移除所有相继的重复元素。只留下相等元素组中的第一个元素。只有到被移除元素的迭代器和引用会失效。 用 operator== 比较元素。 返回值 无,{},"{
+}",1,0,0,0,"{
+  <0>.size = [0, <0>.size]
+}","{
+    <0>.size = [1, <0>.size]
+    <0>.field = NULL
+}",0,0,2,1
+"std::list<T,Allocator>::unique",list,size_type unique();,从容器移除所有相继的重复元素。只留下相等元素组中的第一个元素。只有到被移除元素的迭代器和引用会失效。 用 operator== 比较元素。 返回值 移除的元素数,"{
+  transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+  <-1> = [0, <0>.size - 1]
+  <0>.size = [0, <0>.size]
+}",{},0,0,0,2
+"std::list<T,Allocator>::unique",list,"template< class BinaryPredicate >
+void unique( BinaryPredicate p );",从容器移除所有相继的重复元素。只留下相等元素组中的第一个元素。只有到被移除元素的迭代器和引用会失效。 用二元谓词 p 比较元素。 返回值 无,{},"{
+}
+",1,0,0,0,"{
+  <0>.size = [0, <0>.size]
+}","{
+    <0>.size = [0, <0>.size]
+    <0>.field = NULL
+}",0,1,1,0
+"std::list<T,Allocator>::unique",list,"template< class BinaryPredicate >
+size_type unique( BinaryPredicate p );",从容器移除所有相继的重复元素。只留下相等元素组中的第一个元素。只有到被移除元素的迭代器和引用会失效。 用二元谓词 p 比较元素。 返回值 移除的元素数,"{
+  transitive(<-1>, <0>)
+}","{
+  transitive(<-1>, <0>)
+}",1,1,0,0,"{
+  <-1> = [0, <0>.size - 1]
+  <0>.size = [0, <0>.size]
+}","{
+    <0>.size = [0, <0>.size]
+    <0>.field = NULL
+    <-1> = [0, <0>.size - 1]
+}
+",0,2,1,0
+"std::list<T,Allocator>::sort",list,void sort();,排序元素，并保持等价元素的顺序。不会导致迭代器和引用失效。用 operator< 比较元素。,{},{},1,0,0,0,{},"{
+}",1,0,0,0
+"std::list<T,Allocator>::sort",list,"template< class Compare >
+void sort( Compare comp );","排序元素，并保持等价元素的顺序。不会导致迭代器和引用失效。用 comp 比较元素。 参数 comp - 比较函数对象（即满足比较 (Compare) 概念的对象），在第一参数小于（即先 ﻿序于）第二参数时返回 ​true。 比较函数的签名应等价于如下： bool cmp(const Type1 &a, const Type2 &b);",{},{},1,0,0,0,{},"{}
+",1,0,0,0
+operator==,,"template< class T, class Alloc >
+bool operator==( const std::list<T, Alloc>& lhs,
+
+                 const std::list<T, Alloc>& rhs );","比较两个 list 的内容。 检查 lhs 与 rhs 的内容是否相等，即它们是否拥有相同数量的元素且 lhs 中每个元素与 rhs 的同位置元素比较相等。 参数 lhs, rhs - 要比较内容的 list 返回值 在 list 内容相等时返回 true，否则返回 false",{},{},1,0,0,0,"{
+   <-1> = 0 || 1
+}","{
+    <-1> = 0 || 1
+}",1,1,0,0
+operator!=,,"template< class T, class Alloc >
+bool operator!=( const std::list<T, Alloc>& lhs,
+
+                 const std::list<T, Alloc>& rhs );","比较两个 list 的内容。 检查 lhs 与 rhs 的内容是否相等，即它们是否拥有相同数量的元素且 lhs 中每个元素与 rhs 的同位置元素比较相等。 参数 lhs, rhs - 要比较内容的 list 返回值 在 list 内容不相等时返回 true，否则返回 false",{},{},1,0,0,0,"{
+   <-1> = 0 || 1
+}","{
+    <-1> = 0 || 1
+}",1,1,0,0
+operator<,,"template< class T, class Alloc >
+bool operator<( const std::list<T, Alloc>& lhs,
+
+                const std::list<T, Alloc>& rhs );","比较两个 list 的内容。 按字典序比较 lhs 与 rhs 的内容。由等价于 std::lexicographical_compare 的函数进行比较。 参数 lhs, rhs - 要比较内容的 list 返回值 在 lhs 的内容按字典序小于 rhs 的内容时返回 true，否则返回 false",{},{},1,0,0,0,"{
+   <-1> = 0 || 1
+}","{
+    <-1> = 0 || 1
+}",1,1,0,0
+std::list::operator<=,,"template< class T, class Alloc >
+bool operator<=( const std::list<T, Alloc>& lhs,
+
+                 const std::list<T, Alloc>& rhs );","比较两个 list 的内容。 按字典序比较 lhs 与 rhs 的内容。由等价于 std::lexicographical_compare 的函数进行比较。 参数 lhs, rhs - 要比较内容的 list 返回值 在 lhs 的内容按字典序小于 或等于 rhs 的内容时返回 true，否则返回 false",{},{},1,0,0,0,"{
+   <-1> = 0 || 1
+}","{
+    <-1> = 0 || 1
+}",1,1,0,0
+operator>,,"template< class T, class Alloc >
+bool operator>( const std::list<T, Alloc>& lhs,
+
+                const std::list<T, Alloc>& rhs );","比较两个 list 的内容。 按字典序比较 lhs 与 rhs 的内容。由等价于 std::lexicographical_compare 的函数进行比较。 参数 lhs, rhs - 要比较内容的 list 返回值 在 lhs 的内容按字典序大于 rhs 的内容时返回 true，否则返回 false",{},{},1,0,0,0,"{
+   <-1> = 0 || 1
+}","{
+    <-1> = 0 || 1
+}",1,1,0,0
+operator>=,,"template< class T, class Alloc >
+bool operator>=( const std::list<T, Alloc>& lhs,
+
+                 const std::list<T, Alloc>& rhs );","比较两个 list 的内容。 按字典序比较 lhs 与 rhs 的内容。由等价于 std::lexicographical_compare 的函数进行比较。 参数 lhs, rhs - 要比较内容的 list 返回值 在 lhs 的内容按字典序大于 或等于 rhs 的内容时返回 true，否则返回 false",{},{},1,0,0,0,"{
+   <-1> = 0 || 1
+}","{
+    <-1> = 0 || 1
+}",1,1,0,0
+operator<=>,,"template< class T, class Alloc >
+synth-three-way-result<T>
+    operator<=>( const std::list<T, Alloc>& lhs,
+
+                 const std::list<T, Alloc>& rhs );","比较两个 list 的内容。 按字典序比较 lhs 与 rhs 的内容。如同通过调用 std::lexicographical_compare_three_way(lhs.begin(), lhs.end(), rhs.begin(), rhs.end(), synth-three-way) 进行比较。 返回类型是 synth-three-way 的返回类型（即 synth-three-way-result <T>）。 如果不满足以下任意条件，那么行为未定义： T 实现了 three_way_comparable。 为（可有 const 限定的）T 类型的值定义了 <，并且 < 是全序关系。 参数 lhs, rhs - 要比较内容的 list 返回值 lhs 与 rhs 中的首对不等价元素的相对顺序，如果有这种元素；否则是 lhs.size() <=> rhs.size()。",{},{},1,0,0,0,{},{},1,0,0,0
+std::swap,,"template< class T, class Alloc >
+void swap( std::list<T, Alloc>& lhs,
+
+           std::list<T, Alloc>& rhs );","为 std::list 特化了 std::swap 算法。交换 lhs 与 rhs 的内容。调用 lhs.swap(rhs)。 参数 lhs, rhs - 要交换内容的容器 返回值 （无）","{
+    swapTaint(<1>, <2>)
+}","{
+  swapTaint(<1>, <2>)
+}",1,1,0,0,"{
+   swap(<1>, <2>)
+}","{
+    swap(<1>, <2>)
+}",1,1,0,0
+std::swap,,"template< class T, class Alloc >
+void swap( std::list<T, Alloc>& lhs,
+           std::list<T, Alloc>& rhs )
+
+               noexcept(/* 见下文 */);","为 std::list 特化了 std::swap 算法。交换 lhs 与 rhs 的内容。调用 lhs.swap(rhs)。 参数 lhs, rhs - 要交换内容的容器 返回值 （无）","{
+    swapTaint(<1>, <2>)
+}","{
+  swapTaint(<1>, <2>)
+}",1,1,0,0,"{
+   swap(<1>, <2>)
+}","{
+    swap(<1>, <2>)
+}",1,1,0,0
+std::erase,,"template< class T, class Alloc, class U >
+std::list<T, Alloc>::size_type
+
+    erase( std::list<T, Alloc>& c, const U& value );",从容器中擦除所有比较等于 value 的元素。等价于 return c.remove_if([&](const auto& elem) -> bool { return elem == value; }); 参数 c - 要从中擦除的容器 value - 要擦除的值 pred - 若应该擦除元素则返回 ​true 的一元谓词。 对每个（可为 const 的） T 类型参数 v ，表达式 pred(v) 必须可转换到 bool，无关乎值类别，而且必须不修改 v 。从而不允许 T& 类型参数，亦不允许 T ，除非对 T 而言移动等价于复制(C++11 起)。​返回值 被擦除的元素数。,"{
+  transitive(<-1>, <1>)
+}","{
+    transitive(<-1>, <1>)
+}
+",1,1,0,0,"{
+   <-1> = [0, <1>.size]
+   <1>.size = [0, <1>.size]
+   <1>.field = <1>.field || NULL
+}","{
+    <-1> = [0, <1>.size]
+    <1>.size = [0, <1>.size]
+    <1>.field = <1>.field || NULL
+}",1,3,0,0
+std::erase,,"template< class T, class Alloc, class U = T >
+std::list<T, Alloc>::size_type
+
+    erase( std::list<T, Alloc>& c, const U& value );",从容器中擦除所有比较等于 value 的元素。等价于 return c.remove_if([&](const auto& elem) -> bool { return elem == value; }); 参数 c - 要从中擦除的容器 value - 要擦除的值 pred - 若应该擦除元素则返回 ​true 的一元谓词。 对每个（可为 const 的） T 类型参数 v ，表达式 pred(v) 必须可转换到 bool，无关乎值类别，而且必须不修改 v 。从而不允许 T& 类型参数，亦不允许 T ，除非对 T 而言移动等价于复制(C++11 起)。​返回值 被擦除的元素数。,"{
+  transitive(<-1>, <1>)
+}","{
+    transitive(<-1>, <1>)
+}",1,1,0,0,"{
+   <-1> = [0, <1>.size]
+   <1>.size = [0, <1>.size]
+   <1>.field = <1>.field || NULL
+}","{
+    <-1> = [0, <1>.size]
+    <1>.size = [0, <1>.size]
+    <1>.field = <1>.field || NULL
+}",1,3,0,0
+std::erase_if,,"template< class T, class Alloc, class Pred >
+std::list<T, Alloc>::size_type
+
+    erase_if( std::list<T, Alloc>& c, Pred pred );",从容器中擦除所有满足 pred 的元素。等价于 return c.remove_if(pred);。 参数 c - 要从中擦除的容器 value - 要擦除的值 pred - 若应该擦除元素则返回 ​true 的一元谓词。 对每个（可为 const 的） T 类型参数 v ，表达式 pred(v) 必须可转换到 bool，无关乎值类别，而且必须不修改 v 。从而不允许 T& 类型参数，亦不允许 T ，除非对 T 而言移动等价于复制(C++11 起)。​返回值 被擦除的元素数。,"{
+  transitive(<-1>, <1>)
+}","{
+    transitive(<-1>, <1>)
+}
+",1,1,0,0,"{
+   <-1> = [0, <1>.size]
+   <1>.size = [0, <1>.size]
+   <1>.field = <1>.field || NULL
+}","{
+    <-1> = [0, <1>.size]
+    <1>.size = [0, <1>.size]
+    <1>.field = <1>.field || NULL
+}",1,3,0,0
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,

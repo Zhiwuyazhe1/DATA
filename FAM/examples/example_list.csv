@@ -1,0 +1,2 @@
+﻿namespace,class,func,docstring,taint_summary,memory_summary
+"std::list<T,Allocator>::list",list,"explicit list( size_type count, const Allocator& alloc = Allocator() );",构造拥有 count 个默认插入的 T 对象的 list。不进行复制。 如果 T 不可默认插入 (DefaultInsertable) 到 std::list<T> 中，那么行为未定义。 参数 alloc - 用于此容器所有内存分配的分配器 count - 容器的大小,{ setSink(<1>) },{ <0>.size = <1> }

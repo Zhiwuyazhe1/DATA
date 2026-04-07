@@ -1,0 +1,219 @@
+/**
+ * @file taint dsl parser
+ * @author bruce <zhiwuyazhe154@gmail.com>
+ * @license MIT
+ */
+
+
+module.exports = grammar({
+  name : "memory",
+  // 跳过空白符号
+  extras: () => [
+    /\s/
+  ],
+  rules : {
+    source_file: $ => $.memory_summary, // 避免空串通过检查
+    memory_summary : $ => seq(
+      '{',
+      optional($.side_effects),
+      '}'
+    ),
+
+    side_effects : $ => repeat1(
+      $.memory_side_effect
+    ),
+
+    memory_side_effect : $ => seq(
+      optional(field('condition', $.condition)),
+      field('statement', $.statement)
+    ),
+
+    condition : $ => seq(
+      'condition',
+      field('open_paren', '('),
+      field('left', $.object),
+      field('comparison_operator', $.comparison_operator),
+      field('right', $.constant_value),
+      field('close_paren', ')')
+    ),
+
+    comparison_operator: $ => choice(
+      '==',
+      '!=',
+      '<',
+      '>',
+      '<=',
+      '>='
+    ),
+
+    statement : $ => choice(
+      field('operation', $.assign),
+      field('operation', $.malloc),
+      field('operation', $.free),
+      field('operation', $.overflow),
+      field('operation', $.expansion),
+      field('operation', $.swap)
+    ),
+
+    assign : $ => seq(
+      field('left', $.object),
+      field('operation_name', '='),
+      field('right', $.values)
+    ),
+
+    malloc : $ => seq(
+      field('operation_name', 'malloc'),
+      field('open_paren', '('),
+      field('object', $.object),
+      field('comma', ','),
+      field('possibility', $.possibility),
+      field('close_paren', ')'),
+    ),
+
+    free : $ => seq(
+      field('operation_name', 'free'),
+      field('open_paren', '('),
+      field('object', $.object),
+      field('comma', ','),
+      field('possibility', $.possibility),
+      field('close_paren', ')'),
+    ),
+
+    overflow : $ => seq(
+      field('operation_name', 'overflow'),
+      field('open_paren', '('),
+      field('object', $.overflow_arg),
+      field('comma', ','),
+      field('range_value', $.range_value),
+      field('close_paren', ')'),
+    ),
+
+    expansion : $ => seq(
+      field('operation_name', 'expansion'),
+      field('open_paren', '('),
+      field('key', $.key),
+      field('close_paren', ')')
+    ),
+
+    swap : $ => seq(
+      field('operation_name', 'swap'),
+      field('open_paren', '('),
+      field('left', $.key),
+      field('comma', ','),
+      field('right', $.key),
+      field('close_paren', ')')
+    ),
+
+    possibility : $ => choice(
+      field('may', 'may'),
+      field('must', 'must')
+    ),
+    
+    object : $ => choice(
+      field('key', $.key), 
+      field('constant_value', $.constant_value),
+      field('key_attribute', $.key_attribute)
+    ),
+
+    // overflow_arg = object | overflow_func
+    overflow_arg: $ => choice(
+      $.object, 
+      $.overflow_func
+    ),
+
+    // overflow_func = "min" "(" object ")" | "max" "(" object ")"
+    overflow_func: $ => seq(
+      field('func_name', choice(
+        'min', 
+        'max'
+      )),
+      field('open_paren', '('),
+      field('left', $.object),
+      field('comma', ','),
+      field('right', $.object),
+      field('close_paren', ')')
+    ),
+
+    key : $ => seq(
+      field('open_angle', '<'),
+      field('number', choice(
+        '-1', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+      )),
+      field('close_angle', '>')
+    ),
+
+    key_attribute : $ => seq(
+      field('key', $.key),
+      field('dot', '.'),
+      field('attribute', $.attribute),
+    ),
+
+    attribute : $ => choice(
+      'size',
+      'strlen',
+      'begin',
+      'end',
+      'field'
+    ),
+
+    values : $ => seq(
+      field('value', $.value),
+      field('or_value', optional(seq(
+        field('or', '||'),
+        field('value', $.value)
+      )))
+    ),
+
+    value : $ => choice(
+      field('single_value', $.single_value),
+      field('range_value', $.range_value)
+    ),
+
+    single_value : $ => choice(
+      $.binary_expr,
+      $.object,
+    ),
+
+    constant_value : $ => choice(
+      'MAX',
+      'MIN',
+      'EOF',
+      'NULL',
+      'UNDEF',
+      'NPOS',
+      $.number,
+      $.alpha
+    ),
+
+    number : $ => choice(
+      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+    ),
+
+    alpha : $ => choice(
+      'a', 'b', 'c', 'd', 'e', 'f',
+      'A', 'B', 'C', 'D', 'E', 'F'
+    ),
+
+    // 顶层表达式（支持加减）
+    binary_expr: $ => choice(...[
+        ['+', 0],
+        ['-', 0],
+        ['*', 1],
+        ['/', 1]
+      ].map(([op, precedence]) => prec.left(precedence, seq(
+        field('left', $.single_value),
+        field('operator', op),
+        field('right', $.single_value)
+      )))
+    ),
+
+    range_value: $ => seq(
+      '[', 
+      field('left', $.single_value), 
+      ',', 
+      field('right',$.single_value), 
+      ']'
+    ),
+
+  }
+});

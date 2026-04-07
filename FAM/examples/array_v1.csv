@@ -1,0 +1,268 @@
+﻿namespace,class,func,docstring,taint_summary,memory_summary
+"std::array<T,N>::at",array,reference at( size_type pos );,"返回位于指定位置 pos 的元素的引用，有边界检查。
+若 pos 不在容器范围内，则抛出 std::out_of_range 类型的异常。
+参数
+pos	-	要返回的元素的位置
+返回值
+到所需元素的引用。
+异常
+若 pos >= size()) 则抛出 std::out_of_range。","{
+  setSink(<1>)
+  transitive(<-1>, <0>)
+}","{
+    <-1> = <0>.field
+}"
+"std::array<T,N>::at",array,const_reference at( size_type pos ) const;,"返回位于指定位置 pos 的元素的引用，有边界检查。
+若 pos 不在容器范围内，则抛出 std::out_of_range 类型的异常。
+参数
+pos	-	要返回的元素的位置
+返回值
+到所需元素的引用。
+异常
+若 pos >= size()) 则抛出 std::out_of_range。","{
+  setSink(<1>)
+  transitive(<-1>, <0>)
+}","{
+    <-1> = <0>.field
+}"
+"std::array<T,N>::operator[]",array,reference operator[]( size_type pos );,"返回位于指定位置 pos 的元素的引用。 如果实现未加固，则(C++26 起)不进行边界检查。
+如果 pos < size() 是 false，那么行为未定义。
+参数
+pos	-	要返回的元素的位置
+返回值
+到所需元素的引用","{
+  setSink(<1>)
+  transitive(<-1>, <0>)
+}","{
+    overflow(<1>, [0, <0>.size - 1])
+    <-1> = <0>.field
+}"
+"std::array<T,N>::operator[]",array,const_reference operator[]( size_type pos ) const;,"返回位于指定位置 pos 的元素的引用。 如果实现未加固，则(C++26 起)不进行边界检查。
+如果 pos < size() 是 false，那么行为未定义。
+参数
+pos	-	要返回的元素的位置
+返回值
+到所需元素的引用","{
+  setSink(<1>)
+  transitive(<-1>, <0>)
+}","{
+    overflow(<1>, [0, <0>.size - 1])
+    <-1> = <0>.field
+}"
+"std::array<T,N>::front",array,reference front();,"返回到容器首元素的引用。
+如果 empty() 是 true，那么行为未定义。
+参数
+
+返回值
+到首元素的引用。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = <0>.field
+}"
+"std::array<T,N>::front",array,const_reference front() const;,"返回到容器首元素的引用。
+如果 empty() 是 true，那么行为未定义。
+参数
+
+返回值
+到首元素的引用。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = <0>.field
+}"
+"std::array<T,N>::back",array,reference back();,"返回到容器中最后一个元素的引用。
+如果 empty() 是 true，那么行为未定义。
+参数
+
+返回值
+到最后元素的引用。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = <0>.field
+}"
+"std::array<T,N>::back",array,const_reference back() const;,"返回到容器中最后一个元素的引用。
+如果 empty() 是 true，那么行为未定义。
+参数
+
+返回值
+到最后元素的引用。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = <0>.field
+}"
+"std::array<T,N>::data",array,T* data() noexcept;,"返回指向作为元素存储工作的底层数组的指针。返回的指针使得范围 [data(), data() + size()) 始终是有效范围，即使容器为空（此时 data() 不可解引用）。
+参数
+
+返回值
+指向底层元素存储的指针。对于非空容器，返回的指针与首元素地址比较相等。","{
+  transitive(<-1>, <0>)
+}",{}
+"std::array<T,N>::data",array,const T* data() const noexcept;,"返回指向作为元素存储工作的底层数组的指针。返回的指针使得范围 [data(), data() + size()) 始终是有效范围，即使容器为空（此时 data() 不可解引用）。
+参数
+
+返回值
+指向底层元素存储的指针。对于非空容器，返回的指针与首元素地址比较相等。","{
+  transitive(<-1>, <0>)
+}",{}
+"std::array<T,N>::begin",array,iterator begin() noexcept;,"返回指向 array 首元素的迭代器。
+如果 array 为空，那么返回的迭代器等于 end()。
+参数
+
+返回值
+指向首元素的迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::begin",array,const_iterator begin() const noexcept;,"返回指向 array 首元素的迭代器。
+如果 array 为空，那么返回的迭代器等于 end()。
+参数
+
+返回值
+指向首元素的迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::cbegin",array,const_iterator cbegin() const noexcept;,"返回指向 array 首元素的迭代器。
+如果 array 为空，那么返回的迭代器等于 end()。
+参数
+
+返回值
+指向首元素的迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::end",array,iterator end() noexcept;,"返回指向 array 末元素后一元素的迭代器。
+此元素表现为占位符；试图访问它导致未定义行为。
+参数
+
+返回值
+指向后随最后元素的迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::end",array,const_iterator end() const noexcept;,"返回指向 array 末元素后一元素的迭代器。
+此元素表现为占位符；试图访问它导致未定义行为。
+参数
+
+返回值
+指向后随最后元素的迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::cend",array,const_iterator cend() const noexcept;,"返回指向 array 末元素后一元素的迭代器。
+此元素表现为占位符；试图访问它导致未定义行为。
+参数
+
+返回值
+指向后随最后元素的迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::rbegin",array,reverse_iterator rbegin() noexcept;,"返回指向逆向的 array 的首元素的逆向迭代器。它对应非逆向 array 的末元素。如果 array 为空，那么返回的迭代器等于 rend()。
+参数
+
+返回值
+指向首元素的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::rbegin",array,const_reverse_iterator rbegin() const noexcept;,"返回指向逆向的 array 的首元素的逆向迭代器。它对应非逆向 array 的末元素。如果 array 为空，那么返回的迭代器等于 rend()。
+参数
+
+返回值
+指向首元素的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::crbegin",array,const_reverse_iterator crbegin() const noexcept;,"返回指向逆向的 array 的首元素的逆向迭代器。它对应非逆向 array 的末元素。如果 array 为空，那么返回的迭代器等于 rend()。
+参数
+
+返回值
+指向首元素的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::rend",array,reverse_iterator rend() noexcept;,"返回指向逆向的 array 末元素后一元素的逆向迭代器。它对应非逆向 array 首元素的前一元素。此元素表现为占位符，试图访问它导致未定义行为。
+参数
+
+返回值
+指向末元素后一元素的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::rend",array,const_reverse_iterator rend() const noexcept;,"返回指向逆向的 array 末元素后一元素的逆向迭代器。它对应非逆向 array 首元素的前一元素。此元素表现为占位符，试图访问它导致未定义行为。
+参数
+
+返回值
+指向末元素后一元素的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::crend",array,const_reverse_iterator crend() const noexcept;,"返回指向逆向的 array 末元素后一元素的逆向迭代器。它对应非逆向 array 首元素的前一元素。此元素表现为占位符，试图访问它导致未定义行为。
+参数
+
+返回值
+指向末元素后一元素的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = [<0>.begin, <0>.end]
+}"
+"std::array<T,N>::empty",array,constexpr bool empty() const noexcept;,"检查容器是否无元素，即是否 begin() == end()。
+参数
+
+返回值
+若容器为空则为 true，否则为 false。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = 0 || 1
+}"
+"std::array<T,N>::empty",array,[[nodiscard]] constexpr bool empty() const noexcept;,"检查容器是否无元素，即是否 begin() == end()。
+参数
+
+返回值
+若容器为空则为 true，否则为 false。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = 0 || 1
+}"
+"std::array<T,N>::size",array,constexpr size_type size() const noexcept;,"返回容器中的元素数，即 std::distance(begin(), end())。
+参数
+
+返回值
+容器中的元素数量。","{
+  transitive(<-1>, <0>)
+}","{
+    <-1> = <0>.size
+}"
+"std::array<T,N>::max_size",array,constexpr size_type max_size() const noexcept;,"返回值
+元素数量的最大值，即 N。",{},"{
+    <-1> = [0, MAX]
+}"
+"std::array<T,N>::fill",array,void fill( const T& value );,"将定值 value 赋给容器中的所有元素。
+参数
+value	-	要赋给元素的值
+返回值
+（无）","{
+  transitive(<0>, <1>)
+}","{
+  <0>.field = <1>
+}"
+"std::array<T,N>::swap",array,void swap( array& other ) noexcept,"将容器内容与 other 的内容交换。不会导致迭代器和引用关联到别的容器。
+参数
+other	-	要与之交换内容的 array
+返回值
+（无）","{
+  swapTaint(<0>, <1>)
+}","{
+    swap(<0>, <1>)
+}"

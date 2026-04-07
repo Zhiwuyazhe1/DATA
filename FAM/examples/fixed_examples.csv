@@ -1,0 +1,59 @@
+﻿namespace,class,func,docstring,taint_summary,memory_summary
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,basic_string() : basic_string(Allocator()) {},"C++11 起的默认构造函数。构造拥有默认构造的分配器的空字符串。
+ 如果 Allocator 不可默认构造 (DefaultConstructible) ，那么行为未定义。",{},"{
+   <0>.strlen = 0
+   <0>.size = <0>.strlen + 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"basic_string& insert( size_type index, const basic_string& str,
+                      size_type s_index, size_type count );","插入字符到字符串中。
+ 在位置 index 插入由 str.substr(s_index, count) 获得的字符串。
+
+ 参数
+index	-	插入内容到的位置
+str	-	要插入的字符串
+s_index	-	str 中要插入的首字符位置
+count	-	要插入的字符数
+
+返回值
+*this","{
+  setSink(<1>)
+  setSink(<3>)
+  setSink(<4>)
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen])
+  overflow(<3>, [0, <2>.strlen - 1])
+  <0>.strlen = <0>.strlen + <4> || <0>.strlen + <2>.strlen - <3>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::append",basic_string,"basic_string& append( const basic_string& str,
+                      size_type pos, size_type count = npos );","后附另一字符串 str 中的字符。
+如果只提供了 str，那么就会后附 str 中的所有字符。
+如果也提供了 pos：
+如果 count 是 npos，那么就会后附 str 中从 pos 处开始的所有字符。
+否则会后附 str 中从 pos 处开始的 std::min(count, str.size() - pos) 个字符。
+等价于 return append(std::basic_string_view<CharT, Traits>
+                  (str).substr(pos, count));。
+
+ 参数
+str	-	要后附的字符串
+pos	-	要后附的首个字符下标
+count	-	要后附的字符数
+
+返回值
+*this","{
+  setSink(<2>)
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <0>.strlen + <3> || <0>.strlen + <1>.strlen - <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
