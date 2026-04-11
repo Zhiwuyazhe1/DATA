@@ -1,0 +1,22 @@
+Summary := "{" sideEffects "}"
+SideEffects:=  MemorySideEffect*
+MemorySideEffect:= Object "="  Values 
+     | "malloc" "(" Object "," Possibility ")" 
+     | "free" "(" Object "," Possibility ")" 
+     | "overflow" "(" OverflowArg "," RangeValue ")"
+     | "expansion" "(" Object ")"
+     | "swap" "(" Key "," Key ")"
+Possibility := "may" | "must"
+Object := Key | KeyField
+OverflowArg := Object | OverflowFunc
+OverflowFunc := "min" "(" Object ")" | "max" "(" Object ")"
+Key := <-1> | <0> | <1> | <2> | …|<9>
+KeyField := Key "." Attribute
+Attribute := "size" | "strlen" | "begin" | "end" | "field" 
+Values := Value | Value "||" Value 
+Value := SingleValue | RangeValue
+SingleValue :=  Object| ConstantValue | Expr
+ConstantValue := 0 | 1 | 'a' | 'A' | MAX | MIN | EOF | NULL | NOTNULL | NPOS | ... # 右部均为终结符
+Expr := Object BinaryOp Object | Object BinaryOp Object BinaryOp Object
+RangeValue := "[" SingleValue "," SingleValue "]"
+BinaryOperator := "+"| "-" | "*" | "/"

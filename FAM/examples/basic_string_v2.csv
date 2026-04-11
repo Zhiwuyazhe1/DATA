@@ -1,0 +1,3391 @@
+﻿namespace,class,func,docstring,taint_summary,memory_summary
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,basic_string() : basic_string(Allocator()) {},"C++11 起的默认构造函数。构造拥有默认构造的分配器的空字符串。
+ 如果 Allocator 不可默认构造 (DefaultConstructible) ，那么行为未定义。",{},"{
+   <0>.strlen = 0
+   <0>.size = <0>.strlen + 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"basic_string() noexcept(noexcept(Allocator()))
+    : basic_string(Allocator()) {}","C++11 起的默认构造函数。构造拥有默认构造的分配器的空字符串。
+ 如果 Allocator 不可默认构造 (DefaultConstructible) ，那么行为未定义。",{},"{
+   <0>.strlen = 0
+   <0>.size = <0>.strlen + 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,explicit basic_string( const Allocator& alloc = Allocator() );," C++11 前的默认构造函数。构造拥有给定分配器 alloc 的空字符串。
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器",{},"{
+   <0>.strlen = 0
+   <0>.size = <0>.strlen + 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,explicit basic_string( const Allocator& alloc );," C++11 前的默认构造函数。构造拥有给定分配器 alloc 的空字符串。
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器",{},"{
+   <0>.strlen = 0
+   <0>.size = <0>.strlen + 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"basic_string( size_type count, CharT ch,
+              const Allocator& alloc = Allocator() );","构造拥有 count 个字符 ch 的副本的字符串。
+如果 CharT 不可复制插入 (CopyInsertable) 到 std::basic_string<CharT> 中，那么行为未定义。
+
+(C++11 起)
+此重载只有在 Allocator 满足分配器 (Allocator) 时才会参与重载决议。
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值","{
+   setSink(<1>)
+   transitive(<0>, <2>)
+}","{
+  <0>.strlen = <1>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"template< class InputIt >
+basic_string( InputIt first, InputIt last,
+              const Allocator& alloc = Allocator() );","以范围 [first, last) 的内容构造字符串。[first, last) 中的每个迭代器都只会解引用一次。
+如果 InputIt 不满足老式输入迭代器 (LegacyInputIterator) ，那么就会改为以实参 static_cast<size_type>(first)、last 和 alloc 调用重载 (3)。
+
+(C++11 前)
+此重载只有在 InputIt 满足老式输入迭代器 (LegacyInputIterator) 时才会参与重载决议。
+
+如果 CharT 从 *first 不可就位构造 (EmplaceConstructible) 到 std::basic_string<CharT> 中，那么行为未定义。
+
+(C++11 起)
+
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围","{
+  transitive(<0>, <1> || <2>)
+}","{
+  <0>.strlen = [0, MAX]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"template< container-compatible-range<CharT> R >
+constexpr basic_string( std::from_range_t, R&& rg,
+                        const Allocator& = Allocator());"," 以范围 rg 的内容构造字符串。rg 中的每个迭代器都只会解引用一次。
+ 如果 CharT 从 *ranges::begin(rg) 不可就位构造 (EmplaceConstructible) 到 std::basic_string<CharT> 中，那么行为未定义。
+
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围","{
+  transitive(<0>, <1>)
+}","{
+  <0>.strlen = [0, MAX]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"basic_string( const CharT* s, size_type count,
+              const Allocator& alloc = Allocator() );"," 以范围 [s, s + count) 的内容构造字符串。
+ 如果 [s, s + count) 不是有效范围，那么行为未定义。
+
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针","{
+  setSink(<2>)
+  transitive(<0>, <1>)
+}","{
+  overflow(<2>, [0, <1>.size])
+  <0>.strlen = <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"basic_string( const CharT* s, const Allocator& alloc = Allocator() );"," 等价于 basic_string(s, Traits::length(s), alloc)。
+此重载只有在 Allocator 满足分配器 (Allocator) 时才会参与重载决议。
+(C++17 起)
+
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针","{
+  transitive(<0>, <1>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"template< class StringViewLike >
+explicit basic_string( const StringViewLike& t,
+                       const Allocator& alloc = Allocator() );"," 如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后如同以 basic_string(sv.data(), sv.size(), alloc) 构造字符串。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针
+t	-	初始化字符串所用的对象（可转换到 std::basic_string_view）","{
+  transitive(<0>, <1>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"template< class StringViewLike >
+basic_string( const StringViewLike& t,
+              size_type pos, size_type count,
+              const Allocator& alloc = Allocator() );"," 如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后如同以 basic_string(sv.substr(pos, count), alloc) 构造字符串。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 时才会参与重载决议。
+
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针
+t	-	初始化字符串所用的对象（可转换到 std::basic_string_view）
+pos	-	要包含的首字符位置","{
+  setSink(<2>)
+  setSink(<3>)
+  transitive(<0>, <1>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <3>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,basic_string( const basic_string& other );,"以 other 的（部分）内容构造字符串。如果 other 的类型是 basic_string&&，那么在构造完成时，other 会处于某个未指定的有效状态。
+复制构造函数
+如同通过调用 std::allocator_traits<Allocator>::
+    select_on_container_copy_construction
+        (other.get_allocator()) 获得分配器。
+
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针
+t	-	初始化字符串所用的对象（可转换到 std::basic_string_view）
+pos	-	要包含的首字符位置
+other	-	用作源初始化字符串的另一字符串","{
+  transitive(<0>, <1>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,basic_string( basic_string&& other ) noexcept;,"以 other 的（部分）内容构造字符串。如果 other 的类型是 basic_string&&，那么在构造完成时，other 会处于某个未指定的有效状态。
+移动构造函数。如同通过从 other.get_allocator() 移动构造获得分配器。
+
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针
+t	-	初始化字符串所用的对象（可转换到 std::basic_string_view）
+pos	-	要包含的首字符位置
+other	-	用作源初始化字符串的另一字符串","{
+  transitive(<0>, <1>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"basic_string( const basic_string& other, const Allocator& alloc );","以 other 的（部分）内容构造字符串。如果 other 的类型是 basic_string&&，那么在构造完成时，other 会处于某个未指定的有效状态。
+ 与构造函数相同，但是会将 alloc 用作分配器。
+ 如果 CharT 不可复制插入 (CopyInsertable) 到 std::basic_string<CharT> 中，那么行为未定义。
+
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针
+t	-	初始化字符串所用的对象（可转换到 std::basic_string_view）
+pos	-	要包含的首字符位置
+other	-	用作源初始化字符串的另一字符串","{
+  transitive(<0>, <1>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"basic_string( basic_string&& other, const Allocator& alloc );","以 other 的（部分）内容构造字符串。如果 other 的类型是 basic_string&&，那么在构造完成时，other 会处于某个未指定的有效状态。
+与移动函数相同，但是会将 alloc 用作分配器。
+ 如果 CharT 不可移动插入 (MoveInsertable) 到 std::basic_string<CharT> 中，那么行为未定义。
+
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针
+t	-	初始化字符串所用的对象（可转换到 std::basic_string_view）
+pos	-	要包含的首字符位置
+other	-	用作源初始化字符串的另一字符串","{
+  transitive(<0>, <1>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"basic_string( const basic_string& other, size_type pos,
+              const Allocator& alloc = Allocator() );","以 other 的（部分）内容构造字符串。如果 other 的类型是 basic_string&&，那么在构造完成时，other 会处于某个未指定的有效状态。
+与移动函数相同，但是会将 alloc 用作分配器。
+  以范围 [other.data() + pos, other.data() + other.size()) 的内容构造字符串。
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针
+t	-	初始化字符串所用的对象（可转换到 std::basic_string_view）
+pos	-	要包含的首字符位置
+other	-	用作源初始化字符串的另一字符串","{
+  setSink(<2>)
+  transitive(<0>, <1>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"constexpr basic_string( basic_string&& other, size_type pos,
+                        const Allocator& alloc = Allocator() );","以 other 的（部分）内容构造字符串。如果 other 的类型是 basic_string&&，那么在构造完成时，other 会处于某个未指定的有效状态。
+与移动函数相同，但是会将 alloc 用作分配器。
+  以范围 [other.data() + pos, other.data() + other.size()) 的内容构造字符串。
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针
+t	-	初始化字符串所用的对象（可转换到 std::basic_string_view）
+pos	-	要包含的首字符位置
+other	-	用作源初始化字符串的另一字符串","{
+  setSink(<2>)
+  transitive(<0>, <1>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <1>.strlen - <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"basic_string( const basic_string& other,
+              size_type pos, size_type count,
+              const Allocator& alloc = Allocator() );","以 other 的（部分）内容构造字符串。如果 other 的类型是 basic_string&&，那么在构造完成时，other 会处于某个未指定的有效状态。
+与移动函数相同，但是会将 alloc 用作分配器。
+以范围 [other.data() + pos, other.data() + (pos + std::min(count, other.size() - pos))) 的内容构造字符串。
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针
+t	-	初始化字符串所用的对象（可转换到 std::basic_string_view）
+pos	-	要包含的首字符位置
+other	-	用作源初始化字符串的另一字符串","{
+  setSink(<2>)
+  setSink(<3>)
+  transitive(<0>, <1>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <3> || <1>.strlen - <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"constexpr basic_string( basic_string&& other,
+                        size_type pos, size_type count,
+                        const Allocator& alloc = Allocator() );","以 other 的（部分）内容构造字符串。如果 other 的类型是 basic_string&&，那么在构造完成时，other 会处于某个未指定的有效状态。
+与移动函数相同，但是会将 alloc 用作分配器。
+以范围 [other.data() + pos, other.data() + (pos + std::min(count, other.size() - pos))) 的内容构造字符串。
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+count	-	产生的字符串大小
+ch	-	初始化字符串所用的值
+first, last	-	复制字符的来源范围
+rg	-	与容器兼容的范围
+s	-	指向用作源初始化字符串的字符数组的指针
+t	-	初始化字符串所用的对象（可转换到 std::basic_string_view）
+pos	-	要包含的首字符位置
+other	-	用作源初始化字符串的另一字符串","{
+  setSink(<2>)
+  setSink(<3>)
+  transitive(<0>, <1>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <3> || <1>.strlen - <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::basic_string",basic_string,"basic_string( std::initializer_list<CharT> ilist,
+              const Allocator& alloc = Allocator() );"," 等价于 basic_string(ilist.begin(), ilist.end())。
+
+ 参数
+alloc	-	用于此字符串所有内存分配的分配器
+ilist	-	初始化字符串所用的 std::initializer_list","{
+  transitive(<0>, <1>)
+}","{
+  <0>.strlen = <1>.size
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::~basic_string",basic_string,~basic_string();,析构 basic_string。调用各元素的析构函数并解分配所用的存储。,"{
+  sanitize(<0>)
+}","{
+  <0> = NULL
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator=",basic_string,basic_string& operator=( const basic_string& str );,"以 str 的副本替换字符串的内容。如果 *this 和 str 为同一对象，那么此函数无效果。
+
+ 参数
+str	-	用作源初始化字符串的字符串","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator=",basic_string,"basic_string& operator=( basic_string&& str )
+    noexcept(/* 见下文 */);"," 用序列容器 (SequenceContainer) 的移动赋值语义以 str 的内容替换字符串的内容。
+ 与其他顺序容器移动赋值不同，指向 str 的元素的引用、指针和迭代器可能会失效。
+
+ 参数
+str	-	用作源初始化字符串的字符串","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator=",basic_string,basic_string& operator=( const CharT* s );,"如同用 assign(s, Traits::length(s)) 以 s 所指向的空终止字符串的内容替换字符串的内容。
+
+ 参数
+s	-	指向空终止字符串的指针，用作源初始化字符串","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator=",basic_string,basic_string& operator=( CharT ch );,"如同用 assign(std::addressof(ch), 1) 以字符 ch 的内容替换字符串的内容。
+
+ 参数
+ch	-	初始化字符串所用的值","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = 1
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator=",basic_string,basic_string& operator=( std::initializer_list<CharT> ilist );,"如同用 assign(ilist.begin(), ilist.size()) 以初始化式列表 ilist 的内容替换字符串的内容。
+
+ 参数
+init	-	用作源初始化字符串的 std::initializer_list","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1>.size
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator=",basic_string,"template<class StringViewLike>
+basic_string& operator=( const StringViewLike& t );"," 如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后如同用 assign(sv)，以 sv 的内容替换内容。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+ 参数
+t	-	可转换为用以初始化字符串的 std::basic_string_view 的对象","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign",basic_string,basic_string& assign( const basic_string& str );,"等价于 return *this = str;。
+
+ 参数
+str	-	用作源以初始化字符的字符串      返回值
+*this","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign",basic_string,basic_string& assign( basic_string&& str ) noexcept(/* 见下文 */);,"等价于 return *this = std::move(str);。
+
+ 参数
+str	-	用作源以初始化字符的字符串     返回值
+*this","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign",basic_string,"basic_string& assign( size_type count, CharT ch );"," 以字符 ch 的 count 个副本替换字符串的内容。
+ 等价于 clear(); resize(n, c); return *this;。
+
+ 参数
+count	-	产生的字符串大小
+ch	-	用以初始化字符串的字符的值     返回值
+*this","{
+  setSink(<1>)
+  transitive(<0>, <2>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign",basic_string,"basic_string& assign( const CharT* s, size_type count );"," 以范围 [s, s + count) 中的字符的副本替换字符串的内容。
+ 如果 [s, s + count) 不是有效范围，那么行为未定义。
+
+ 参数
+count	-	产生的字符串大小
+s	-	指向用作源初始化字符串字符串的指针   返回值
+*this","{
+  setSink(<2>)
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<2>, [0, <1>.size])
+  <0>.strlen = <2>
+  <0>.size = <2> + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign",basic_string,basic_string& assign( const CharT* s );,"等价于 return assign(s, Traits::length(s));。
+
+ 参数
+s	-	指向用作源初始化字符串字符串的指针   返回值
+*this","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign",basic_string,"template< class SV >
+basic_string& assign( const SV& t );"," 以从 t 构造的字符串视图 sv 中的字符替换字符串的内容。
+如果只提供了 t，那么就会以 sv 中的所有字符进行替换。
+如果也提供了 pos：
+如果 count 是 npos，那么就会以 sv 中从 pos 处开始的所有字符进行替换。
+否则会以 sv 中从 pos 处开始的 std::min(count, sv.size() - pos) 个字符进行替换。
+ 这些重载只有在满足以下所有条件时才会参与重载决议：
+std::is_convertible_v<const SV&, std::basic_string_view<CharT, Traits>> 是 true。
+std::is_convertible_v<const SV&, const CharT*> 是 false。
+等价于 std::basic_string_view<CharT, Traits> sv = t;
+return assign(sv.data(), sv.size());
+
+ 参数
+t	-	用以初始化字符串字符的对象（可转换到 std::basic_string_view）   返回值
+*this","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign",basic_string,"template< class SV >
+basic_string& assign( const SV& t,
+                      size_type pos, size_type count = npos);"," 以从 t 构造的字符串视图 sv 中的字符替换字符串的内容。
+如果只提供了 t，那么就会以 sv 中的所有字符进行替换。
+如果也提供了 pos：
+如果 count 是 npos，那么就会以 sv 中从 pos 处开始的所有字符进行替换。
+否则会以 sv 中从 pos 处开始的 std::min(count, sv.size() - pos) 个字符进行替换。
+ 这些重载只有在满足以下所有条件时才会参与重载决议：
+std::is_convertible_v<const SV&, std::basic_string_view<CharT, Traits>> 是 true。
+std::is_convertible_v<const SV&, const CharT*> 是 false。
+等价于 std::basic_string_view<CharT, Traits> sv = t;
+return assign(sv.substr(pos, count));
+
+ 参数
+t	-	用以初始化字符串字符的对象（可转换到 std::basic_string_view）
+count	-	产生的字符串大小
+pos	-	要取的首字符下标      返回值
+*this","{
+  setSink(<2>)
+  setSink(<3>)
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <3> || <1>.strlen - <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign",basic_string,"basic_string& assign( const basic_string& str,
+                      size_type pos, size_type count );","以 str 中的字符替换字符串的内容。
+如果 count 是 npos，那么就会以 str 中从 pos 处开始的所有字符进行替换。
+否则会以 str 中从 pos 处开始的 std::min(count, str.size() - pos) 个字符进行替换。
+ 等价于 return assign(std::basic_string_view<CharT, Traits>
+                  (str).substr(pos, count));。
+(C++20 起)
+
+
+ 参数
+str	-	用作源以初始化字符的字符串
+count	-	产生的字符串大小
+pos	-	要取的首字符下标    返回值
+*this","{
+  setSink(<2>)
+  setSink(<3>)
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <3> || <1>.strlen - <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign",basic_string,"basic_string& assign( const basic_string& str,
+                      size_type pos, size_type count = npos);","以 str 中的字符替换字符串的内容。
+如果 count 是 npos，那么就会以 str 中从 pos 处开始的所有字符进行替换。
+否则会以 str 中从 pos 处开始的 std::min(count, str.size() - pos) 个字符进行替换。
+ 等价于 return assign(std::basic_string_view<CharT, Traits>
+                  (str).substr(pos, count));。
+(C++20 起)
+
+
+ 参数
+str	-	用作源以初始化字符的字符串
+count	-	产生的字符串大小
+pos	-	要取的首字符下标    返回值
+*this","{
+  setSink(<2>)
+  setSink(<3>)
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <3> || <1>.strlen - <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign",basic_string,"template< class InputIt >
+basic_string& assign( InputIt first, InputIt last );","等价于 return assign(basic_string(first, last, get_allocator()));。
+此重载只有在 InputIt 满足老式输入迭代器 (LegacyInputIterator) 的要求时才会参与重载决议。
+
+
+ 参数
+first, last	-	复制字符来源的范围  返回值
+*this","{
+  transitive(<0>, <1> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = [0, MAX]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign",basic_string,basic_string& assign( std::initializer_list<CharT> ilist );,"等价于 return assign(ilist.begin(), ilist.size());。
+
+ 参数
+ilist	-	用以初始化字符串字符的 std::initializer_list
+
+返回值
+*this","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1>.size
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::assign_range",basic_string,"template< container-compatible-range<CharT> R >
+constexpr std::basic_string& assign_range( R&& rg );","以范围 rg 中的值替换字符串的内容。
+等价于
+return assign(
+    std::basic_string(
+        std::from_range,
+        std​::​forward<R>(rg),
+        get_allocator())
+);
+
+ 参数
+rg	-	container compatible range
+
+返回值
+*this","{
+  transitive(<0>, <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = [0, MAX]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::get_allocator",basic_string,allocator_type get_allocator() const;,"返回与字符串关联的分配器。
+
+ 参数
+无
+
+返回值
+关联的分配器。",{},{}
+"std::basic_string<CharT,Traits,Allocator>::at",basic_string,CharT& at( size_type pos );,"返回到位于指定位置 pos 的字符的引用。进行边界检查，非法访问时抛出 std::out_of_range 类型的异常。
+
+ 参数
+pos	-	要返回的字符位置
+
+返回值
+到请求的字符的引用。","{
+  setSink(<1>)
+  transitive(<-1>, <0>)
+}","{
+  <-1> = <0>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::at",basic_string,const CharT& at( size_type pos ) const;,"返回到位于指定位置 pos 的字符的引用。进行边界检查，非法访问时抛出 std::out_of_range 类型的异常。
+
+ 参数
+pos	-	要返回的字符位置
+
+返回值
+到请求的字符的引用。","{
+  setSink(<1>)
+  transitive(<-1>, <0>)
+}","{
+  <-1> = <0>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator[]",basic_string,CharT& operator[]( size_type pos );,"在 pos < size() 时返回到位于指定位置 pos 的字符的引用，或在 pos == size() 时：
+行为未定义。(C++11 前)
+返回到 CharT() 的引用，如果返回的引用指代的对象被修改成 CharT() 以外的值，那么行为未定义。(C++11 起)
+ 
+ 参数
+pos	-	要返回的字符位置
+
+返回值
+在 pos < size() 时返回 *(begin() + pos)，或在 pos == size() 时返回到 CharT() 的引用(C++11 起)。","{
+  setSink(<1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <-1> = <0>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator[]",basic_string,const CharT& operator[]( size_type pos ) const;,"返回到 CharT() 的引用。
+ 
+ 参数
+pos	-	要返回的字符位置
+
+返回值
+在 pos < size() 时返回 *(begin() + pos)，或在 pos == size() 时返回到 CharT() 的引用。","{
+  setSink(<1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <-1> = <0>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::front",basic_string,CharT& front();,"返回到字符串中首字符的引用。如果 empty() 是 true，那么行为未定义。
+ 
+ 参数
+无
+
+返回值
+operator[](0)","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = <0>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::front",basic_string,const CharT& front() const;,"返回到字符串中首字符的引用。如果 empty() 是 true，那么行为未定义。
+ 
+ 参数
+无
+
+返回值
+operator[](0)","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = <0>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::back",basic_string,CharT& back();,"返回字符串中的末字符。如果 empty() 是 true，那么行为未定义。
+ 
+ 参数
+无
+
+返回值
+operator[](size() - 1)","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = <0>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::back",basic_string,const CharT& back() const;,"返回字符串中的末字符。如果 empty() 是 true，那么行为未定义。
+ 
+ 参数
+无
+
+返回值
+operator[](size() - 1)","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = <0>.field
+}"
+"std::basic_string<CharT,Traits,Allocator>::data",basic_string,const CharT* data() const;,"返回指向用作字符存储的底层数组的指针。此指针满足范围
+[data(), data() + size())(C++11 前)
+[data(), data() + size()](C++11 起)
+有效，且其中的值对应存储于字符串的值。
+不要求返回的数组是空终止的。
+若 empty() 返回 true，则指针指向不应解引用的非空指针。(C++11 前)
+返回的数组是空终止的，即 data() 与 c_str() 进行同一功能。
+若 empty() 返回 true，则指针指向单个空字符。(C++11 起)
+指向 data() 的指针可能因以下情况失效：
+传递此字符串的非 const 引用给任何标准库函数，或
+在此字符串上调用非 const 成员函数，除了 operator[]()、at()、front()、back()、begin()、end()、rbegin()、rend()。
+通过 data 的 const 重载修改数组有未定义行为。
+
+ 参数
+无
+
+返回值
+指向底层字符存储的指针。
+对 [​0​, size()) 中的每个 i 有 data()[i] == operator[](i)。 (C++11 前)
+对 [​0​, size()] 中的每个 i 有 data() + i == std::addressof(operator[](i))。 (C++11 起)","{
+  transitive(<-1>, <0>)
+}",{}
+"std::basic_string<CharT,Traits,Allocator>::data",basic_string,CharT* data() noexcept;,"返回指向用作字符存储的底层数组的指针。此指针满足范围
+[data(), data() + size())(C++11 前)
+[data(), data() + size()](C++11 起)
+有效，且其中的值对应存储于字符串的值。
+不要求返回的数组是空终止的。
+若 empty() 返回 true，则指针指向不应解引用的非空指针。(C++11 前)
+返回的数组是空终止的，即 data() 与 c_str() 进行同一功能。
+若 empty() 返回 true，则指针指向单个空字符。(C++11 起)
+指向 data() 的指针可能因以下情况失效：
+传递此字符串的非 const 引用给任何标准库函数，或
+在此字符串上调用非 const 成员函数，除了 operator[]()、at()、front()、back()、begin()、end()、rbegin()、rend()。
+修改存储于 data() + size() 的尾后空终止符为任何异于 CharT() 的值有未定义行为。
+
+ 参数
+无
+
+返回值
+指向底层字符存储的指针。
+对 [​0​, size()) 中的每个 i 有 data()[i] == operator[](i)。 (C++11 前)
+对 [​0​, size()] 中的每个 i 有 data() + i == std::addressof(operator[](i))。 (C++11 起)","{
+  transitive(<-1>, <0>)
+}",{}
+"std::basic_string<CharT,Traits,Allocator>::c_str",basic_string,const CharT* c_str() const;,"返回指向拥有数据等价于存储于字符串中的空终止字符数组的指针。
+
+该指针满足范围 [c_str(), c_str() + size()] 有效，且其中的值对应存储于字符串的值，且在最后位置有个附加的空终止字符。
+
+从 c_str() 获得的指针可能因下列行为失效：
+
+将该字符串的非 const 引用传递给任何标准库函数，或
+在该字符串上调用非 const 成员函数，不包括 operator[]、at()、front()、back()、begin()、rbegin()、end() 及 rend()(C++11 起)。
+通过 c_str() 写入字符数组是未定义行为。
+
+c_str() 与 data() 进行同一功能。(C++11 起)
+
+
+ 参数
+无
+
+返回值
+指向底层字符存储的指针。
+对 [​0​, size()) 中的每个 i 有 c_str()[i] == operator[](i)。 (C++11 前)
+对 [​0​, size()] 中的每个 i 有 c_str() + i == std::addressof(operator[](i))。 (C++11 起)","{
+  transitive(<-1>, <0>)
+}",{}
+"std::basic_string<CharT,Traits,Allocator>::operator basic_string_view",basic_string,"operator std::basic_string_view<CharT, Traits>() const noexcept;","返回如同用 std::basic_string_view<CharT, Traits>(data(), size()) 构造的 std::basic_string_view。
+
+ 参数
+无
+
+返回值
+表示整个字符串内容的字符串视图。","{
+  transitive(<-1>, <0>)
+}",{}
+"std::basic_string<CharT,Traits,Allocator>::begin",basic_string,iterator begin();,"返回指向字符串首字符的迭代器。
+begin() 返回可变或常量迭代器，取决于 *this 的常量性。
+cbegin() 始终返回常量迭代器。它等价于 const_cast<const basic_string&>(*this).begin()。
+
+ 参数
+无
+
+返回值
+指向首字符的迭代器","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::begin",basic_string,const_iterator begin() const;,"返回指向字符串首字符的迭代器。
+begin() 返回可变或常量迭代器，取决于 *this 的常量性。
+cbegin() 始终返回常量迭代器。它等价于 const_cast<const basic_string&>(*this).begin()。
+
+ 参数
+无
+
+返回值
+指向首字符的迭代器","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::cbegin",basic_string,const_iterator cbegin() const noexcept;,"返回指向字符串首字符的迭代器。
+begin() 返回可变或常量迭代器，取决于 *this 的常量性。
+cbegin() 始终返回常量迭代器。它等价于 const_cast<const basic_string&>(*this).begin()。
+
+ 参数
+无
+
+返回值
+指向首字符的迭代器","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::end",basic_string,iterator end();,"返回指向后随字符串末字符的字符的迭代器。此字符表现为占位符，试图访问它导致未定义行为。
+
+ 参数
+无
+
+返回值
+指向后随尾字符的字符的迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::end",basic_string,const_iterator end() const;,"返回指向后随字符串末字符的字符的迭代器。此字符表现为占位符，试图访问它导致未定义行为。
+
+ 参数
+无
+
+返回值
+指向后随尾字符的字符的迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::cend",basic_string,const_iterator cend() const noexcept;,"返回指向后随字符串末字符的字符的迭代器。此字符表现为占位符，试图访问它导致未定义行为。
+
+ 参数
+无
+
+返回值
+指向后随尾字符的字符的迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::rbegin",basic_string,reverse_iterator rbegin();,"返回指向逆向字符串的首字符的逆向迭代器。它对应非逆向字符串的末字符。
+
+ 参数
+无
+
+返回值
+指向首字符的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::rbegin",basic_string,const_reverse_iterator rbegin() const;,"返回指向逆向字符串的首字符的逆向迭代器。它对应非逆向字符串的末字符。
+
+ 参数
+无
+
+返回值
+指向首字符的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::crbegin",basic_string,const_reverse_iterator crbegin() const noexcept;,"返回指向逆向字符串的首字符的逆向迭代器。它对应非逆向字符串的末字符。
+
+ 参数
+无
+
+返回值
+指向首字符的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::rend",basic_string,reverse_iterator rend();,"返回指向后随逆向字符串末字符的字符的逆向迭代器。它对应非逆向字符串的首字符之前的字符。此字符表现为占位符，试图访问它会导致未定义行为。
+
+ 参数
+无
+
+返回值
+指向后随末字符的字符的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::rend",basic_string,const_reverse_iterator rend() const;,"返回指向后随逆向字符串末字符的字符的逆向迭代器。它对应非逆向字符串的首字符之前的字符。此字符表现为占位符，试图访问它会导致未定义行为。
+
+ 参数
+无
+
+返回值
+指向后随末字符的字符的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::crend",basic_string,const_reverse_iterator crend() const noexcept;,"返回指向后随逆向字符串末字符的字符的逆向迭代器。它对应非逆向字符串的首字符之前的字符。此字符表现为占位符，试图访问它会导致未定义行为。
+
+ 参数
+无
+
+返回值
+指向后随末字符的字符的逆向迭代器。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::empty",basic_string,bool empty() const;,"检查字符串是否无字符，即是否 begin() == end()。
+
+ 参数
+无
+
+返回值
+若字符串为空则为 true，否则为 false。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = 0 || 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::size",basic_string,size_type size() const;,"返回字符串中的 CharT 元素数，即 std::distance(begin(), end())。
+
+ 参数
+无
+
+返回值
+字符串中的 CharT 元素数。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = <0>.strlen
+}"
+"std::basic_string<CharT,Traits,Allocator>::length",basic_string,size_type length() const;,"返回字符串中的 CharT 元素数，即 std::distance(begin(), end())。
+
+ 参数
+无
+
+返回值
+字符串中的 CharT 元素数。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = <0>.strlen
+}"
+"std::basic_string<CharT,Traits,Allocator>::max_size",basic_string,size_type max_size() const;,"返回字符串由于系统或库实现限制而有能力保有的最大元素数，即最大字符串的 std::distance(begin(), end())。
+
+ 参数
+无
+
+返回值
+最大字符数。",{},"{
+  <-1> = [0, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::reserve",basic_string,void reserve( size_type new_cap = 0 );,"告知 std::basic_string 对象大小的有计划更改，使得它能准确地管理存储分配。
+如果 new_cap 大于当前 capacity()，那么分配新存储，并使 capacity() 大于或等于 new_cap。
+如果 new_cap 小于当前 capacity()，那么这是非强制的收缩请求。
+如果 new_cap 小于当前 size()，那么这是非强制的收缩到适合（shrink-to-fit）请求，等价于 shrink_to_fit()(C++11 起)。 (C++20 前)
+如果 new_cap 小于或等于当前 capacity()，那么没有效果。 (C++20 起)
+如果容量有更改，那么所有迭代器与引用（包含尾后迭代器）都会失效。
+
+ 参数
+new_cap	-	字符串的新容量
+
+返回值
+无","{
+  setSink(<1>)
+}","{
+  expansion(<0>)
+}"
+"std::basic_string<CharT,Traits,Allocator>::reserve",basic_string,constexpr void reserve( size_type new_cap );,"告知 std::basic_string 对象大小的有计划更改，使得它能准确地管理存储分配。
+如果 new_cap 大于当前 capacity()，那么分配新存储，并使 capacity() 大于或等于 new_cap。
+如果 new_cap 小于当前 capacity()，那么这是非强制的收缩请求。
+如果 new_cap 小于当前 size()，那么这是非强制的收缩到适合（shrink-to-fit）请求，等价于 shrink_to_fit()(C++11 起)。 (C++20 前)
+如果 new_cap 小于或等于当前 capacity()，那么没有效果。 (C++20 起)
+如果容量有更改，那么所有迭代器与引用（包含尾后迭代器）都会失效。
+
+ 参数
+new_cap	-	字符串的新容量
+
+返回值
+无","{
+  setSink(<1>)
+}","{
+  expansion(<0>)
+}"
+"std::basic_string<CharT,Traits,Allocator>::reserve",basic_string,void reserve();,"非强制的收缩到适合请求。调用后 capacity() 拥有大于或等于 size() 的未指定值。
+
+ 参数
+无
+
+返回值
+无",{},{}
+"std::basic_string<CharT,Traits,Allocator>::capacity",basic_string,size_type capacity() const;,"返回当前已为字符串分配空间的字符数。
+
+ 参数
+无
+
+返回值
+当前分配的存储，即可用于存储元素的存储的容量。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = [<0>.size, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::shrink_to_fit",basic_string,void shrink_to_fit();,"请求移除未使用的容量。
+这是减少 capacity() 到 size() 的非强制请求。是否满足请求取依赖于实现。
+当且仅当发生重分配时使所有指针、引用和迭代器失效。
+
+ 参数
+无
+
+返回值
+无",{},{}
+"std::basic_string<CharT,Traits,Allocator>::clear",basic_string,void clear();,"如同通过执行 erase(begin(), end()) 从字符串中移除所有字符。
+使所有指针、引用及迭代器失效。
+
+ 参数
+无
+
+返回值
+无","{
+  sanitize(<0>)
+}","{
+  <0>.strlen = 0
+  <0>.size = <0>.strlen + 1
+  <0>.field = NULL
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"basic_string& insert( size_type index, size_type count, CharT ch );","插入字符到字符串中。
+在位置 index 插入 count 个字符 ch 的副本。
+
+ 参数
+index	-	插入内容到的位置
+pos	-	将插入字符到它之前的迭代器
+ch	-	要插入的字符
+
+返回值
+*this","{
+  setSink(<1>)
+  setSink(<2>)
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen])
+  <0>.strlen = <0>.strlen + <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"basic_string& insert( size_type index, const CharT* s );","插入字符到字符串中。
+在位置 index 插入 s 所指向的空终止字符串。字符串的长度由首个空字符，通过 Traits::length(s) 确定。
+
+ 参数
+index	-	插入内容到的位置
+pos	-	将插入字符到它之前的迭代器
+ch	-	要插入的字符
+s	-	指向要插入的字符串的指针
+
+返回值
+*this","{
+  setSink(<1>)
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen])
+  <0>.strlen = <0>.strlen + <2>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"basic_string& insert( size_type index, const CharT* s, size_type count );","插入字符到字符串中。
+在位置 index 插入范围 [s, s + count) 中的字符。范围可以包含空字符。
+
+ 参数
+index	-	插入内容到的位置
+pos	-	将插入字符到它之前的迭代器
+ch	-	要插入的字符
+s	-	指向要插入的字符串的指针
+count	-	要插入的字符数
+
+返回值
+*this","{
+  setSink(<1>)
+  setSink(<3>)
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen])
+  overflow(<3>, [0, <2>.size])
+  <0>.strlen = <0>.strlen + <3>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"basic_string& insert( size_type index, const basic_string& str );","插入字符到字符串中。
+在位置 index 插入字符串 str。
+
+ 参数
+index	-	插入内容到的位置
+str	-	要插入的字符串
+
+返回值
+*this","{
+  setSink(<1>)
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen])
+  <0>.strlen = <0>.strlen + <2>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"basic_string& insert( size_type index, const basic_string& str,
+                      size_type s_index, size_type count );","插入字符到字符串中。
+ 在位置 index 插入由 str.substr(s_index, count) 获得的字符串。
+
+ 参数
+index	-	插入内容到的位置
+str	-	要插入的字符串
+s_index	-	str 中要插入的首字符位置
+count	-	要插入的字符数
+
+返回值
+*this","{
+  setSink(<1>)
+  setSink(<3>)
+  setSink(<4>)
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen])
+  overflow(<3>, [0, <2>.strlen - 1])
+  <0>.strlen = <0>.strlen + <4> || <0>.strlen + <2>.strlen - <3>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"basic_string& insert( size_type index, const basic_string& str,
+                      size_type s_index, size_type count = npos );","插入字符到字符串中。
+ 在位置 index 插入由 str.substr(s_index, count) 获得的字符串。
+
+ 参数
+index	-	插入内容到的位置
+str	-	要插入的字符串
+s_index	-	str 中要插入的首字符位置
+count	-	要插入的字符数
+
+返回值
+*this","{
+  setSink(<1>)
+  setSink(<3>)
+  setSink(<4>)
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen])
+  overflow(<3>, [0, <2>.strlen - 1])
+  <0>.strlen = <0>.strlen + <4> || <0>.strlen + <2>.strlen - <3>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"iterator insert( iterator pos, CharT ch );","插入字符到字符串中。
+在 pos 所指向的字符前插入字符 ch。
+
+ 参数
+pos	-	将插入字符到它之前的迭代器
+ch	-	要插入的字符
+
+返回值
+指代首个被插入字符的迭代器，或者在未插入字符时就是 pos（count == 0，ilist.size() == 0 或 first == last）","{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end])
+  <0>.strlen = <0>.strlen + 1
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>
+  expansion(<0>)
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"iterator insert( const_iterator pos, CharT ch );","插入字符到字符串中。
+在 pos 所指向的字符前插入字符 ch。
+
+ 参数
+pos	-	将插入字符到它之前的迭代器
+ch	-	要插入的字符
+
+返回值
+指代首个被插入字符的迭代器，或者在未插入字符时就是 pos（count == 0，ilist.size() == 0 或 first == last）","{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end])
+  <0>.strlen = <0>.strlen + 1
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>
+  expansion(<0>)
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"void insert( iterator pos, size_type count, CharT ch );","插入字符到字符串中。
+在 pos 所指向的元素（如果存在）前插入 count 个字符 ch 的副本。
+
+ 参数
+pos	-	将插入字符到它之前的迭代器
+ch	-	要插入的字符
+count	-	要插入的字符数
+
+返回值
+无","{
+  setSink(<2>)
+  transitive(<0>, <0> || <3>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end])
+  <0>.strlen = <0>.strlen + <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>
+  expansion(<0>)
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"iterator insert( const_iterator pos, size_type count, CharT ch );","插入字符到字符串中。
+在 pos 所指向的元素（如果存在）前插入 count 个字符 ch 的副本。
+
+ 参数
+pos	-	将插入字符到它之前的迭代器
+ch	-	要插入的字符
+count	-	要插入的字符数
+
+返回值
+指代首个被插入字符的迭代器，或者在未插入字符时就是 pos（count == 0，ilist.size() == 0 或 first == last）","{
+  setSink(<2>)
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end])
+  <0>.strlen = <0>.strlen + <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>
+  expansion(<0>)
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"template< class InputIt >
+void insert( iterator pos, InputIt first, InputIt last );","插入字符到字符串中。
+如同用 insert(pos - begin(), basic_string(first, last, get_allocator())) 在 pos 所指向的元素（如果存在）前插入来自范围 [first, last) 的元素。
+如果 InputIt 不满足老式输入迭代器 (LegacyInputIterator) ，那么此重载不参与重载决议。(C++11 起)
+
+ 参数
+pos	-	将插入字符到它之前的迭代器
+first, last	-	定义要插入字符的范围
+
+返回值
+无","{
+  transitive(<0>, <0> || <2> || <3>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end])
+  <0>.strlen = [<0>.strlen, MAX]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"template< class InputIt >
+iterator insert( const_iterator pos, InputIt first, InputIt last );","插入字符到字符串中。
+如同用 insert(pos - begin(), basic_string(first, last, get_allocator())) 在 pos 所指向的元素（如果存在）前插入来自范围 [first, last) 的元素。
+如果 InputIt 不满足老式输入迭代器 (LegacyInputIterator) ，那么此重载不参与重载决议。(C++11 起)
+
+ 参数
+pos	-	将插入字符到它之前的迭代器
+first, last	-	定义要插入字符的范围
+
+返回值
+指代首个被插入字符的迭代器，或者在未插入字符时就是 pos（count == 0，ilist.size() == 0 或 first == last）","{
+  transitive(<0>, <0> || <2> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end])
+  <0>.strlen = [<0>.strlen, MAX]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"iterator insert( const_iterator pos, std::initializer_list<CharT> ilist );","插入字符到字符串中。
+ 在 pos 所指向的元素（如果存在）前插入来自初始化式列表 ilist 的字符。
+
+ 参数
+pos	-	将插入字符到它之前的迭代器
+ilist	-	要插入的字符来源的 std::initializer_list
+
+返回值
+指代首个被插入字符的迭代器，或者在未插入字符时就是 pos（count == 0，ilist.size() == 0 或 first == last）","{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end])
+  <0>.strlen = <0>.strlen + <2>.size - 1
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"template< class StringViewLike >
+basic_string& insert( size_type index, const StringViewLike& t );","插入字符到字符串中。
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后如同用 insert(pos, sv.data(), sv.size()) 在 pos 所指向的元素（如果存在）前插入来自 sv 的元素。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+ 参数
+index	-	插入内容到的位置
+t	-	要插入的字符来源对象（可转换到 std::basic_string_view）
+count	-	要插入的字符数
+
+返回值
+*this","{
+  setSink(<1>)
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen])
+  <0>.strlen = <0>.strlen + <2>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert",basic_string,"template< class StringViewLike >
+basic_string& insert( size_type index, const StringViewLike& t,
+                      size_type t_index, size_type count = npos );","插入字符到字符串中。
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后在 pos 所指向的元素（如果存在）前插入来自 sv 的子视图 [t_index, t_index + count) 的元素。
+如果请求的子视图越过 sv 的末尾或 count == npos，那么作为结果的子视图是 [t_index, sv.size())。
+如果 t_index > sv.size() 或 index > size()，那么抛出 std::out_of_range。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+如果 pos 不是 *this 上的有效迭代器，那么行为未定义。
+
+ 参数
+index	-	插入内容到的位置
+t	-	要插入的字符来源对象（可转换到 std::basic_string_view）
+count	-	要插入的字符数
+t_index	-	t 中要插入的首字符位置
+
+返回值
+*this","{
+  setSink(<1>)
+  setSink(<3>)
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen])
+  overflow(<3>, [0, <2>.strlen - 1])
+  <0>.strlen = <0>.strlen + <4> || <0>.strlen + <2>.strlen - <3>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::insert_range",basic_string,"template< container-compatible-range<CharT> R >
+constexpr iterator insert_range( const_iterator pos, R&& rg );","向 pos 所指向的元素（如果有）之前插入范围 rg 中的字符。
+
+等价于
+
+return insert(pos - begin(),
+    std::basic_string(
+        std::from_range,
+        std​::​forward<R>(rg),
+        get_allocator())
+);
+如果 pos 不是 *this 上的有效迭代器，则其行为未定义。
+
+ 参数
+pos	-	迭代器，将在它之前插入字符
+rg	-	容器兼容范围
+
+返回值
+指代插入的第一个字符的迭代器，或者当 rg 为空而没有插入任何字符时为 pos。","{
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end])
+  <0>.strlen = [<0>.strlen, MAX]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>.field
+  expansion(<0>)
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::erase",basic_string,"basic_string& erase( size_type index = 0, size_type count = npos );","从字符串移除指定的字符。
+移除从 index 开始的 std::min(count, size() - index) 个字符。
+
+ 参数
+index	-	要移除的首个字符
+count	-	要移除的字符数
+
+返回值
+*this","{
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <0>.strlen = <0>.strlen - <2> || <1>
+  <0>.size = <0>.strlen + 1
+  <0>.field = NULL
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::erase",basic_string,"constexpr basic_string& erase( size_type index = 0, size_type count = npos );","从字符串移除指定的字符。
+移除从 index 开始的 std::min(count, size() - index) 个字符。
+
+ 参数
+index	-	要移除的首个字符
+count	-	要移除的字符数
+
+返回值
+*this","{
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <0>.strlen = <0>.strlen - <2> || <1>
+  <0>.size = <0>.strlen + 1
+  <0>.field = NULL
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::erase",basic_string,iterator erase( iterator position );,"从字符串移除指定的字符。
+移除位于 position 的字符。
+ 如果 position 不是 *this 上的可解引用迭代器，那么行为未定义。
+
+ 参数
+position	-	指向要移除的字符的迭代器
+
+返回值
+指向紧跟被擦除字符之后的迭代器，或者在不存在这种字符的情况下返回 end()。","{
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end - 1])
+  <0>.strlen = <0>.strlen - 1
+  <0>.size = <0>.strlen + 1
+  <0>.field = NULL
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::erase",basic_string,iterator erase( const_iterator position );,"从字符串移除指定的字符。
+移除位于 position 的字符。
+ 如果 position 不是 *this 上的可解引用迭代器，那么行为未定义。
+
+ 参数
+position	-	指向要移除的字符的迭代器
+
+返回值
+指向紧跟被擦除字符之后的迭代器，或者在不存在这种字符的情况下返回 end()。","{
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end - 1])
+  <0>.strlen = <0>.strlen - 1
+  <0>.size = <0>.strlen + 1
+  <0>.field = NULL
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::erase",basic_string,constexpr iterator erase( const_iterator position );,"从字符串移除指定的字符。
+移除位于 position 的字符。
+ 如果 position 不是 *this 上的可解引用迭代器，那么行为未定义。
+
+ 参数
+position	-	指向要移除的字符的迭代器
+
+返回值
+指向紧跟被擦除字符之后的迭代器，或者在不存在这种字符的情况下返回 end()。","{
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end - 1])
+  <0>.strlen = <0>.strlen - 1
+  <0>.size = <0>.strlen + 1
+  <0>.field = NULL
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::erase",basic_string,"iterator erase( iterator first, iterator last );","从字符串移除指定的字符。
+移除范围 [first, last) 中的字符。
+ 如果 first 或 last 不是 *this 上的有效迭代器，或者 [first, last) 不是有效范围，那么行为未定义。
+
+ 参数
+first, last	-	要移除的字符范围
+
+返回值
+指向擦除前 last 指向的字符的迭代器，或者在不存在这种字符的情况下返回 end()。","{
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end])
+  overflow(<2>, [<0>.begin, <0>.end])
+  <0>.strlen = [0, <0>.strlen]
+  <0>.size = <0>.strlen + 1
+  <0>.field = NULL
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::erase",basic_string,"iterator erase( const_iterator first, const_iterator last );","从字符串移除指定的字符。
+移除范围 [first, last) 中的字符。
+ 如果 first 或 last 不是 *this 上的有效迭代器，或者 [first, last) 不是有效范围，那么行为未定义。
+
+ 参数
+first, last	-	要移除的字符范围
+
+返回值
+指向擦除前 last 指向的字符的迭代器，或者在不存在这种字符的情况下返回 end()。","{
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end])
+  overflow(<2>, [<0>.begin, <0>.end])
+  <0>.strlen = [0, <0>.strlen]
+  <0>.size = <0>.strlen + 1
+  <0>.field = NULL
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::erase",basic_string,"constexpr iterator erase( const_iterator first, const_iterator last );","从字符串移除指定的字符。
+移除范围 [first, last) 中的字符。
+ 如果 first 或 last 不是 *this 上的有效迭代器，或者 [first, last) 不是有效范围，那么行为未定义。
+
+ 参数
+first, last	-	要移除的字符范围
+
+返回值
+指向擦除前 last 指向的字符的迭代器，或者在不存在这种字符的情况下返回 end()。","{
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [<0>.begin, <0>.end])
+  overflow(<2>, [<0>.begin, <0>.end])
+  <0>.strlen = [0, <0>.strlen]
+  <0>.size = <0>.strlen + 1
+  <0>.field = NULL
+  <-1> = [<0>.begin, <0>.end]
+}"
+"std::basic_string<CharT,Traits,Allocator>::push_back",basic_string,void push_back( CharT ch );,"后附给定字符 ch 到字符串尾。
+
+ 参数
+ch	-	要后附的字符
+
+返回值
+无","{
+  transitive(<0>, <0> || <1>)
+}","{
+  <0>.strlen = <0>.strlen + 1
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>
+  expansion(<0>)
+}"
+"std::basic_string<CharT,Traits,Allocator>::pop_back",basic_string,void pop_back();,"从字符串移除末字符。
+等价于 erase(end() - 1)。
+如果 empty() 是 true，那么行为未定义。
+
+ 参数
+无
+
+返回值
+无",{},"{
+  <0>.strlen = <0>.strlen - 1
+  <0>.size = <0>.strlen + 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::append",basic_string,"basic_string& append( size_type count, CharT ch );","后附额外字符到字符串。
+后附 count 个 ch 的副本。
+
+ 参数
+count	-	要后附的字符数
+ch	-	要后附的字符值
+
+返回值
+*this","{
+  setSink(<1>)
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <0>.strlen + <1>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::append",basic_string,"basic_string& append( const CharT* s, size_type count );","后附额外字符到字符串。
+ 后附范围 [s, s + count) 中的字符。
+ 如果 [s, s + count) 不是有效范围，那么行为未定义。
+
+ 参数
+count	-	要后附的字符数
+s	-	指向要后附的字符串的指针
+
+返回值
+*this","{
+  setSink(<2>)
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<2>, [0, <1>.size])
+  <0>.strlen = <0>.strlen + <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::append",basic_string,basic_string& append( const CharT* s );,"后附额外字符到字符串。
+等价于 return append(s, Traits::length(s));。
+
+ 参数
+s	-	指向要后附的字符串的指针
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <0>.strlen + <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::append",basic_string,"template< class SV >
+basic_string& append( const SV& t );","后附从 t 构造的字符串视图 sv 中的字符。
+如果只提供了 t，那么就会后附 sv 中的所有字符。
+如果也提供了 pos：
+如果 count 是 npos，那么就会后附 sv 中从 pos 处开始的所有字符。
+否则会后附 sv 中从 pos 处开始的 std::min(count, sv.size() - pos) 个字符。
+ 这些重载只有在满足以下所有条件时才会参与重载决议：
+std::is_convertible_v<const SV&, std::basic_string_view<CharT, Traits>> 是 true。
+std::is_convertible_v<const SV&, const CharT*> 是 false。
+
+等价于 std::basic_string_view<CharT, Traits> sv = t;
+return append(sv.data(), sv.size());
+
+ 参数
+t	-	可转换为带要后附的字符的可以转换到 std::basic_string_view 的对象
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <0>.strlen + <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::append",basic_string,"template< class SV >
+basic_string& append( const SV& t, size_type pos,
+                      size_type count = npos );","后附从 t 构造的字符串视图 sv 中的字符。
+如果只提供了 t，那么就会后附 sv 中的所有字符。
+如果也提供了 pos：
+如果 count 是 npos，那么就会后附 sv 中从 pos 处开始的所有字符。
+否则会后附 sv 中从 pos 处开始的 std::min(count, sv.size() - pos) 个字符。
+ 这些重载只有在满足以下所有条件时才会参与重载决议：
+std::is_convertible_v<const SV&, std::basic_string_view<CharT, Traits>> 是 true。
+std::is_convertible_v<const SV&, const CharT*> 是 false。
+
+等价于 std::basic_string_view<CharT, Traits> sv = t;
+return append(sv.substr(pos, count));
+
+ 参数
+t	-	可转换为带要后附的字符的可以转换到 std::basic_string_view 的对象
+count	-	要后附的字符数
+pos	-	要后附的首个字符下标
+
+返回值
+*this","{
+  setSink(<2>)
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <0>.strlen + <3> || <0>.strlen + <1>.strlen - <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::append",basic_string,basic_string& append( const basic_string& str );,"后附另一字符串 str 中的字符。
+如果只提供了 str，那么就会后附 str 中的所有字符。
+如果也提供了 pos：
+如果 count 是 npos，那么就会后附 str 中从 pos 处开始的所有字符。
+否则会后附 str 中从 pos 处开始的 std::min(count, str.size() - pos) 个字符。
+等价于 return append(str.data(), str.size());。
+
+ 参数
+str	-	要后附的字符串
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <0>.strlen + <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::append",basic_string,"basic_string& append( const basic_string& str,
+                      size_type pos, size_type count );","后附另一字符串 str 中的字符。
+如果只提供了 str，那么就会后附 str 中的所有字符。
+如果也提供了 pos：
+如果 count 是 npos，那么就会后附 str 中从 pos 处开始的所有字符。
+否则会后附 str 中从 pos 处开始的 std::min(count, str.size() - pos) 个字符。
+等价于 return append(std::basic_string_view<CharT, Traits>
+                  (str).substr(pos, count));。
+
+ 参数
+str	-	要后附的字符串
+pos	-	要后附的首个字符下标
+count	-	要后附的字符数
+
+返回值
+*this","{
+  setSink(<2>)
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <0>.strlen + <3> || <0>.strlen + <1>.strlen - <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::append",basic_string,"basic_string& append( const basic_string& str,
+                      size_type pos, size_type count = npos );","后附另一字符串 str 中的字符。
+如果只提供了 str，那么就会后附 str 中的所有字符。
+如果也提供了 pos：
+如果 count 是 npos，那么就会后附 str 中从 pos 处开始的所有字符。
+否则会后附 str 中从 pos 处开始的 std::min(count, str.size() - pos) 个字符。
+等价于 return append(std::basic_string_view<CharT, Traits>
+                  (str).substr(pos, count));。
+
+ 参数
+str	-	要后附的字符串
+pos	-	要后附的首个字符下标
+count	-	要后附的字符数
+
+返回值
+*this","{
+  setSink(<2>)
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<2>, [0, <1>.strlen - 1])
+  <0>.strlen = <0>.strlen + <3> || <0>.strlen + <1>.strlen - <2>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::append",basic_string,"template< class InputIt >
+basic_string& append( InputIt first, InputIt last );","后附另一字符串 str 中的字符。
+ 等价于 return append(basic_string(first, last, get_allocator()));。
+如果 InputIt 为整数类型，那么此重载与重载 (1) 拥有相同效果。(C++11 前)
+此重载只有在 InputIt 满足 老式输入迭代器 (LegacyInputIterator) 的要求时才会参与重载决议。(C++11 起)
+
+ 参数
+first, last	-	要后附的字符范围
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = [<0>.strlen, MAX]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::append",basic_string,basic_string& append( std::initializer_list<CharT> ilist );,"后附另一字符串 str 中的字符。
+等价于 return append(ilist.begin(), ilist.size());。
+
+ 参数
+ilist	-	拥有要后附的字符的初始化器列表
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <0>.strlen + <1>.size
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::append_range",basic_string,"template< container-compatible-range<CharT> R >
+constexpr std::basic_string& append_range( R&& rg );","后附 rg 中的全部字符。
+等价于
+return append(std::basic_string( std::from_range, std​::​forward<R>(rg), get_allocator()));
+
+ 参数
+rg	-	容器兼容范围
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = [<0>.strlen, MAX]
+  <0>.size =<0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator+=",basic_string,basic_string& operator+=( const basic_string& str );,"向字符串后附额外字符。
+后附字符串 str。
+
+ 参数
+str	-	要后附的字符串
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <0>.strlen + <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator+=",basic_string,basic_string& operator+=( CharT ch );,"向字符串后附额外字符。
+ 后附字符 ch。
+
+ 参数
+ch	-	要后附的字符
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <0>.strlen + 1
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator+=",basic_string,basic_string& operator+=( const CharT* s );,"向字符串后附额外字符。
+后附 s 所指向的空终止字符串。
+
+ 参数
+s	-	指向要后附的空终止字符串的指针
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <0>.strlen + <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator+=",basic_string,basic_string& operator+=( std::initializer_list<CharT> ilist );,"向字符串后附额外字符。
+后附初始化式列表 ilist 中的字符。
+
+ 参数
+ilist	-	拥有要后附的字符的 std::initializer_list
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <0>.strlen + <1>.size
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::operator+=",basic_string,"template< class StringViewLike >
+basic_string& operator+=( const StringViewLike& t );","向字符串后附额外字符。
+ 如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后如同用 append(sv) 后附字符串视图 sv 中的字符。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+ 参数
+t	-	拥有要后附的字符的（可转换到 std::basic_string_view 的）对象
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <0>.strlen + <1>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <1>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"basic_string& replace( size_type pos, size_type count,
+                       const basic_string& str );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+ 以 str 替换那些字符。
+
+ 参数
+pos	-	将被替换的子串起始位置
+count	-	将被替换的子串长度
+str	-	用于替换的字符串
+
+返回值
+*this","{
+  setSink(<1>)
+  transitive(<0>, <0> || <2>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <0>.strlen = <0>.strlen - <2> + <3>.strlen || <1> + <3>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"basic_string& replace( const_iterator first, const_iterator last,
+                       const basic_string& str );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+ 以 str 替换那些字符。
+
+ 参数
+first, last	-	将被替换的字符范围
+count	-	将被替换的子串长度
+str	-	用于替换的字符串
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1> || <2> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = [<3>.strlen, <0>.strlen + <3>.strlen]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"basic_string& replace( size_type pos, size_type count,
+                       const basic_string& str,
+                       size_type pos2, size_type count2 );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+以 str 的 [pos2, std::min(pos2 + count2, str.size())) 子串替换那些字符。
+
+ 参数
+pos	-	将被替换的子串起始位置
+count	-	将被替换的子串长度
+str	-	用于替换的字符串
+pos2	-	用于替换的子串起始位置
+count2	-	用于替换的字符数
+
+返回值
+*this","{
+  setSink(<1>)
+  setSink(<4>)
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  overflow(<4>, [0, <3>.strlen - 1])
+  <0>.strlen = [0, <0>.strlen + <3>.strlen]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"basic_string& replace( size_type pos, size_type count,
+                       const basic_string& str,
+                       size_type pos2, size_type count2 = npos );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+以 str 的 [pos2, std::min(pos2 + count2, str.size())) 子串替换那些字符。
+
+ 参数
+pos	-	将被替换的子串起始位置
+count	-	将被替换的子串长度
+str	-	用于替换的字符串
+pos2	-	用于替换的子串起始位置
+count2	-	用于替换的字符数
+
+返回值
+*this","{
+  setSink(<1>)
+  setSink(<4>)
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  overflow(<4>, [0, <3>.strlen - 1])
+  <0>.strlen = [0, <0>.strlen + <3>.strlen]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"basic_string& replace( size_type pos, size_type count,
+                       const CharT* cstr, size_type count2 );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+以范围 [cstr, cstr + count2) 中的字符替换那些字符。
+ 如果 [cstr, cstr + count2) 不是有效范围，那么行为未定义。
+
+ 参数
+pos	-	将被替换的子串起始位置
+count	-	将被替换的子串长度
+str	-	用于替换的字符串
+pos2	-	用于替换的子串起始位置
+count2	-	用于替换的字符数
+cstr	-	指向用于替换的字符串的指针
+
+返回值
+*this","{
+  setSink(<1>)
+  setSink(<4>)
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  overflow(<4>, [0, <3>.size])
+  <0>.strlen = [0, <0>.strlen + <4>]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"basic_string& replace( const_iterator first, const_iterator last,
+                       const CharT* cstr, size_type count2 );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+以范围 [cstr, cstr + count2) 中的字符替换那些字符。
+ 如果 [cstr, cstr + count2) 不是有效范围，那么行为未定义。
+
+ 参数
+first, last	-	将被替换的字符范围
+str	-	用于替换的字符串
+pos2	-	用于替换的子串起始位置
+count2	-	用于替换的字符数
+cstr	-	指向用于替换的字符串的指针
+
+返回值
+*this","{
+  setSink(<4>)
+  transitive(<0>, <0> || <1> || <2> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<4>, [0, <3>.size])
+  <0>.strlen = [0, <0>.strlen + <4>]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"basic_string& replace( size_type pos, size_type count,
+                       const CharT* cstr );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+以范围 [cstr, cstr + Traits::length(cstr)) 中的字符替换那些字符。
+
+ 参数
+pos	-	将被替换的子串起始位置
+count	-	将被替换的子串长度
+cstr	-	指向用于替换的字符串的指针
+
+返回值
+*this","{
+  setSink(<1>)
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <0>.strlen = <1> + <3>.strlen || <0>.strlen - <2> + <3>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"basic_string& replace( const_iterator first, const_iterator last,
+                       const CharT* cstr );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+以范围 [cstr, cstr + Traits::length(cstr)) 中的字符替换那些字符。
+
+ 参数
+first, last	-	将被替换的字符范围
+cstr	-	指向用于替换的字符串的指针
+
+返回值
+*this","{
+  transitive(<0>, <0> || <1> || <2> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = [<3>.strlen, <0>.strlen + <3>.strlen]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"basic_string& replace( size_type pos, size_type count,
+                       size_type count2, CharT ch );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+以 count2 个 ch 的副本替换那些字符。
+
+ 参数
+pos	-	将被替换的子串起始位置
+count	-	将被替换的子串长度
+count2	-	用于替换的字符数
+ch	-	用于替换的字符值
+
+返回值
+*this","{
+  setSink(<1>)
+  setSink(<3>)
+  transitive(<0>, <0> || <4>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = <1> + <3> || <0>.strlen - <2> + <3>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <4>
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"basic_string& replace( const_iterator first, const_iterator last,
+                       size_type count2, CharT ch );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+以 count2 个 ch 的副本替换那些字符。
+
+ 参数
+first, last	-	将被替换的字符范围
+count2	-	用于替换的字符数
+ch	-	用于替换的字符值
+
+返回值
+*this","{
+  setSink(<3>)
+  transitive(<0>, <0> || <1> || <2> || <4>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = [0, <0>.strlen + <3>]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <4>
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"template< class InputIt >
+basic_string& replace( const_iterator first, const_iterator last,
+                       InputIt first2, InputIt last2 );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+如同用 replace(first, last, basic_string(first2, last2, get_allocator())) 以范围[first2, last2) 中的字符替换那些字符。
+
+ 参数
+first, last	-	将被替换的字符范围
+first2, last2	-	用于替换的字符范围
+
+返回值
+*this","{
+  transitive(<0>, <0> || <3> || <4>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = [0, MAX]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"basic_string& replace( const_iterator first, const_iterator last,
+                       std::initializer_list<CharT> ilist );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+ 以 ilist 中的字符替换那些字符。
+
+ 参数
+first, last	-	将被替换的字符范围
+ilist	-	拥有用于替换的字符的初始化式列表
+
+返回值
+*this","{
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = [<3>.size, <3>.size + <0>.strlen]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"template< class StringViewLike >
+basic_string& replace( size_type pos, size_type count,
+                       const StringViewLike& t );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后以 sv 中的字符替换那些字符。
+ 这些重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+ 参数
+pos	-	将被替换的子串起始位置
+count	-	将被替换的子串长度
+t	-	拥有用于替换的字符的对象（可转换到 std::basic_string_view）
+
+返回值
+*this","{
+  setSink(<1>)
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <0>.strlen = <0>.strlen - <2> + <3>.strlen || <1> + <3>.strlen
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"template< class StringViewLike >
+basic_string& replace( const_iterator first, const_iterator last,
+                       const StringViewLike& t );","以若干给定字符替换范围 [begin() + pos, begin() + std::min(pos + count, size())) 或 [first, last) 中的字符。
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后以 sv 中的字符替换那些字符。
+ 这些重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+ 参数
+first, last	-	将被替换的字符范围
+t	-	拥有用于替换的字符的对象（可转换到 std::basic_string_view）
+
+返回值
+*this","{
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = [<3>.strlen, <3>.strlen + <0>.strlen]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace",basic_string,"template< class StringViewLike >
+basic_string& replace( size_type pos, size_type count,
+                       const StringViewLike& t,
+                       size_type pos2, size_type count2 = npos );","如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后以子视图 sv.substr(pos2, count2) 中的字符替换那些字符。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+ 参数
+pos	-	将被替换的子串起始位置
+count	-	将被替换的子串长度
+t	-	拥有用于替换的字符的对象（可转换到 std::basic_string_view）
+pos2	-	用于替换的子串起始位置
+count2	-	用于替换的字符数
+
+返回值
+*this","{
+  setSink(<1>)
+  setSink(<4>)
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  overflow(<4>, [0, <3>.strlen - 1])
+  <0>.strlen = [0, <0>.strlen + <3>.strlen]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  expansion(<0>)
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::replace_with_range",basic_string,"template< container-compatible-range<CharT> R >
+constexpr std::basic_string& replace_with_range( const_iterator first,
+                                                 const_iterator last,
+                                                 R&& rg );","将范围 [first, last) 中的字符替换为范围 rg 中的字符。
+
+等价于
+
+return replace(first,
+               last,
+               std::basic_string(
+                   std::from_range,
+                   std::forward<R>(rg),
+                   get_allocator())
+);
+
+ 参数
+first, last	-	要被替换的字符范围
+rg	-	容器兼容范围
+
+返回值
+*this","{
+  transitive(<0>, <0> || <3>)
+  transitive(<-1>, <0>)
+}","{
+  <0>.strlen = [0, MAX]
+  <0>.size = <0>.strlen + 1
+  <0>.field = <3>.field
+  <-1> = <0>
+}"
+"std::basic_string<CharT,Traits,Allocator>::copy",basic_string,"size_type copy( CharT* dest, size_type count, size_type pos = 0 ) const;","复制子串 [pos, pos + count) 到 dest 指向的字符串。如果请求的子串越过字符串结尾，或 count == npos，那么复制的子串是 [pos, size())。
+产生的字符串不是空终止的。
+
+ 参数
+dest	-	指向目标字符串的指针
+count	-	子串长度
+pos	-	所包含的首字符位置
+
+返回值
+复制的字符数。","{
+  setSink(<2>)
+  setSink(<3>)
+  transitive(<1>, <0>)
+  transitive(<-1>, <0> || <2>)
+}","{
+  overflow(<2>, [0, <1>.size])
+  overflow(<3>, [0, <0>.strlen - 1])
+  <1>.strlen = <2> || <0>.strlen - <3>
+  <-1> = <1>.strlen
+}"
+"std::basic_string<CharT,Traits,Allocator>::resize",basic_string,void resize( size_type count );,"重设字符串大小，使其包含 count 个字符。
+如果当前大小小于 count，那么后附额外的字符：
+将后附的字符初始化为 CharT()（在 CharT 是 char 时就是 '\0'）。
+如果当前大小大于 count，那么字符串会缩减到首 count 个元素。
+
+ 参数
+count	-	字符串的新大小
+
+返回值
+无","{
+  setSink(<1>)
+}","{
+  <0>.strlen = <1>
+  <0>.size = <0>.strlen + 1
+  expansion(<0>)
+}"
+"std::basic_string<CharT,Traits,Allocator>::resize",basic_string,"void resize( size_type count, CharT ch );","重设字符串大小，使其包含 count 个字符。
+如果当前大小小于 count，那么后附额外的字符：
+将后附的字符初始化为 ch。
+如果当前大小大于 count，那么字符串会缩减到首 count 个元素。
+
+ 参数
+count	-	字符串的新大小
+ch	-	用以初始化新字符的字符
+
+返回值
+无","{
+  setSink(<1>)
+  transitive(<0>, <0> || <2>)
+}","{
+  <0>.strlen = <1>
+  <0>.size = <0>.strlen + 1
+  <0>.field = <2>
+  expansion(<0>)
+}"
+"std::basic_string<CharT,Traits,Allocator>::resize_and_overwrite",basic_string,"template< class Operation >
+constexpr void resize_and_overwrite( size_type count, Operation op );","重设字符串大小以含有至多 count 个字符，用用户提供的操作 op 修改可能不确定的内容并设置长度。这样就避免了初始化大小合适的 std::string 时所产生的成本，当它打算作为要被填充的字符数组时，例如，C API 调用。
+
+此函数执行下列步骤：
+
+获得至少含有 count + 1 个字符的存储，并使它的前 k 个字符等于 *this 的前 k 个字符，其中 k 是 count 与调用 resize_and_overwrite 前 size() 的结果的较小者。令 p 代表指向该存储中首个字符的指针。
+相等性以如同检查 this->compare(0, k, p, k) == 0 确定。
+[p + k, p + count] 中的字符可能拥有不确定值。
+求值 std::move(op)(p, count)，令它的返回值为 r。
+以 [p, p + r) 替换 *this 的内容（这会设置 *this 的长度为 r）。使所有指向范围 [p, p + count] 中的指针与引用失效。
+如果 r 不具有整数式类型，那么程序非良构。
+
+如果满足以下任意条件，那么行为未定义：
+
+std::move(op)(p, count) 抛出异常。
+std::move(op)(p, count) 修改 p 或 count。
+r 不在范围 [​0​, count] 中。
+范围 [p, p + r) 中的任何字符拥有不确定值。
+推荐实现避免不必要的复制与分配，例如通过使得 p 等于指向调用后为 *this 分配的字符存储的起始指针，如果 count 小于或等于 capacity()，那么该存储能等同于 *this 的既存存储。
+
+ 参数
+count	-	字符串的最大可能的新大小
+op	-	用于设置字符串新内容的函数对象
+
+返回值
+无","{
+  setSink(<1>)
+  transitive(<0>, <0> || <2>)
+}","{
+  <0>.strlen = [0, <1>]
+  <0>.size = <0>.strlen + 1
+  expansion(<0>)
+}"
+"std::basic_string<CharT,Traits,Allocator>::swap",basic_string,void swap( basic_string& other );,"交换字符串与 other 的内容。所有迭代器和引用都可能会失效。
+
+如果 std::allocator_traits<allocator_type>::propagate_on_container_swap::value 为 true，那么使用对非成员 swap 进行无限定调用来交换这些分配器。否则，不交换它们（且若 get_allocator() != other.get_allocator() 则其行为未定义）。
+
+ 参数
+other	-	要与之交换内容的字符串
+
+返回值
+无","{
+  swapTaint(<0>, <1>)
+}","{
+  swap(<0>, <1>)
+}"
+"std::basic_string<CharT,Traits,Allocator>::swap",basic_string,void swap( basic_string& other ) noexcept(/* 见下文 */);,"交换字符串与 other 的内容。所有迭代器和引用都可能会失效。
+
+如果 std::allocator_traits<allocator_type>::propagate_on_container_swap::value 为 true，那么使用对非成员 swap 进行无限定调用来交换这些分配器。否则，不交换它们（且若 get_allocator() != other.get_allocator() 则其行为未定义）。
+
+ 参数
+other	-	要与之交换内容的字符串
+
+返回值
+无","{
+  swapTaint(<0>, <1>)
+}","{
+  swap(<0>, <1>)
+}"
+"std::basic_string<CharT,Traits,Allocator>::find",basic_string,"size_type find( const basic_string& str, size_type pos = 0 ) const;","寻找首个等于给定字符序列的子串。搜索从 pos 开始，也就是说找到的子串不会从 pos 之前的位置开始。
+
+寻找等于 str 的首个子串。
+
+正式而言，如果以下表达式都是 true，那么在位置 xpos 找到 ﻿子串 str：
+
+xpos >= pos
+xpos + str.size() <= size()
+对于 str 中所有位置 n，Traits::eq(at(xpos + n), str.at(n))
+特别是，这意味着
+
+只有在 pos <= size() - str.size() 时才能找到子串。
+在且仅在 pos <= size() 时才能在 pos 找到空子串。
+对于非空子串，如果 pos >= size()，那么函数始终返回 npos。
+
+ 参数
+str	-	要搜索的字符串
+pos	-	开始搜索的位置
+
+返回值
+找到的子串的首字符位置，或在找不到这种子串时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS ||  [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find",basic_string,"size_type find( const CharT* s, size_type pos, size_type count ) const;","寻找首个等于给定字符序列的子串。搜索从 pos 开始，也就是说找到的子串不会从 pos 之前的位置开始。
+
+寻找首个等于范围 [s, s + count) 的子串。此范围可以包含空字符。
+ 如果 [s, s + count) 不是有效范围，那么行为未定义。
+
+正式而言，如果以下表达式都是 true，那么在位置 xpos 找到 ﻿子串 str：
+
+xpos >= pos
+xpos + str.size() <= size()
+对于 str 中所有位置 n，Traits::eq(at(xpos + n), str.at(n))
+特别是，这意味着
+
+只有在 pos <= size() - str.size() 时才能找到子串。
+在且仅在 pos <= size() 时才能在 pos 找到空子串。
+对于非空子串，如果 pos >= size()，那么函数始终返回 npos。
+
+ 参数
+pos	-	开始搜索的位置
+count	-	要搜索的子串长度
+s	-	指向要搜索的字符串的指针
+
+返回值
+找到的子串的首字符位置，或在找不到这种子串时返回 npos。","{
+  setSink(<3>)
+  transitive(<-1>, <0> || <1>)
+}","{
+  overflow(<3>, [0, <1>.size])
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find",basic_string,"size_type find( const CharT* s, size_type pos = 0 ) const;","寻找首个等于给定字符序列的子串。搜索从 pos 开始，也就是说找到的子串不会从 pos 之前的位置开始。
+
+寻找首个等于 s 所指向的字符串的子串。该字符串的长度由首个空字符，通过 Traits::length(s) 确定。
+ 如果 [s, s + Traits::length(s)) 不是有效范围，那么行为未定义。
+
+正式而言，如果以下表达式都是 true，那么在位置 xpos 找到 ﻿子串 str：
+
+xpos >= pos
+xpos + str.size() <= size()
+对于 str 中所有位置 n，Traits::eq(at(xpos + n), str.at(n))
+特别是，这意味着
+
+只有在 pos <= size() - str.size() 时才能找到子串。
+在且仅在 pos <= size() 时才能在 pos 找到空子串。
+对于非空子串，如果 pos >= size()，那么函数始终返回 npos。
+
+ 参数
+pos	-	开始搜索的位置
+s	-	指向要搜索的字符串的指针
+
+返回值
+找到的子串的首字符位置，或在找不到这种子串时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find",basic_string,"size_type find( CharT ch, size_type pos = 0 ) const;","寻找首个等于给定字符序列的子串。搜索从 pos 开始，也就是说找到的子串不会从 pos 之前的位置开始。
+
+寻找首个字符 ch（由后述规则当作单字符子串）。
+
+正式而言，如果以下表达式都是 true，那么在位置 xpos 找到 ﻿子串 str：
+
+xpos >= pos
+xpos + str.size() <= size()
+对于 str 中所有位置 n，Traits::eq(at(xpos + n), str.at(n))
+特别是，这意味着
+
+只有在 pos <= size() - str.size() 时才能找到子串。
+在且仅在 pos <= size() 时才能在 pos 找到空子串。
+对于非空子串，如果 pos >= size()，那么函数始终返回 npos。
+
+ 参数
+pos	-	开始搜索的位置
+ch	-	要搜索的字符
+
+返回值
+找到的子串的首字符位置，或在找不到这种子串时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find",basic_string,"template< class StringViewLike >
+size_type find( const StringViewLike& t,
+                size_type pos = 0 ) const noexcept(/* 见下文 */);","寻找首个等于给定字符序列的子串。搜索从 pos 开始，也就是说找到的子串不会从 pos 之前的位置开始。
+
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后寻找首个等于字符串视图 sv 的子串。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+正式而言，如果以下表达式都是 true，那么在位置 xpos 找到 ﻿子串 str：
+
+xpos >= pos
+xpos + str.size() <= size()
+对于 str 中所有位置 n，Traits::eq(at(xpos + n), str.at(n))
+特别是，这意味着
+
+只有在 pos <= size() - str.size() 时才能找到子串。
+在且仅在 pos <= size() 时才能在 pos 找到空子串。
+对于非空子串，如果 pos >= size()，那么函数始终返回 npos。
+
+ 参数
+pos	-	开始搜索的位置
+t	-	要搜索的对象（可转换到 std::basic_string_view）
+
+返回值
+找到的子串的首字符位置，或在找不到这种子串时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::rfind",basic_string,"size_type rfind( const basic_string& str, size_type pos = npos ) const;","寻找最后一个等于给定字符序列的子串。搜索从 pos 开始并从右向左进行（因此，找到的子串不会从 pos 之后的位置开始）。如果将 npos 或任何不小于 size() - 1 的值作为 pos 传递，那么就会在整个字符串中搜索。
+寻找最后一个等于 str 的子串。
+
+ 参数
+str	-	要搜索的字符串
+pos	-	开始搜索的位置
+
+返回值
+找到的子串的首字符位置，或者在找不到这种子串则时返回 npos。注意这是从字符串开始，而非末尾的偏移。
+
+如果搜索的是空字符串（str.size()，count 或 Traits::length(s) 为零），那么立即找到空字符串并返回：
+
+pos，如果 pos < size()；
+否则是 size()，包括 pos == npos 的情况。
+否则，如果 size() 为零，那么始终返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::rfind",basic_string,"size_type rfind( const CharT* s, size_type pos, size_type count ) const;","寻找最后一个等于给定字符序列的子串。搜索从 pos 开始并从右向左进行（因此，找到的子串不会从 pos 之后的位置开始）。如果将 npos 或任何不小于 size() - 1 的值作为 pos 传递，那么就会在整个字符串中搜索。
+寻找最后一个等于范围 [s, s + count) 的子串。此范围可以包含空字符。
+ 如果 [s, s + count) 不是有效范围，那么行为未定义。
+
+ 参数
+pos	-	开始搜索的位置
+count	-	要搜索的子串长度
+s	-	指向要搜索的字符串的指针
+
+返回值
+找到的子串的首字符位置，或者在找不到这种子串则时返回 npos。注意这是从字符串开始，而非末尾的偏移。
+
+如果搜索的是空字符串（str.size()，count 或 Traits::length(s) 为零），那么立即找到空字符串并返回：
+
+pos，如果 pos < size()；
+否则是 size()，包括 pos == npos 的情况。
+否则，如果 size() 为零，那么始终返回 npos。","{
+  setSink(<3>)
+  transitive(<-1>, <0> || <1>)
+}","{
+  overflow(<3>, [0, <1>.size])
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::rfind",basic_string,"size_type rfind( const CharT* s, size_type pos = npos ) const;","寻找最后一个等于给定字符序列的子串。搜索从 pos 开始并从右向左进行（因此，找到的子串不会从 pos 之后的位置开始）。如果将 npos 或任何不小于 size() - 1 的值作为 pos 传递，那么就会在整个字符串中搜索。
+寻找最后一个等于 s 所指向的字符串的子串。该字符串的长度由首个空字符，通过 Traits::length(s) 确定。
+ 如果 [s, s + Traits::length(s)) 不是有效范围，那么行为未定义。
+
+ 参数
+pos	-	开始搜索的位置
+s	-	指向要搜索的字符串的指针
+
+返回值
+找到的子串的首字符位置，或者在找不到这种子串则时返回 npos。注意这是从字符串开始，而非末尾的偏移。
+
+如果搜索的是空字符串（str.size()，count 或 Traits::length(s) 为零），那么立即找到空字符串并返回：
+
+pos，如果 pos < size()；
+否则是 size()，包括 pos == npos 的情况。
+否则，如果 size() 为零，那么始终返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::rfind",basic_string,"size_type rfind( CharT ch, size_type pos = npos ) const;","寻找最后一个等于给定字符序列的子串。搜索从 pos 开始并从右向左进行（因此，找到的子串不会从 pos 之后的位置开始）。如果将 npos 或任何不小于 size() - 1 的值作为 pos 传递，那么就会在整个字符串中搜索。
+寻找最后一个等于 ch 的字符。
+
+ 参数
+pos	-	开始搜索的位置
+ch	-	要搜索的字符
+
+返回值
+找到的子串的首字符位置，或者在找不到这种子串则时返回 npos。注意这是从字符串开始，而非末尾的偏移。
+
+如果搜索的是空字符串（str.size()，count 或 Traits::length(s) 为零），那么立即找到空字符串并返回：
+
+pos，如果 pos < size()；
+否则是 size()，包括 pos == npos 的情况。
+否则，如果 size() 为零，那么始终返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::rfind",basic_string,"template< class StringViewLike >
+size_type rfind( const StringViewLike& t,
+                 size_type pos = npos ) const noexcept(/* 见下文 */);","寻找最后一个等于给定字符序列的子串。搜索从 pos 开始并从右向左进行（因此，找到的子串不会从 pos 之后的位置开始）。如果将 npos 或任何不小于 size() - 1 的值作为 pos 传递，那么就会在整个字符串中搜索。
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后寻找最后一个等于 sv 内容的子串。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+ 参数
+pos	-	开始搜索的位置
+t	-	要搜索的对象（可转换到 std::basic_string_view）
+
+返回值
+找到的子串的首字符位置，或者在找不到这种子串则时返回 npos。注意这是从字符串开始，而非末尾的偏移。
+
+如果搜索的是空字符串（str.size()，count 或 Traits::length(s) 为零），那么立即找到空字符串并返回：
+
+pos，如果 pos < size()；
+否则是 size()，包括 pos == npos 的情况。
+否则，如果 size() 为零，那么始终返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_first_of",basic_string,"size_type find_first_of( const basic_string& str, size_type pos = 0 ) const;","寻找首个等于给定字符序列中字符之一的字符。搜索只考虑范围 [pos, size())。如果范围中不存在给定的任何一个字符，那么就会返回 npos。
+寻找首个等于 str 中字符之一的字符。
+
+ 参数
+str	-	鉴别要搜索的字符的字符串
+pos	-	搜索开始的位置
+
+返回值
+找到的字符的位置，或在找不到字符时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_first_of",basic_string,"size_type find_first_of( const CharT* s,
+                         size_type pos, size_type count ) const;","寻找首个等于给定字符序列中字符之一的字符。搜索只考虑范围 [pos, size())。如果范围中不存在给定的任何一个字符，那么就会返回 npos。
+寻找首个等于范围 [s, s + count) 中字符中字符之一的字符。此范围可以包含空字符。
+ 如果 [s, s + count) 不是有效范围，那么行为未定义。
+
+ 参数
+pos	-	搜索开始的位置
+count	-	鉴别要搜索的字符的字符串长度
+s	-	指向鉴别要搜索的字符的字符串的指针
+
+返回值
+找到的字符的位置，或在找不到字符时返回 npos。","{
+  setSink(<3>)
+  transitive(<-1>, <0> || <1>)
+}","{
+  overflow(<3>, [0, <1>.size])
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_first_of",basic_string,"size_type find_first_of( const CharT* s, size_type pos = 0 ) const;","寻找首个等于给定字符序列中字符之一的字符。搜索只考虑范围 [pos, size())。如果范围中不存在给定的任何一个字符，那么就会返回 npos。
+ 寻找首个等于 s 所指向的字符串中字符之一的字符。该字符串的长度由首个空字符，通过 Traits::length(s) 确定。
+ 如果 [s, s + Traits::length(s)) 不是有效范围，那么行为未定义。
+
+ 参数
+pos	-	搜索开始的位置
+s	-	指向鉴别要搜索的字符的字符串的指针
+
+返回值
+找到的字符的位置，或在找不到字符时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_first_of",basic_string,"size_type find_first_of( CharT ch, size_type pos = 0 ) const;","寻找首个等于给定字符序列中字符之一的字符。搜索只考虑范围 [pos, size())。如果范围中不存在给定的任何一个字符，那么就会返回 npos。
+寻找首个等于 ch 的字符。
+
+ 参数
+pos	-	搜索开始的位置
+ch	-	鉴别要搜索的字符的字符
+
+返回值
+找到的字符的位置，或在找不到字符时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_first_of",basic_string,"template< class StringViewLike >
+size_type
+    find_first_of( const StringViewLike& t,
+                   size_type pos = 0 ) const noexcept(/* 见下文 */);","寻找首个等于给定字符序列中字符之一的字符。搜索只考虑范围 [pos, size())。如果范围中不存在给定的任何一个字符，那么就会返回 npos。
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后寻找首个等于 sv 中字符之一的字符。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+ 参数
+pos	-	搜索开始的位置
+t	-	鉴别要搜索的字符的对象（可转换到 std::basic_string_view）
+
+返回值
+找到的字符的位置，或在找不到字符时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_first_not_of",basic_string,"size_type find_first_not_of( const basic_string& str,
+                             size_type pos = 0 ) const;","寻找首个不等于给定字符序列中任何字符的字符。搜索只考虑范围 [pos, size())。如果范围中的所有字符都能在给定字符序列中找到，那么就会返回 npos。
+寻找首个不等于 str 中任何字符的字符。
+
+ 参数
+str	-	鉴别要搜索的字符的字符串
+pos	-	搜索开始的位置
+
+返回值
+找到的字符的位置，或在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_first_not_of",basic_string,"size_type find_first_not_of( const CharT* s,
+                             size_type pos, size_type count ) const;","寻找首个不等于给定字符序列中任何字符的字符。搜索只考虑范围 [pos, size())。如果范围中的所有字符都能在给定字符序列中找到，那么就会返回 npos。
+寻找首个不等于范围 [s, s + count) 中任何字符的字符。此范围可以包含空字符。
+ 如果 [s, s + count) 不是有效范围，那么行为未定义。
+
+ 参数
+pos	-	搜索开始的位置
+count	-	鉴别要搜索的字符的字符串长度
+s	-	指向鉴别要搜索的字符的字符串的指针
+
+返回值
+找到的字符的位置，或在找不到这种字符时返回 npos。","{
+  setSink(<3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<3>, [0, <1>.size])
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_first_not_of",basic_string,"size_type find_first_not_of( const CharT* s,
+                             size_type pos = 0 ) const;","寻找首个不等于给定字符序列中任何字符的字符。搜索只考虑范围 [pos, size())。如果范围中的所有字符都能在给定字符序列中找到，那么就会返回 npos。
+寻找首个不等于 s 所指向的字符串中任何字符的字符。该字符串的长度由首个空字符，通过 Traits::length(s) 确定。
+ 如果 [s, s + Traits::length(s)) 不是有效范围，那么行为未定义。
+
+ 参数
+pos	-	搜索开始的位置
+s	-	指向鉴别要搜索的字符的字符串的指针
+
+返回值
+找到的字符的位置，或在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_first_not_of",basic_string,"size_type find_first_not_of( CharT ch, size_type pos = 0 ) const;","寻找首个不等于给定字符序列中任何字符的字符。搜索只考虑范围 [pos, size())。如果范围中的所有字符都能在给定字符序列中找到，那么就会返回 npos。
+寻找首个不等于 ch 的字符。
+
+ 参数
+pos	-	搜索开始的位置
+ch	-	鉴别要搜索的字符的字符
+
+返回值
+找到的字符的位置，或在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_first_not_of",basic_string,"template< class StringViewLike >
+size_type
+    find_first_not_of( const StringViewLike& t,
+                       size_type pos = 0 ) const noexcept(/* 见下文 */);","如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后寻找首个不等于 sv 中任何字符的字符。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+ 参数
+pos	-	搜索开始的位置
+t	-	鉴别要搜索的字符的对象（可转换到 std::basic_string_view）
+
+返回值
+找到的字符的位置，或在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_last_of",basic_string,"size_type find_last_of( const basic_string& str,
+                        size_type pos = npos ) const;","寻找最后一个等于给定字符序列中字符之一的字符。不指定准确的搜索算法。搜索只考虑范围 [​0​, pos]。如果范围中不存在给定的任何一个字符，那么返回 npos。
+寻找最后一个等于 str 中字符之一的字符。
+
+ 参数
+str	-	鉴别要搜索的字符的字符串
+pos	-	搜索结束的位置
+
+返回值
+找到的字符位置，在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_last_of",basic_string,"size_type find_last_of( const CharT* s,
+                        size_type pos, size_type count ) const;","寻找最后一个等于给定字符序列中字符之一的字符。不指定准确的搜索算法。搜索只考虑范围 [​0​, pos]。如果范围中不存在给定的任何一个字符，那么返回 npos。
+寻找最后一个等于范围 [s, s + count) 中字符之一的字符。此范围可以包含空字符。
+ 如果 [s, s + count) 不是有效范围，那么行为未定义。
+
+ 参数
+pos	-	搜索结束的位置
+count	-	鉴别要搜索的字符的字符串长度
+s	-	指向鉴别要搜索的字符的字符串的指针
+
+返回值
+找到的字符位置，在找不到这种字符时返回 npos。","{
+  setSink(<3>)
+  transitive(<-1>, <0> || <1>)
+}","{
+  overflow(<3>, [0, <1>.size])
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_last_of",basic_string,"size_type find_last_of( const CharT* s, size_type pos = npos ) const;","寻找最后一个等于给定字符序列中字符之一的字符。不指定准确的搜索算法。搜索只考虑范围 [​0​, pos]。如果范围中不存在给定的任何一个字符，那么返回 npos。
+寻找最后一个等于 s 所指向的字符串中字符之一的字符。该字符串的长度由首个空字符，通过 Traits::length(s) 确定。
+ 如果 [s, s + Traits::length(s)) 不是有效范围，那么行为未定义。
+
+ 参数
+pos	-	搜索结束的位置
+s	-	指向鉴别要搜索的字符的字符串的指针
+
+返回值
+找到的字符位置，在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_last_of",basic_string,"size_type find_last_of( CharT ch, size_type pos = npos ) const;","寻找最后一个等于给定字符序列中字符之一的字符。不指定准确的搜索算法。搜索只考虑范围 [​0​, pos]。如果范围中不存在给定的任何一个字符，那么返回 npos。
+寻找最后一个等于 ch 的字符。
+
+ 参数
+pos	-	搜索结束的位置
+ch	-	要搜索的字符
+
+返回值
+找到的字符位置，在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_last_of",basic_string,"template< class StringViewLike >
+size_type
+    find_last_of( const StringViewLike& t,
+                  size_type pos = npos ) const noexcept(/* 见下文 */);","寻找最后一个等于给定字符序列中字符之一的字符。不指定准确的搜索算法。搜索只考虑范围 [​0​, pos]。如果范围中不存在给定的任何一个字符，那么返回 npos。
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后寻找最后一个等于 sv 中字符之一的字符。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议
+
+ 参数
+pos	-	搜索结束的位置
+t	-	鉴别要搜索的字符的对象（可转换到 std::basic_string_view）
+
+返回值
+找到的字符位置，在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_last_not_of",basic_string,"size_type find_last_not_of( const basic_string& str,
+                            size_type pos = npos ) const;","寻找最后一个不等于给定字符序列中任何字符的字符。搜索只考虑范围 [​0​, pos]。如果范围中的所有字符都能在给定字符序列中找到，那么就会返回 npos。
+寻找最后一个不等于 str 中任何字符的字符。
+
+ 参数
+str	-	鉴别要搜索的字符的字符串
+pos	-	搜索结束的位置
+
+返回值
+找到的字符位置，在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_last_not_of",basic_string,"size_type find_last_not_of( const CharT* s,
+                            size_type pos, size_type count ) const;","寻找最后一个不等于给定字符序列中任何字符的字符。搜索只考虑范围 [​0​, pos]。如果范围中的所有字符都能在给定字符序列中找到，那么就会返回 npos。
+寻找最后一个不等于范围 [s, s + count) 中任何字符的字符。此范围可以包含空字符。
+ 如果 [s, s + count) 不是有效范围，那么行为未定义。
+
+ 参数
+pos	-	搜索结束的位置
+count	-	鉴别要搜索的字符的字符串长度
+s	-	指向鉴别要搜索的字符的字符串的指针
+
+返回值
+找到的字符位置，在找不到这种字符时返回 npos。","{
+  setSink(<3>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<3>, [0, <1>.size])
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_last_not_of",basic_string,"size_type find_last_not_of( const CharT* s, size_type pos = npos ) const;","寻找最后一个不等于给定字符序列中任何字符的字符。搜索只考虑范围 [​0​, pos]。如果范围中的所有字符都能在给定字符序列中找到，那么就会返回 npos。
+寻找最后一个不等于 s 所指向的字符串中任何字符的字符。该字符串的长度由首个空字符，通过 Traits::length(s) 确定。
+ 如果 [s, s + Traits::length(s)) 不是有效范围，那么行为未定义。
+
+ 参数
+pos	-	搜索结束的位置
+s	-	指向鉴别要搜索的字符的字符串的指针
+
+返回值
+找到的字符位置，在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_last_not_of",basic_string,"size_type find_last_not_of( CharT ch, size_type pos = npos ) const;","寻找最后一个不等于给定字符序列中任何字符的字符。搜索只考虑范围 [​0​, pos]。如果范围中的所有字符都能在给定字符序列中找到，那么就会返回 npos。
+寻找最后一个不等于 ch 的字符。
+
+ 参数
+pos	-	搜索结束的位置
+ch	-	鉴别要搜索的字符的字符
+
+返回值
+找到的字符位置，在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::find_last_not_of",basic_string,"template< class StringViewLike >
+size_type
+    find_last_not_of( const StringViewLike& t,
+                      size_type pos = npos ) const noexcept(/* 见下文 */);","寻找最后一个不等于给定字符序列中任何字符的字符。搜索只考虑范围 [​0​, pos]。如果范围中的所有字符都能在给定字符序列中找到，那么就会返回 npos。
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后寻找最后一个不等于 sv 中任何字符的字符。
+ 此重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+ 参数
+pos	-	搜索结束的位置
+t	-	鉴别要搜索的字符的对象（可转换到 std::basic_string_view）
+
+返回值
+找到的字符位置，在找不到这种字符时返回 npos。","{
+  transitive(<-1>, <0>)
+}","{
+  <-1> = NPOS || [0, <0>.strlen - 1]
+}"
+"std::basic_string<CharT,Traits,Allocator>::compare",basic_string,int compare( const basic_string& str ) const;,"比较两个字符序列。
+比较此字符串与 str。
+
+ 参数
+str	-	要比较的另一字符串
+
+返回值
+*this 在字典序中先出现于实参所指定的字符序列时是负值。
+两个序列比较等价时为零。
+*this 在字典序中后出现于实参所指定的字符序列时是正值。",{},"{
+  <-1> = [MIN, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::compare",basic_string,"int compare( size_type pos1, size_type count1,
+             const basic_string& str ) const;","比较两个字符序列。
+比较此字符串的 [pos1, pos1 + count1) 子串与 str。
+如果 count1 > size() - pos1，那么子串是 [pos1, size())。
+
+ 参数
+str	-	要比较的另一字符串
+count1	-	此字符串要比较的字符数
+pos1	-	此字符串中要比较的首字符的位置
+
+返回值
+*this 在字典序中先出现于实参所指定的字符序列时是负值。
+两个序列比较等价时为零。
+*this 在字典序中后出现于实参所指定的字符序列时是正值。","{
+  setSink(<1>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <-1> = [MIN, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::compare",basic_string,"int compare( size_type pos1, size_type count1,
+             const basic_string& str,
+             size_type pos2, size_type count2 ) const;","比较两个字符序列。
+比较此字符串的 [pos1, pos1 + count1) 子串与 str 的子串 [pos2, pos2 + count2)。
+如果 count1 > size() - pos1，那么第一子串是 [pos1, size())。
+如果 count2 > str.size() - pos2，那么第二子串是 [pos2, str.size())。
+
+ 参数
+str	-	要比较的另一字符串
+count1	-	此字符串要比较的字符数
+pos1	-	此字符串中要比较的首字符的位置
+count2	-	给定字符串要比较的字符数
+pos2	-	给定字符串的要比较的首字符位置
+
+返回值
+*this 在字典序中先出现于实参所指定的字符序列时是负值。
+两个序列比较等价时为零。
+*this 在字典序中后出现于实参所指定的字符序列时是正值。","{
+  setSink(<1>)
+  setSink(<4>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  overflow(<4>, [0, <3>.strlen - 1])
+  <-1> = [MIN, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::compare",basic_string,"int compare( size_type pos1, size_type count1,
+             const basic_string& str,
+             size_type pos2, size_type count2 = npos ) const;","比较两个字符序列。
+比较此字符串的 [pos1, pos1 + count1) 子串与 str 的子串 [pos2, pos2 + count2)。
+如果 count1 > size() - pos1，那么第一子串是 [pos1, size())。
+如果 count2 > str.size() - pos2，那么第二子串是 [pos2, str.size())。
+
+ 参数
+str	-	要比较的另一字符串
+count1	-	此字符串要比较的字符数
+pos1	-	此字符串中要比较的首字符的位置
+count2	-	给定字符串要比较的字符数
+pos2	-	给定字符串的要比较的首字符位置
+
+返回值
+*this 在字典序中先出现于实参所指定的字符序列时是负值。
+两个序列比较等价时为零。
+*this 在字典序中后出现于实参所指定的字符序列时是正值。","{
+  setSink(<1>)
+  setSink(<4>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  overflow(<4>, [0, <3>.strlen - 1])
+  <-1> = [MIN, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::compare",basic_string,int compare( const CharT* s ) const;,"比较两个字符序列。
+比较此字符串与始于 s 所指向字符的长度为 Traits::length(s) 的空终止字符序列。
+
+ 参数
+s	-	指向要比较的字符串的指针
+
+返回值
+*this 在字典序中先出现于实参所指定的字符序列时是负值。
+两个序列比较等价时为零。
+*this 在字典序中后出现于实参所指定的字符序列时是正值。",{},"{
+  <-1> = [MIN, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::compare",basic_string,"int compare( size_type pos1, size_type count1,
+             const CharT* s ) const;","比较两个字符序列。
+比较此字符串的 [pos1, pos1 + count1) 子串与始于 s 所指向字符的长度为 Traits::length(s) 的空终止字符序列。
+如果 count1 > size() - pos1，那么子串是 [pos1, size())。
+
+ 参数
+s	-	指向要比较的字符串的指针
+count1	-	此字符串要比较的字符数
+pos1	-	此字符串中要比较的首字符的位置
+
+返回值
+*this 在字典序中先出现于实参所指定的字符序列时是负值。
+两个序列比较等价时为零。
+*this 在字典序中后出现于实参所指定的字符序列时是正值。","{
+  setSink(<1>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <-1> = [MIN, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::compare",basic_string,"int compare( size_type pos1, size_type count1,
+             const CharT* s, size_type count2 ) const;","比较两个字符序列。
+ 比较此字符串的 [pos1, pos1 + count1) 子串与范围 [s, s + count2) 中的字符。[s, s + count2) 中的字符可包含空字符。
+如果 count1 > size() - pos1，那么子串是 [pos1, size())。
+
+ 参数
+s	-	指向要比较的字符串的指针
+count1	-	此字符串要比较的字符数
+pos1	-	此字符串中要比较的首字符的位置
+count2	-	给定字符串要比较的字符数
+pos2	-	给定字符串的要比较的首字符位置
+
+返回值
+*this 在字典序中先出现于实参所指定的字符序列时是负值。
+两个序列比较等价时为零。
+*this 在字典序中后出现于实参所指定的字符序列时是正值。","{
+  setSink(<1>)
+  setSink(<4>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  overflow(<4>, [0, <3>.size])
+  <-1> = [MIN, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::compare",basic_string,"template< class StringViewLike >
+int compare( const StringViewLike& t ) const noexcept(/* 见下文 */);","比较两个字符序列。
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后
+比较此字符串与 sv。
+
+ 参数
+t	-	要比较的（可转换到 std::basic_string_view 的）对象
+
+返回值
+*this 在字典序中先出现于实参所指定的字符序列时是负值。
+两个序列比较等价时为零。
+*this 在字典序中后出现于实参所指定的字符序列时是正值。",{},"{
+  <-1> = [MIN, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::compare",basic_string,"template< class StringViewLike >
+int compare( size_type pos1, size_type count1,
+             const StringViewLike& t ) const;","比较两个字符序列。
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后
+如同用 std::basic_string_view<CharT, Traits>(*this).substr(pos1, count1).compare(sv) 比较此字符串的 [pos1, pos1 + count1) 子串与 sv。
+
+ 参数
+t	-	要比较的（可转换到 std::basic_string_view 的）对象
+count1	-	此字符串要比较的字符数
+pos1	-	此字符串中要比较的首字符的位置
+count2	-	给定字符串要比较的字符数
+pos2	-	给定字符串的要比较的首字符位置
+
+返回值
+*this 在字典序中先出现于实参所指定的字符序列时是负值。
+两个序列比较等价时为零。
+*this 在字典序中后出现于实参所指定的字符序列时是正值。","{
+  setSink(<1>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <-1> = [MIN, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::compare",basic_string,"template< class StringViewLike >
+int compare( size_type pos1, size_type count1,
+             const StringViewLike& t,
+             size_type pos2, size_type count2 = npos) const;","比较两个字符序列。
+如同用 std::basic_string_view<CharT, Traits> sv = t; 将 t 隐式转换到字符串视图 sv ，然后
+如同用 std::basic_string_view<CharT, Traits>(*this)
+    .substr(pos1, count1).compare(sv.substr(pos2, count2))
+比较此字符串的 [pos1, pos1 + count1) 子串与 sv 的 [pos2, pos2 + count2) 子串。
+ 这些重载只有在 std::is_convertible_v<const StringViewLike&,
+                      std::basic_string_view<CharT, Traits>> 是 true 且 std::is_convertible_v<const StringViewLike&, const CharT*> 是 false 时才会参与重载决议。
+
+ 参数
+t	-	要比较的（可转换到 std::basic_string_view 的）对象
+count1	-	此字符串要比较的字符数
+pos1	-	此字符串中要比较的首字符的位置
+count2	-	给定字符串要比较的字符数
+pos2	-	给定字符串的要比较的首字符位置
+
+返回值
+*this 在字典序中先出现于实参所指定的字符序列时是负值。
+两个序列比较等价时为零。
+*this 在字典序中后出现于实参所指定的字符序列时是正值。","{
+  setSink(<1>)
+  setSink(<4>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  overflow(<4>, [0, <3>.strlen - 1])
+  <-1> = [MIN, MAX]
+}"
+"std::basic_string<CharT,Traits,Allocator>::starts_with",basic_string,"constexpr bool
+    starts_with( std::basic_string_view<CharT,Traits> sv ) const noexcept;","检查字符串是否始于给定前缀。前缀可为以下之一：
+ 字符串视图 sv（可以是从另一 std::basic_string 隐式转换的结果）。
+
+ 参数
+sv	-	字符串视图，可为从另一 std::basic_string 隐式转换的结果
+
+返回值
+若字符串始于前缀则为 true，否则为 false。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = 0 || 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::starts_with",basic_string,"constexpr bool
+    starts_with( CharT ch ) const noexcept;","检查字符串是否始于给定前缀。前缀可为以下之一：
+ 单个字符 ch。
+
+ 参数
+ch	-	单个字符
+
+返回值
+若字符串始于前缀则为 true，否则为 false。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = 0 || 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::starts_with",basic_string,"constexpr bool
+    starts_with( const CharT* s ) const;","检查字符串是否始于给定前缀。前缀可为以下之一：
+ 空终止字符串 s。
+
+ 参数
+s	-	空终止字符串
+
+返回值
+若字符串始于前缀则为 true，否则为 false。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = 0 || 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::ends_with",basic_string,"constexpr bool
+    ends_with( std::basic_string_view<CharT, Traits> sv ) const noexcept;","检查字符串是否终于给定后缀。后缀可为以下之一：
+ 字符串视图 sv（可以是从另一 std::basic_string 隐式转换的结果）。
+
+ 参数
+sv	-	字符串视图，可为从另一 std::basic_string 隐式转换的结果
+
+返回值
+若字符串终于给定后缀则为 true，否则为 false。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = 0 || 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::ends_with",basic_string,"constexpr bool
+    ends_with( CharT ch ) const noexcept;","检查字符串是否终于给定后缀。后缀可为以下之一：
+单个字符 c。
+
+ 参数
+c	-	单个字符
+
+返回值
+若字符串终于给定后缀则为 true，否则为 false。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = 0 || 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::ends_with",basic_string,"constexpr bool
+    ends_with( const CharT* s ) const;","检查字符串是否终于给定后缀。后缀可为以下之一：
+空终止字符串 s。
+
+ 参数
+s	-	空终止字符串
+
+返回值
+若字符串终于给定后缀则为 true，否则为 false。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = 0 || 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::contains",basic_string,"constexpr bool
+    contains( std::basic_string_view<CharT,Traits> sv ) const noexcept;","检查字符串是否含有给定子串。子串可以是下列三种之一：
+ 字符串视图 sv（可能为从另一 std::basic_string 隐式转换的结果）。
+
+ 参数
+sv	-	字符串视图，可能为从另一 std::basic_string 隐式转换的结果
+
+返回值
+若字符串含有给定子串则为 true，否则为 false。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = 0 || 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::contains",basic_string,"constexpr bool
+    contains( CharT ch ) const noexcept;","检查字符串是否含有给定子串。子串可以是下列三种之一：
+单个字符 c。
+
+ 参数
+c	-	单个字符
+
+返回值
+若字符串含有给定子串则为 true，否则为 false。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = 0 || 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::contains",basic_string,"constexpr bool
+    contains( const CharT* s ) const;","检查字符串是否含有给定子串。子串可以是下列三种之一：
+空终止字符串 s。
+
+ 参数
+s	-	空终止字符串
+
+返回值
+若字符串含有给定子串则为 true，否则为 false。","{
+  transitive(<-1>, <0> || <1>)
+}","{
+  <-1> = 0 || 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::substr",basic_string,"basic_string substr( size_type pos = 0, size_type count = npos ) const;","返回子串 [pos, pos + count)。如果请求的子串越过字符串的结尾，即 count 大于 size() - pos（例如 count == npos），那么返回的子串是 [pos, size())。
+等价于 return basic_string(*this, pos, count);。
+
+ 参数
+pos	-	要包含的首个字符的位置
+count	-	子串的长度
+
+返回值
+含子串 [pos, pos + count) 或 [pos, size()) 的字符串。","{
+  setSink(<1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <-1>.field = <0>.field
+  <-1>.strlen =  <2> || <0>.strlen - <1>
+  <-1>.size = <-1>.strlen + 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::substr",basic_string,"constexpr basic_string
+    substr( size_type pos = 0, size_type count = npos ) const&;","返回子串 [pos, pos + count)。如果请求的子串越过字符串的结尾，即 count 大于 size() - pos（例如 count == npos），那么返回的子串是 [pos, size())。
+等价于 return basic_string(*this, pos, count);。
+
+ 参数
+pos	-	要包含的首个字符的位置
+count	-	子串的长度
+
+返回值
+含子串 [pos, pos + count) 或 [pos, size()) 的字符串。","{
+  setSink(<1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <-1>.field = <0>.field
+  <-1>.strlen =  <2> || <0>.strlen - <1>
+  <-1>.size = <-1>.strlen + 1
+}"
+"std::basic_string<CharT,Traits,Allocator>::substr",basic_string,"constexpr basic_string substr( size_type pos = 0, size_type count = npos ) &&;","返回子串 [pos, pos + count)。如果请求的子串越过字符串的结尾，即 count 大于 size() - pos（例如 count == npos），那么返回的子串是 [pos, size())。
+等价于 return basic_string(std::move(*this), pos, count);。
+
+ 参数
+pos	-	要包含的首个字符的位置
+count	-	子串的长度
+
+返回值
+含子串 [pos, pos + count) 或 [pos, size()) 的字符串。","{
+  setSink(<1>)
+  transitive(<-1>, <0>)
+}","{
+  overflow(<1>, [0, <0>.strlen - 1])
+  <-1>.field = <0>.field
+  <-1>.strlen =  <2> || <0>.strlen - <1>
+  <-1>.size = <-1>.strlen + 1
+}"
