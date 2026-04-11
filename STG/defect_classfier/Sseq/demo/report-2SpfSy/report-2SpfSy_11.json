@@ -1,0 +1,64 @@
+{
+    "Semantic": {
+        "ControlFlow": {
+            "Case": 0,
+            "DoWhile": 0,
+            "For": 0,
+            "If": 14,
+            "Switch": 0,
+            "While": 0
+        },
+        "Exception": {
+            "Catch": 0,
+            "Longjmp": 0,
+            "MaxNestingDepth": 0,
+            "Setjmp": 0,
+            "Throw": 0,
+            "Try": 0
+        },
+        "Macro": {
+            "INT_MAX": 0,
+            "INT_MIN": 0,
+            "NULL": 3
+        },
+        "NestedBlock": {
+            "IF_IF": 0,
+            "IF_LOOP": 0,
+            "LOOP_LOOP": 0,
+            "MaxDepth": 1
+        },
+        "Resource": {
+            "DB_Access": 0,
+            "File_Close": 0,
+            "File_Open": 0,
+            "Memory_Alloc": 3,
+            "Memory_Free": 2,
+            "Net_Connect": 0,
+            "Net_Socket": 0
+        },
+        "Special": {
+            "Assign": 0,
+            "Op_Values": 0,
+            "Pos": 0
+        },
+        "TypeSafe": {
+            "BO_types": 7,
+            "BitField": 0,
+            "E_CAST": 1,
+            "MD_Array": 0,
+            "RECORD_DEF": 0,
+            "RETURN_types": 0
+        }
+    },
+    "Sensitive": {
+        "Context": 16,
+        "Field": 0,
+        "Flow": 0,
+        "Path": 1
+    },
+    "bug_type": "Argument with 'nonnull' attribute passed null",
+    "checker": "core.NonNullParamChecker",
+    "is_single_file": true,
+    "is_single_function": false,
+    "trace": "pointer[0] :<Empty Statement>\npointer[1] :<Empty Statement>\npointer[2] :<vflag == 1 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[3] :<vflag == 2 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[4] :<vflag == 3 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[5] :<vflag == 4 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[6] :<vflag == 5 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[7] :<vflag == 6 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[8] :<vflag == 7 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[9] :<vflag == 8 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[10] :<vflag == 9 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[11] :<vflag == 10 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[12] :<vflag == 11 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[13] :<vflag == 12 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[14] :<vflag == 13 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[15] :<vflag == 14 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[16] :<null_pointer_014()> in null_pointer_main\tisInBranch:1 isInLoop:0 isFPCall:0\npointer[17] :<Empty Statement>\npointer[18] :<char *str = \"This is a string\";> in null_pointer_015\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[19] :<Empty Statement>\npointer[20] :<Empty Statement>\npointer[21] :<null_pointer_015_gbl_ptr = ((void *)0)> in null_pointer_015_func_001\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[22] :<char *str = \"This is a string\";> in null_pointer_015\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[23] :<null_pointer_015_func_001(strlen(str))> in null_pointer_015\tisInBranch:0 isInLoop:0 isFPCall:0\n"
+}

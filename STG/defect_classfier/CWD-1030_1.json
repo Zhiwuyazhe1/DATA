@@ -1,0 +1,61 @@
+{
+    "bug_type": "CWD-1030",
+    "checker": "",
+    "description": "When using a single pointer int\tVariable - Loading",
+    "warning_func": "uninit_pointer.c#uninit_pointer_001",
+    "line_number": 29,
+    "directory": "/home/nishikino/code-infrastructure/DefectScenarioClassfier/tests/test-projs/itc-benchmarks/01.w_Defects",
+    "entry_function": "uninit_pointer.c#uninit_pointer_001",
+    "functions": [
+        "uninit_pointer.c#uninit_pointer_001"
+    ],
+    "is_single_file": true,
+    "is_single_function": true,
+    "trace": [
+        {
+            "file_path": "/home/nishikino/code-infrastructure/DefectScenarioClassfier/tests/test-projs/itc-benchmarks/01.w_Defects/uninit_pointer.c",
+            "line": 26,
+            "col": 2,
+            "line2": 26,
+            "col2": 12,
+            "function": "uninit_pointer_001",
+            "var": [
+                "a"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/code-infrastructure/DefectScenarioClassfier/tests/test-projs/itc-benchmarks/01.w_Defects/uninit_pointer.c",
+            "line": 27,
+            "col": 2,
+            "line2": 27,
+            "col2": 10,
+            "function": "uninit_pointer_001",
+            "var": [
+                "p"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/code-infrastructure/DefectScenarioClassfier/tests/test-projs/itc-benchmarks/01.w_Defects/uninit_pointer.c",
+            "line": 28,
+            "col": 2,
+            "line2": 28,
+            "col2": 10,
+            "function": "uninit_pointer_001",
+            "var": [
+                "ret"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/code-infrastructure/DefectScenarioClassfier/tests/test-projs/itc-benchmarks/01.w_Defects/uninit_pointer.c",
+            "line": 29,
+            "col": 2,
+            "line2": 29,
+            "col2": 10,
+            "function": "uninit_pointer_001",
+            "var": [
+                "ret",
+                "p"
+            ]
+        }
+    ]
+}

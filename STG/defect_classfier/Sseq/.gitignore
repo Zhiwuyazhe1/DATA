@@ -1,0 +1,9 @@
+.vs/**
+out/**
+output/**
+*.dot
+CMakeSettings.json
+.vscode/**
+build*
+testcase*
+compile_info_*/

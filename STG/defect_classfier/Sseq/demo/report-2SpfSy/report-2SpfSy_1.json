@@ -1,0 +1,63 @@
+{
+    "Semantic": {
+        "ControlFlow": {
+            "Case": 0,
+            "DoWhile": 0,
+            "For": 0,
+            "If": 0,
+            "Switch": 0,
+            "While": 0
+        },
+        "Exception": {
+            "Catch": 0,
+            "Longjmp": 0,
+            "MaxNestingDepth": 0,
+            "Setjmp": 0,
+            "Throw": 0,
+            "Try": 0
+        },
+        "Macro": {
+            "INT_MAX": 0,
+            "INT_MIN": 0
+        },
+        "NestedBlock": {
+            "IF_IF": 0,
+            "IF_LOOP": 0,
+            "LOOP_LOOP": 0,
+            "MaxDepth": 1
+        },
+        "Resource": {
+            "DB_Access": 0,
+            "File_Close": 0,
+            "File_Open": 0,
+            "Memory_Alloc": 0,
+            "Memory_Free": 0,
+            "Net_Connect": 0,
+            "Net_Socket": 0
+        },
+        "Special": {
+            "Assign": 0,
+            "Op_Values": 0,
+            "Pos": 0
+        },
+        "TypeSafe": {
+            "BO_types": 7,
+            "BitField": 0,
+            "E_CAST": 0,
+            "MD_Array": 0,
+            "RECORD_DEF": 6,
+            "RETURN_types": 0
+        }
+    },
+    "Sensitive": {
+        "Context": 0,
+        "Field": 6,
+        "Flow": 0,
+        "Path": 0
+    },
+    "bug_type": "Dereference of null pointer",
+    "checker": "core.NullDereference",
+    "is_single_file": true,
+    "is_single_function": false,
+    "trace": "pointer[0] :<Empty Statement>\npointer[1] :<Empty Statement>\npointer[2] :<int a = 1;> in null_pointer_001\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[3] :<*p = array[sa.a - sa.b]> in null_pointer_001\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[4] :<Empty Statement>\n"
+}
