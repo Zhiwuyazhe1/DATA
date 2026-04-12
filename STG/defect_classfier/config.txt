@@ -1,0 +1,41 @@
+Sensitive 
+{
+    Flow = true
+    Path = true
+    Context = true
+    Field = true
+}
+
+Semantic_Macro
+{
+    ALL = true
+    INT_MAX = true
+    INT_MIN = true
+}
+
+
+Semantic_TypeSafe
+{   
+    ALL = true
+    RETURN_types = true
+    BO_types = true
+    E_CAST = true
+    RECORD_DEF  = true
+    MD_Array  = true
+    BitField  = true
+}
+
+Semantic_Special
+{   
+    ALL = true
+    Assign = true
+    Pos = true
+    Op_Values = true
+}
+Semantic_Control
+{
+    ALL = true
+    DeadCode = true
+    Switch_Default = true
+    LoopState = true
+}

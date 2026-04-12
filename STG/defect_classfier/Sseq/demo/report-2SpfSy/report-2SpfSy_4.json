@@ -1,0 +1,85 @@
+{
+    "ControlFlow": {
+        "ALL": 1,
+        "Case": 0,
+        "DoWhile": 0,
+        "For": 0,
+        "If": 17,
+        "Switch": 0,
+        "While": 0
+    },
+    "Exception": {
+        "ALL": 0,
+        "Catch": 0,
+        "Longjmp": 0,
+        "MaxNestingDepth": 0,
+        "Setjmp": 0,
+        "Throw": 0,
+        "Try": 0
+    },
+    "NestedBlock": {
+        "ALL": 0,
+        "IF": {
+            "IF": 0,
+            "LOOP": 0
+        },
+        "LOOP": {
+            "LOOP": 0
+        },
+        "MaxDepth": 1
+    },
+    "Resource": {
+        "ALL": 0,
+        "DB": {
+            "Access": 0
+        },
+        "File": {
+            "Close": 0,
+            "Open": 0
+        },
+        "Memory": {
+            "Alloc": 0,
+            "Free": 0
+        },
+        "Net": {
+            "Connect": 0,
+            "Socket": 0
+        }
+    },
+    "Semantic": {
+        "Control": {
+            "DeadCode": 0,
+            "LoopState": 0,
+            "Switch_Default": 0
+        },
+        "Macro": {
+            "INT_MAX": 0,
+            "INT_MIN": 0,
+            "NULL": 3
+        },
+        "Special": {
+            "Assign": 4,
+            "Op_Values": 1,
+            "Pos": 0
+        },
+        "TypeSafe": {
+            "BO_types": 6,
+            "BitField": 0,
+            "E_CAST": 1,
+            "MD_Array": 0,
+            "RECORD_DEF": 6,
+            "RETURN_types": 0
+        }
+    },
+    "Sensitive": {
+        "Context": 0,
+        "Field": 0,
+        "Flow": 0,
+        "Path": 1
+    },
+    "bug_type": "Dereference of null pointer",
+    "checker": "core.NullDereference",
+    "is_single_file": true,
+    "is_single_function": false,
+    "trace": "pointer[0] :<vflag == 1 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[1] :<vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[2] :<vflag == 2 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[3] :<vflag == 3 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[4] :<vflag == 4 || vflag == 888> in null_pointer_main\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[5] :<null_pointer_004()> in null_pointer_main\tisInBranch:1 isInLoop:0 isFPCall:0\npointer[6] :<Empty Statement>\npointer[7] :<null_pointer_004_s_001 *p = ((void *)0);> in null_pointer_004\tisInBranch:0 isInLoop:0 isFPCall:0\npointer[8] :<p->a = 1> in null_pointer_004\tisInBranch:0 isInLoop:0 isFPCall:0\n"
+}
