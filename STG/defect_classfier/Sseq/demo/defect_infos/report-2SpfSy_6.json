@@ -1,0 +1,139 @@
+{
+    "bug_type": "Dereference of null pointer",
+    "checker": "core.NullDereference",
+    "is_single_file": true,
+    "is_single_function": false,
+    "trace": [
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 356,
+            "col": 6,
+            "line2": 356,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 356,
+            "col": 20,
+            "line2": 356,
+            "col2": 30,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 361,
+            "col": 6,
+            "line2": 361,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 366,
+            "col": 6,
+            "line2": 366,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 371,
+            "col": 6,
+            "line2": 371,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 376,
+            "col": 6,
+            "line2": 376,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 381,
+            "col": 6,
+            "line2": 381,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 386,
+            "col": 6,
+            "line2": 386,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 388,
+            "col": 3,
+            "line2": 388,
+            "col2": 20,
+            "function": "null_pointer_main",
+            "var": [
+                "null_pointer_007"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 112,
+            "col": 1,
+            "line2": 112,
+            "col2": 1,
+            "function": "null_pointer_007",
+            "var": []
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 116,
+            "col": 2,
+            "line2": 116,
+            "col2": 35,
+            "function": "null_pointer_007",
+            "var": [
+                "p",
+                "a"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 117,
+            "col": 5,
+            "line2": 117,
+            "col2": 3,
+            "function": "null_pointer_007",
+            "var": [
+                "p"
+            ]
+        }
+    ]
+}

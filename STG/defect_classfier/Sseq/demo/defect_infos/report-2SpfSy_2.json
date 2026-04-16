@@ -1,0 +1,84 @@
+{
+    "bug_type": "Dereference of null pointer",
+    "checker": "core.NullDereference",
+    "is_single_file": true,
+    "is_single_function": false,
+    "trace": [
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 356,
+            "col": 6,
+            "line2": 356,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 356,
+            "col": 20,
+            "line2": 356,
+            "col2": 30,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 361,
+            "col": 6,
+            "line2": 361,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 363,
+            "col": 3,
+            "line2": 363,
+            "col2": 20,
+            "function": "null_pointer_main",
+            "var": [
+                "null_pointer_002"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 30,
+            "col": 1,
+            "line2": 30,
+            "col2": 1,
+            "function": "null_pointer_002",
+            "var": []
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 32,
+            "col": 2,
+            "line2": 32,
+            "col2": 7,
+            "function": "null_pointer_002",
+            "var": [
+                "p"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 34,
+            "col": 8,
+            "line2": 34,
+            "col2": 9,
+            "function": "null_pointer_002",
+            "var": [
+                "p",
+                "ret"
+            ]
+        }
+    ]
+}

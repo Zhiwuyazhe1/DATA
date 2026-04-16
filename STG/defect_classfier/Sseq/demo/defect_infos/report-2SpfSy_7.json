@@ -1,0 +1,180 @@
+{
+    "bug_type": "Dereference of null pointer",
+    "checker": "core.NullDereference",
+    "is_single_file": true,
+    "is_single_function": false,
+    "trace": [
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 356,
+            "col": 6,
+            "line2": 356,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 356,
+            "col": 20,
+            "line2": 356,
+            "col2": 30,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 361,
+            "col": 6,
+            "line2": 361,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 366,
+            "col": 6,
+            "line2": 366,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 371,
+            "col": 6,
+            "line2": 371,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 376,
+            "col": 6,
+            "line2": 376,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 381,
+            "col": 6,
+            "line2": 381,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 386,
+            "col": 6,
+            "line2": 386,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 391,
+            "col": 6,
+            "line2": 391,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 396,
+            "col": 6,
+            "line2": 396,
+            "col2": 15,
+            "function": "null_pointer_main",
+            "var": [
+                "vflag"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 398,
+            "col": 3,
+            "line2": 398,
+            "col2": 20,
+            "function": "null_pointer_main",
+            "var": [
+                "null_pointer_009"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 145,
+            "col": 1,
+            "line2": 145,
+            "col2": 1,
+            "function": "null_pointer_009",
+            "var": []
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 147,
+            "col": 28,
+            "line2": 147,
+            "col2": 31,
+            "function": "null_pointer_009",
+            "var": [
+                "null_pointer_009_func_001"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 147,
+            "col": 2,
+            "line2": 147,
+            "col2": 32,
+            "function": "null_pointer_009",
+            "var": [
+                "null_pointer_009_func_001"
+            ]
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 140,
+            "col": 1,
+            "line2": 140,
+            "col2": 1,
+            "function": "null_pointer_009_func_001",
+            "var": []
+        },
+        {
+            "file_path": "/home/nishikino/benchmarks/defect_scenario_c/Sseq/demo/01.w_Defects/null_pointer.c",
+            "line": 142,
+            "col": 5,
+            "line2": 142,
+            "col2": 3,
+            "function": "null_pointer_009_func_001",
+            "var": [
+                "p"
+            ]
+        }
+    ]
+}
